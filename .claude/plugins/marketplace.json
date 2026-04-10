@@ -1,0 +1,9 @@
+{
+  "marketplaces": [
+    {
+      "name": "gptaku_plugins",
+      "url": "https://github.com/fivetaku/gptaku_plugins.git",
+      "added_at": "2026-04-10"
+    }
+  ]
+}

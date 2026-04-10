@@ -1,0 +1,12 @@
+{
+  "installed": [
+    {
+      "name": "show-me-the-prd",
+      "version": "0.7.2",
+      "marketplace": "gptaku_plugins",
+      "source": "https://github.com/fivetaku/show-me-the-prd.git",
+      "installed_at": "2026-04-10",
+      "plugin_root": ".claude/plugins/cache/gptaku_plugins/show-me-the-prd"
+    }
+  ]
+}
