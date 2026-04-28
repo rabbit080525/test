@@ -64,7 +64,7 @@ function BrandAvatar({ brand }) {
       aria-label={name}
       className="flex flex-col items-center flex-shrink-0"
       style={{ gap: 9 }}
-      onClick={() => url && window.open(url, '_blank', 'noopener,noreferrer')}
+      onClick={() => url && (window.location.href = url)}
     >
       {/* ring + gap layer */}
       <div
