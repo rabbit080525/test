@@ -31,11 +31,11 @@ const BANNERS = [
 ];
 
 const BRANDS = [
-  { id: 1, name: '우이',      hasNewArrivals: true,  logo: '/oui_logo.jpg'        },
-  { id: 2, name: '프론트로우', hasNewArrivals: false, logo: '/frontrow_logo.jpg'   },
-  { id: 3, name: '레이지지',  hasNewArrivals: false, logo: '/lazy_logo.jpg'        },
-  { id: 4, name: '르세지엠',  hasNewArrivals: true,  logo: '/LESEIZIEME_logo.jpg'  },
-  { id: 5, name: '마르디',    hasNewArrivals: false, logo: null                   },
+  { id: 1, name: '우이',      hasNewArrivals: true,  logo: '/oui_logo.jpg',       url: 'https://display.wconcept.co.kr/rn/brand/105485' },
+  { id: 2, name: '프론트로우', hasNewArrivals: false, logo: '/frontrow_logo.jpg',  url: null },
+  { id: 3, name: '레이지지',  hasNewArrivals: false, logo: '/lazy_logo.jpg',       url: null },
+  { id: 4, name: '르세지엠',  hasNewArrivals: true,  logo: '/LESEIZIEME_logo.jpg', url: null },
+  { id: 5, name: '마르디',    hasNewArrivals: false, logo: null,                  url: null },
 ];
 
 const RELATED_PRODUCTS = [
@@ -58,12 +58,13 @@ const SCROLL_STYLE = {
 
 /* ─── BrandAvatar ────────────────────────────────────── */
 function BrandAvatar({ brand }) {
-  const { name, hasNewArrivals, logo } = brand;
+  const { name, hasNewArrivals, logo, url } = brand;
   return (
     <button
       aria-label={name}
       className="flex flex-col items-center flex-shrink-0"
       style={{ gap: 9 }}
+      onClick={() => url && window.open(url, '_blank', 'noopener,noreferrer')}
     >
       {/* ring + gap layer */}
       <div
