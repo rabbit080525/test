@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Search, ShoppingBag, Heart } from 'lucide-react';
+import { Search, ShoppingBag, Heart, Home, LayoutGrid, User } from 'lucide-react';
 
 /* ─── data ─────────────────────────────────────────── */
 const TABS = [
@@ -64,6 +64,77 @@ const SCROLL_STYLE = {
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
 };
+
+/* ─── BottomNav ─────────────────────────────────────── */
+const NAV_TABS = [
+  { id: 'home',     label: '홈',      Icon: Home      },
+  { id: 'category', label: '카테고리', Icon: LayoutGrid },
+  { id: 'search',   label: '검색',    Icon: Search    },
+  { id: 'heart',    label: '하트',    Icon: Heart     },
+  { id: 'my',       label: '마이',    Icon: User      },
+];
+
+function BottomNav({ active, onChange }) {
+  return (
+    <nav
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%',
+        maxWidth: 390,
+        background: '#fff',
+        borderTop: '1px solid #EFEFEF',
+        display: 'flex',
+        zIndex: 100,
+        /* iOS 홈 인디케이터 영역 확보 */
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+      }}
+    >
+      {NAV_TABS.map(({ id, label, Icon }) => {
+        const isActive = active === id;
+        return (
+          <button
+            key={id}
+            aria-label={label}
+            onClick={() => onChange(id)}
+            style={{
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 3,
+              padding: '10px 0 8px',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <Icon
+              size={22}
+              strokeWidth={isActive ? 2 : 1.3}
+              color={isActive ? '#111' : '#C0C0C0'}
+              fill={isActive && id === 'home' ? '#111' : 'none'}
+            />
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: isActive ? 600 : 400,
+                color: isActive ? '#111' : '#C0C0C0',
+                letterSpacing: '0.01em',
+                lineHeight: 1,
+              }}
+            >
+              {label}
+            </span>
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
 
 /* ─── BrandAvatar ────────────────────────────────────── */
 function BrandAvatar({ brand }) {
@@ -208,6 +279,7 @@ function ProductCard({ item }) {
 export default function WConceptApp() {
   const [activeTab,    setActiveTab]    = useState('추천');
   const [activeBanner, setActiveBanner] = useState(0);
+  const [activeNav,    setActiveNav]    = useState('home');
   const bannerTrackRef = useRef(null);
 
   /* dot indicator: track which banner is snapped */
@@ -225,6 +297,8 @@ export default function WConceptApp() {
       className="relative max-w-[390px] mx-auto bg-white min-h-screen overflow-x-hidden select-none"
       style={{
         fontFamily: "'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+        /* 탭바 높이(56px) + 안전 여백 확보 */
+        paddingBottom: 72,
       }}
     >
       <div className="h-12" />
@@ -526,6 +600,9 @@ export default function WConceptApp() {
           ))}
         </div>
       </section>
+
+      {/* ── 하단 고정 탭바 ── */}
+      <BottomNav active={activeNav} onChange={setActiveNav} />
     </div>
   );
 }
