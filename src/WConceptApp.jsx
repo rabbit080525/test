@@ -49,127 +49,21 @@ const RELATED_PRODUCTS = [
   { id: 8,  brand: '아무르 무아르',        name: '블라인드 시스루 퍼프 블라우스',         discount: 25, price: 81532  },
 ];
 
-const STYLE_CURATIONS = [
-  {
-    id: 1,
-    theme: '주말 데이트에\n어울리는\n모던 시크 룩',
-    mainImage: 'https://loremflickr.com/400/640/fashion,woman?lock=51',
-    products: [
-      { id: 'c1', brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON T-SHIRT',    price: 56050, discount: 5,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=52' },
-      { id: 'c2', brand: '온앤온',               name: '넥 스트링 라이트 윈드 점퍼', price: 84550, discount: 10, image: 'https://loremflickr.com/400/533/fashion,woman?lock=53' },
-      { id: 'c3', brand: '레이지지',              name: 'Loose Fit Classic Check',   price: 76736, discount: 29, image: 'https://loremflickr.com/400/533/fashion,woman?lock=54' },
-      { id: 'c4', brand: '시아쥬',                name: '노블 시어서커 오버핏 셔츠',  price: 62640, discount: 28, image: 'https://loremflickr.com/400/533/fashion,woman?lock=55' },
-    ],
-  },
-  {
-    id: 2,
-    theme: '미니멀한\n오피스 룩으로\n완성하는 하루',
-    mainImage: 'https://loremflickr.com/400/640/fashion,woman?lock=61',
-    products: [
-      { id: 'c5', brand: '르세지엠',    name: '타임리스 와이드 슬랙스',      price: 89000, discount: 15, image: 'https://loremflickr.com/400/533/fashion,woman?lock=62' },
-      { id: 'c6', brand: '프론트로우',  name: '크리스프 버튼다운 블라우스',  price: 78000, discount: 20, image: 'https://loremflickr.com/400/533/fashion,woman?lock=63' },
-      { id: 'c7', brand: '아무르 무아르', name: '블라인드 시스루 블라우스',  price: 81532, discount: 25, image: 'https://loremflickr.com/400/533/fashion,woman?lock=64' },
-      { id: 'c8', brand: '몽돌',        name: '체크 시어서커 오버핏 셔츠',  price: 72410, discount: 26, image: 'https://loremflickr.com/400/533/fashion,woman?lock=65' },
-    ],
-  },
-  {
-    id: 3,
-    theme: '봄 햇살 아래\n편안한\n캐주얼 데일리 룩',
-    mainImage: 'https://loremflickr.com/400/640/fashion,woman?lock=71',
-    products: [
-      { id: 'c9',  brand: '마른파이브',  name: '[1+1] 캠내장 모달 크롭 탑',  price: 24160, discount: 39, image: 'https://loremflickr.com/400/533/fashion,woman?lock=72' },
-      { id: 'c10', brand: '브아빗포우먼', name: '[NEW] 베이직 캐미솔 탑',    price: 48600, discount: 38, image: 'https://loremflickr.com/400/533/fashion,woman?lock=73' },
-      { id: 'c11', brand: '르베티',      name: '시어서커 루즈핏 블라우스',   price: 56010, discount: 37, image: 'https://loremflickr.com/400/533/fashion,woman?lock=74' },
-      { id: 'c12', brand: '마르디',      name: '플라워 자카드 니트 탑',      price: 67000, discount: 22, image: 'https://loremflickr.com/400/533/fashion,woman?lock=75' },
-    ],
-  },
+const CURATION_PRODUCTS = [
+  { id: 'c1', brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON T-SHIRT',    price: 56050, discount: 5,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=52' },
+  { id: 'c2', brand: '온앤온',               name: '넥 스트링 라이트 윈드 점퍼', price: 84550, discount: 10, image: 'https://loremflickr.com/400/533/fashion,woman?lock=53' },
+  { id: 'c3', brand: '레이지지',             name: 'Loose Fit Classic Check',    price: 76736, discount: 29, image: 'https://loremflickr.com/400/533/fashion,woman?lock=54' },
+  { id: 'c4', brand: '시아쥬',               name: '노블 시어서커 오버핏 셔츠',  price: 62640, discount: 28, image: 'https://loremflickr.com/400/533/fashion,woman?lock=55' },
+  { id: 'c5', brand: '르세지엠',             name: '타임리스 와이드 슬랙스',      price: 89000, discount: 15, image: 'https://loremflickr.com/400/533/fashion,woman?lock=62' },
+  { id: 'c6', brand: '프론트로우',            name: '크리스프 버튼다운 블라우스',  price: 78000, discount: 20, image: 'https://loremflickr.com/400/533/fashion,woman?lock=63' },
+  { id: 'c7', brand: '아무르 무아르',         name: '블라인드 시스루 블라우스',    price: 81532, discount: 25, image: 'https://loremflickr.com/400/533/fashion,woman?lock=64' },
+  { id: 'c8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',   price: 72410, discount: 26, image: 'https://loremflickr.com/400/533/fashion,woman?lock=65' },
 ];
 const SCROLL_STYLE = {
   WebkitOverflowScrolling: 'touch', /* iOS 관성 스크롤 */
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
 };
-
-/* ─── StyleCurationCard ─────────────────────────────── */
-function StyleCurationCard({ curation }) {
-  return (
-    /*
-      슬라이드 1장: 좌측 대형 에디토리얼 카드 + 우측 2×2 상품 그리드
-      flex 구조:  [large | 2×2 grid]
-    */
-    <div className="flex flex-shrink-0 gap-[8px]" style={{ width: 'calc(100% - 40px)', scrollSnapAlign: 'start' }}>
-
-      {/* ── 좌측 대형 카드 ── */}
-      <div
-        className="relative flex-shrink-0 overflow-hidden"
-        style={{ width: '44%', borderRadius: 10 }}
-      >
-        <img
-          src={curation.mainImage}
-          alt={curation.theme}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          loading="lazy"
-          decoding="async"
-        />
-        {/* 하단 그라데이션 */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 45%, transparent 65%)' }}
-        />
-        {/* 스타일 테마 텍스트 */}
-        <div className="absolute bottom-0 left-0 right-0 p-[14px]">
-          <p
-            className="text-white"
-            style={{
-              fontSize: 14.5, fontWeight: 700,
-              lineHeight: 1.45, letterSpacing: '-0.02em',
-              whiteSpace: 'pre-line', margin: 0,
-            }}
-          >
-            {curation.theme}
-          </p>
-        </div>
-      </div>
-
-      {/* ── 우측 2×2 상품 그리드 ── */}
-      <div
-        className="flex-1 grid grid-cols-2"
-        style={{ gap: 7 }}
-      >
-        {curation.products.map((product) => (
-          <div key={product.id} style={{ minWidth: 0 }}>
-            {/* 상품 이미지 */}
-            <div
-              className="overflow-hidden"
-              style={{ aspectRatio: '3 / 4', borderRadius: 6, background: '#EBEBEB' }}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            {/* 텍스트 */}
-            <div style={{ marginTop: 5 }}>
-              <p style={{ fontSize: 10, fontWeight: 400, color: '#999', lineHeight: 1, marginBottom: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {product.brand}
-              </p>
-              <p style={{ fontSize: 10.5, fontWeight: 400, color: '#333', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>
-                {product.name}
-              </p>
-              <div className="flex items-baseline gap-[3px]" style={{ marginTop: 3 }}>
-                <span style={{ fontSize: 10.5, fontWeight: 700, color: '#FF3300' }}>{product.discount}%</span>
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{product.price.toLocaleString()}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ─── BrandAvatar ────────────────────────────────────── */
 function BrandAvatar({ brand }) {
@@ -250,7 +144,7 @@ function ProductCard({ item }) {
         style={{ aspectRatio: '3 / 4', borderRadius: 4, background: '#EBEBEB' }}
       >
         <img
-          src={`/pd0${item.id}.jpg`}
+          src={item.image || `/pd0${item.id}.jpg`}
           alt={item.name}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           loading="lazy"
@@ -598,47 +492,37 @@ export default function WConceptApp() {
       </section>
 
       {/* ══════════════════════════════════════
-          스타일 큐레이션
-          좌: 대형 에디토리얼 카드 (테마 텍스트 오버레이)
-          우: 2×2 상품 그리드
-          → snap-x 가로 스크롤로 여러 스타일 탐색
+          스타일 큐레이션 — 2행 그리드 (추천 상품 구좌와 동일)
       ══════════════════════════════════════ */}
       <section
-        style={{
-          borderTop: '1px solid #F0F0F0',
-          paddingTop: 28,
-          paddingBottom: 44,
-        }}
+        style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}
       >
-        {/* 섹션 타이틀 */}
-        <div className="px-5 mb-5">
-          <h3
-            style={{
-              fontSize: 17, fontWeight: 600, color: '#111',
-              letterSpacing: '-0.025em', margin: 0,
-            }}
-          >
-            스타일 큐레이션
-          </h3>
-          <p style={{ fontSize: 12, color: '#AAA', fontWeight: 400, marginTop: 4, letterSpacing: '0.01em' }}>
-            스타일 속성별로 모은 추천 아이템
-          </p>
-        </div>
+        <h3
+          className="px-5"
+          style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}
+        >
+          주말에 어울리는 모던 시크 룩
+        </h3>
 
-        {/* 슬라이드 트랙 — snap */}
+        {/* 추천 상품 구좌와 동일한 2행 CSS Grid */}
         <div
-          className="flex overflow-x-auto scrollbar-hide"
+          className="overflow-x-auto scrollbar-hide"
           style={{
             ...SCROLL_STYLE,
-            scrollSnapType: 'x mandatory',
-            scrollPaddingLeft: 20,
-            gap: 12,
+            display: 'grid',
+            gridTemplateRows: 'auto auto',
+            gridAutoFlow: 'column',
+            gridAutoColumns: 98,
+            columnGap: 10,
+            rowGap: 20,
             paddingLeft: 20,
             paddingRight: 20,
+            paddingTop: 2,
+            paddingBottom: 4,
           }}
         >
-          {STYLE_CURATIONS.map((curation) => (
-            <StyleCurationCard key={curation.id} curation={curation} />
+          {CURATION_PRODUCTS.map((item) => (
+            <ProductCard key={item.id} item={item} />
           ))}
         </div>
       </section>
