@@ -12,11 +12,11 @@ const TABS = [
 ];
 
 const BRANDS = [
-  { id: 1, name: '우이',      hasNewArrivals: true  },
-  { id: 2, name: '프론트로우', hasNewArrivals: false },
-  { id: 3, name: '레이지지',  hasNewArrivals: false },
-  { id: 4, name: '르세지엠',  hasNewArrivals: true  },
-  { id: 5, name: '마르디',    hasNewArrivals: false },
+  { id: 1, name: '우이',      hasNewArrivals: true,  logo: '/oui_logo.jpg'        },
+  { id: 2, name: '프론트로우', hasNewArrivals: false, logo: '/frontrow_logo.jpg'   },
+  { id: 3, name: '레이지지',  hasNewArrivals: false, logo: '/lazy_logo.jpg'        },
+  { id: 4, name: '르세지엠',  hasNewArrivals: true,  logo: '/LESEIZIEME_logo.jpg'  },
+  { id: 5, name: '마르디',    hasNewArrivals: false, logo: null                   },
 ];
 
 /* Place the uploaded image at public/banner.jpg  */
@@ -26,7 +26,7 @@ const BANNER_IMAGE = '/banner.jpg';
 
 /** Instagram-story-style brand avatar ring */
 function BrandAvatar({ brand }) {
-  const { name, hasNewArrivals } = brand;
+  const { name, hasNewArrivals, logo } = brand;
   return (
     <button
       aria-label={name}
@@ -45,10 +45,6 @@ function BrandAvatar({ brand }) {
           border: hasNewArrivals
             ? '2px solid #FF3300'
             : '1px solid #E6E6E6',
-          /* subtle pulse animation only on active brands */
-          ...(hasNewArrivals && {
-            boxShadow: '0 0 0 0 rgba(255,51,0,0)',
-          }),
         }}
       >
         {/* Avatar circle */}
@@ -58,11 +54,43 @@ function BrandAvatar({ brand }) {
             height: 64,
             borderRadius: '50%',
             background: '#F2F2F2',
-            /* crisp white edge separates avatar from ring */
+            overflow: 'hidden',
             outline: '2px solid #ffffff',
             outlineOffset: -2,
           }}
-        />
+        >
+          {logo ? (
+            <img
+              src={logo}
+              alt={name}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                display: 'block',
+              }}
+            />
+          ) : (
+            /* 로고 없는 브랜드 — 이니셜 폴백 */
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#F2F2F2',
+                fontSize: 18,
+                fontWeight: 300,
+                color: '#999',
+                letterSpacing: '0.05em',
+              }}
+            >
+              {name.charAt(0)}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Brand name */}
