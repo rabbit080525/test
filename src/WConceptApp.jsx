@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Search, ShoppingBag } from 'lucide-react';
+import { Search, ShoppingBag, Heart } from 'lucide-react';
 
 /* ─── data ─────────────────────────────────────────── */
 const TABS = [
@@ -36,6 +36,15 @@ const BRANDS = [
   { id: 3, name: '레이지지',  hasNewArrivals: false, logo: '/lazy_logo.jpg'        },
   { id: 4, name: '르세지엠',  hasNewArrivals: true,  logo: '/LESEIZIEME_logo.jpg'  },
   { id: 5, name: '마르디',    hasNewArrivals: false, logo: null                   },
+];
+
+const RELATED_PRODUCTS = [
+  { id: 1,  brand: '마른파이브',   name: '[1+1] 일체형 캠내장 모달 크롭 탑',   discount: 39, price: 24160 },
+  { id: 2,  brand: '마른파이브',   name: '[1+1] 모달 코튼 캠내장 크롭 탑',     discount: 34, price: 29832 },
+  { id: 3,  brand: '브아빗포우먼', name: '[NEW컬러] 베이직 캐미솔 크롭 탑',     discount: 38, price: 48600 },
+  { id: 4,  brand: '시아쥬',       name: 'SITP5147 노블 시어서커 오버핏 셔츠',  discount: 28, price: 62640 },
+  { id: 5,  brand: '아무르 무아르', name: '블라인드 시스루 퍼프 블라우스',       discount: 25, price: 81532 },
+  { id: 6,  brand: '르베티',       name: '시어서커 루즈핏 스트라이프 블라우스', discount: 37, price: 56010 },
 ];
 
 /* ─── shared scroll style ────────────────────────────── */
@@ -108,6 +117,72 @@ function BrandAvatar({ brand }) {
         {name}
       </span>
     </button>
+  );
+}
+
+/* ─── ProductCard ────────────────────────────────────── */
+function ProductCard({ item }) {
+  const [liked, setLiked] = useState(false);
+  return (
+    <div className="flex-shrink-0" style={{ width: 152 }}>
+      {/* 3:4 이미지 */}
+      <div className="relative overflow-hidden rounded-sm" style={{ aspectRatio: '3 / 4' }}>
+        <img
+          src={`https://loremflickr.com/400/533/fashion,woman?lock=${item.id}`}
+          alt={item.name}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        {/* 하트 아이콘 */}
+        <button
+          aria-label="관심 상품"
+          onClick={() => setLiked((v) => !v)}
+          className="absolute bottom-[7px] right-[7px] flex items-center justify-center"
+          style={{
+            width: 26, height: 26,
+            background: 'rgba(255,255,255,0.82)',
+            borderRadius: '50%',
+            backdropFilter: 'blur(2px)',
+          }}
+        >
+          <Heart
+            size={13}
+            strokeWidth={1.5}
+            style={{ color: liked ? '#FF3300' : '#888', fill: liked ? '#FF3300' : 'none' }}
+          />
+        </button>
+      </div>
+
+      {/* 텍스트 */}
+      <div style={{ marginTop: 8 }}>
+        {/* 브랜드명 */}
+        <p style={{ fontSize: 11, fontWeight: 400, color: '#999', letterSpacing: '0.01em', lineHeight: 1, marginBottom: 4 }}>
+          {item.brand}
+        </p>
+        {/* 상품명 — 최대 2줄 */}
+        <p
+          style={{
+            fontSize: 12, fontWeight: 400, color: '#222',
+            lineHeight: 1.45, marginBottom: 5,
+            display: '-webkit-box', WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical', overflow: 'hidden',
+            letterSpacing: '-0.01em',
+          }}
+        >
+          {item.name}
+        </p>
+        {/* 할인율 + 가격 */}
+        <div className="flex items-baseline gap-[5px]">
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#FF3300', letterSpacing: '-0.01em' }}>
+            {item.discount}%
+          </span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>
+            {item.price.toLocaleString()}
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -324,6 +399,66 @@ export default function WConceptApp() {
         >
           {BRANDS.map((brand) => (
             <BrandAvatar key={brand.id} brand={brand} />
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          연관 추천 상품
+      ══════════════════════════════════════ */}
+      <section
+        style={{
+          borderTop: '1px solid #F0F0F0',
+          paddingTop: 28,
+          paddingBottom: 40,
+        }}
+      >
+        {/* 섹션 헤더 — 최근 본 상품 썸네일 + 타이틀 */}
+        <div className="flex items-center gap-[10px] px-5 mb-5">
+          <div
+            className="flex-shrink-0 overflow-hidden"
+            style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
+          >
+            <img
+              src="https://loremflickr.com/400/533/fashion,woman?lock=99"
+              alt="최근 본 상품"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3
+              style={{
+                fontSize: 14, fontWeight: 700, color: '#111',
+                letterSpacing: '-0.02em', lineHeight: 1.3,
+                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                margin: 0,
+              }}
+            >
+              시어서커 오버핏 스트라이프 셔츠 [핑크]
+            </h3>
+            <p
+              style={{
+                fontSize: 11.5, fontWeight: 400, color: '#AAA',
+                letterSpacing: '0.01em', marginTop: 3, lineHeight: 1,
+              }}
+            >
+              이 상품과 비슷한 무드의 아이템
+            </p>
+          </div>
+        </div>
+
+        {/* 상품 카드 — 가로 스크롤 */}
+        <div
+          className="flex overflow-x-auto scrollbar-hide"
+          style={{
+            ...SCROLL_STYLE,
+            gap: 10,
+            paddingLeft: 20,
+            paddingRight: 20,
+          }}
+        >
+          {RELATED_PRODUCTS.map((item) => (
+            <ProductCard key={item.id} item={item} />
           ))}
         </div>
       </section>
