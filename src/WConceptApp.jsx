@@ -39,12 +39,14 @@ const BRANDS = [
 ];
 
 const RELATED_PRODUCTS = [
-  { id: 1,  brand: '마른파이브',   name: '[1+1] 일체형 캠내장 모달 크롭 탑',   discount: 39, price: 24160 },
-  { id: 2,  brand: '마른파이브',   name: '[1+1] 모달 코튼 캠내장 크롭 탑',     discount: 34, price: 29832 },
-  { id: 3,  brand: '브아빗포우먼', name: '[NEW컬러] 베이직 캐미솔 크롭 탑',     discount: 38, price: 48600 },
-  { id: 4,  brand: '시아쥬',       name: 'SITP5147 노블 시어서커 오버핏 셔츠',  discount: 28, price: 62640 },
-  { id: 5,  brand: '아무르 무아르', name: '블라인드 시스루 퍼프 블라우스',       discount: 25, price: 81532 },
-  { id: 6,  brand: '르베티',       name: '시어서커 루즈핏 스트라이프 블라우스', discount: 37, price: 56010 },
+  { id: 1,  brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON SHORT SLEEVE T-SHIRT', discount: 5,  price: 56050  },
+  { id: 2,  brand: '레이지지',             name: 'Loose Fit Classic Check Jacket',       discount: 29, price: 76736  },
+  { id: 3,  brand: '마리떼 프랑소와 저버', name: 'SMALL CLASSIC LOGO POLO SHIRT',        discount: 5,  price: 84550  },
+  { id: 4,  brand: '온앤온',               name: '넥 스트링 라이트 윈드 점퍼',            discount: 34, price: 170940 },
+  { id: 5,  brand: '몽돌',                name: '체크 시어서커 오버핏 스트라이프 셔츠',   discount: 26, price: 72410  },
+  { id: 6,  brand: '온앤온',               name: '쉬어 체크 오버사이즈 셔츠',             discount: 20, price: 38000  },
+  { id: 7,  brand: '시아쥬',               name: 'SITP5147 노블 시어서커 오버핏 셔츠',    discount: 28, price: 62640  },
+  { id: 8,  brand: '아무르 무아르',        name: '블라인드 시스루 퍼프 블라우스',         discount: 25, price: 81532  },
 ];
 
 /* ─── shared scroll style ────────────────────────────── */
@@ -124,60 +126,66 @@ function BrandAvatar({ brand }) {
 function ProductCard({ item }) {
   const [liked, setLiked] = useState(false);
   return (
-    <div className="flex-shrink-0" style={{ width: 152 }}>
-      {/* 3:4 이미지 */}
-      <div className="relative overflow-hidden rounded-sm" style={{ aspectRatio: '3 / 4' }}>
+    /* minWidth:0 — grid 컬럼 너비 초과 방지 */
+    <div style={{ minWidth: 0 }}>
+      {/* 3:4 이미지 — 하트 없음 */}
+      <div
+        className="overflow-hidden"
+        style={{ aspectRatio: '3 / 4', borderRadius: 4, background: '#EBEBEB' }}
+      >
         <img
           src={`https://loremflickr.com/400/533/fashion,woman?lock=${item.id}`}
           alt={item.name}
-          className="w-full h-full object-cover"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           loading="lazy"
           decoding="async"
         />
-        {/* 하트 아이콘 */}
-        <button
-          aria-label="관심 상품"
-          onClick={() => setLiked((v) => !v)}
-          className="absolute bottom-[7px] right-[7px] flex items-center justify-center"
-          style={{
-            width: 26, height: 26,
-            background: 'rgba(255,255,255,0.82)',
-            borderRadius: '50%',
-            backdropFilter: 'blur(2px)',
-          }}
-        >
-          <Heart
-            size={13}
-            strokeWidth={1.5}
-            style={{ color: liked ? '#FF3300' : '#888', fill: liked ? '#FF3300' : 'none' }}
-          />
-        </button>
       </div>
 
       {/* 텍스트 */}
-      <div style={{ marginTop: 8 }}>
-        {/* 브랜드명 */}
-        <p style={{ fontSize: 11, fontWeight: 400, color: '#999', letterSpacing: '0.01em', lineHeight: 1, marginBottom: 4 }}>
-          {item.brand}
-        </p>
-        {/* 상품명 — 최대 2줄 */}
+      <div style={{ marginTop: 7 }}>
+        {/* 브랜드명 + 하트 (같은 줄) */}
+        <div className="flex items-center justify-between" style={{ gap: 4 }}>
+          <span
+            style={{
+              fontSize: 11.5, fontWeight: 400, color: '#222',
+              letterSpacing: '-0.01em', lineHeight: 1,
+              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+              minWidth: 0,
+            }}
+          >
+            {item.brand}
+          </span>
+          <button
+            aria-label="관심 상품"
+            onClick={() => setLiked((v) => !v)}
+            style={{ flexShrink: 0, padding: 1 }}
+          >
+            <Heart
+              size={13}
+              strokeWidth={1.5}
+              style={{ color: liked ? '#FF3300' : '#C0C0C0', fill: liked ? '#FF3300' : 'none', display: 'block' }}
+            />
+          </button>
+        </div>
+
+        {/* 상품명 — 1줄 말줄임 */}
         <p
           style={{
-            fontSize: 12, fontWeight: 400, color: '#222',
-            lineHeight: 1.45, marginBottom: 5,
-            display: '-webkit-box', WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical', overflow: 'hidden',
-            letterSpacing: '-0.01em',
+            fontSize: 11.5, fontWeight: 400, color: '#777',
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            letterSpacing: '-0.01em', lineHeight: 1.35, marginTop: 3,
           }}
         >
           {item.name}
         </p>
+
         {/* 할인율 + 가격 */}
-        <div className="flex items-baseline gap-[5px]">
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#FF3300', letterSpacing: '-0.01em' }}>
+        <div className="flex items-baseline gap-[4px]" style={{ marginTop: 4 }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300', letterSpacing: '-0.01em' }}>
             {item.discount}%
           </span>
-          <span style={{ fontSize: 13, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>
             {item.price.toLocaleString()}
           </span>
         </div>
@@ -447,14 +455,24 @@ export default function WConceptApp() {
           </div>
         </div>
 
-        {/* 상품 카드 — 가로 스크롤 */}
+        {/* 상품 카드 — 2행 CSS Grid 가로 스크롤
+            gridAutoColumns = (390 - paddingLeft20) / 3.5 - gap ≈ 98px
+            → 화면에 3.5개 노출, 4번째 카드 살짝 peek
+        */}
         <div
-          className="flex overflow-x-auto scrollbar-hide"
+          className="overflow-x-auto scrollbar-hide"
           style={{
             ...SCROLL_STYLE,
-            gap: 10,
+            display: 'grid',
+            gridTemplateRows: 'auto auto',
+            gridAutoFlow: 'column',
+            gridAutoColumns: 98,
+            columnGap: 10,
+            rowGap: 20,
             paddingLeft: 20,
             paddingRight: 20,
+            paddingTop: 2,
+            paddingBottom: 4,
           }}
         >
           {RELATED_PRODUCTS.map((item) => (
