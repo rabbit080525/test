@@ -60,6 +60,17 @@ const CURATION_PRODUCTS = [
   { id: 'c8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',   price: 72410, discount: 26, image: 'https://loremflickr.com/400/533/fashion,woman?lock=65' },
 ];
 
+const BEAUTY_PRODUCTS = [
+  { id: 'b1', brand: '이솝',        name: 'Parsley Seed Anti-Oxidant Serum',    price: 82000,  discount: 10, image: 'https://loremflickr.com/400/533/skincare,serum?lock=301' },
+  { id: 'b2', brand: '조말론',      name: '잉글리쉬 페어 앤드 프리지아 크림',   price: 68000,  discount: 15, image: 'https://loremflickr.com/400/533/skincare,cream?lock=302' },
+  { id: 'b3', brand: '라네즈',      name: '워터 슬리핑 마스크 EX 70ml',         price: 29000,  discount: 20, image: 'https://loremflickr.com/400/533/skincare,mask?lock=303' },
+  { id: 'b4', brand: '드렁크엘리펀트', name: 'T.L.C Framboos Glycolic Serum',  price: 138000, discount: 12, image: 'https://loremflickr.com/400/533/skincare,serum?lock=304' },
+  { id: 'b5', brand: '구달',        name: '청귤 비타C 세럼 30ml',               price: 19800,  discount: 30, image: 'https://loremflickr.com/400/533/skincare?lock=305' },
+  { id: 'b6', brand: '클라랑스',    name: '더블 세럼 EX 50ml 기획세트',          price: 142000, discount: 18, image: 'https://loremflickr.com/400/533/skincare,lotion?lock=306' },
+  { id: 'b7', brand: '닥터자르트', name: '세라마이딘 크림 15ml + 마이크로 젤',  price: 44000,  discount: 22, image: 'https://loremflickr.com/400/533/skincare,cream?lock=307' },
+  { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: 'https://loremflickr.com/400/533/skincare,oil?lock=308' },
+];
+
 const BRAND_RECS = [
   {
     id: 1,
@@ -746,6 +757,41 @@ export default function WConceptApp() {
         >
           {BRAND_RECS.map((item) => (
             <BrandRecCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          뷰티 상품 추천 — 2행 그리드 (스타일 추천과 동일)
+      ══════════════════════════════════════ */}
+      <section
+        style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}
+      >
+        <h3
+          className="px-5"
+          style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}
+        >
+          여름 휴가에서 빛나는 수분 글로우 픽
+        </h3>
+
+        <div
+          className="overflow-x-auto scrollbar-hide"
+          style={{
+            ...SCROLL_STYLE,
+            display: 'grid',
+            gridTemplateRows: 'auto auto',
+            gridAutoFlow: 'column',
+            gridAutoColumns: 98,
+            columnGap: 10,
+            rowGap: 20,
+            paddingLeft: 20,
+            paddingRight: 20,
+            paddingTop: 2,
+            paddingBottom: 4,
+          }}
+        >
+          {BEAUTY_PRODUCTS.map((item) => (
+            <ProductCard key={item.id} item={item} />
           ))}
         </div>
       </section>
