@@ -21,13 +21,11 @@ const BANNERS = [
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=90&auto=format&fit=crop',
-    badge: '신규 입고',
     title: '봄을 맞이하는\n마르디의 새 컬렉션',
   },
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=90&auto=format&fit=crop',
-    badge: '한정 특가',
     title: '지금만 만날 수 있는\n프론트로우 시즌 오프',
   },
 ];
@@ -251,18 +249,20 @@ export default function WConceptApp() {
 
               {/* text overlay */}
               <div className="absolute bottom-0 left-0 right-0 px-5 pb-6 flex flex-col items-start">
-                <div
-                  className="flex items-center gap-[5px] mb-[12px]"
-                  style={{ background: 'rgba(0,0,0,0.72)', borderRadius: 100, padding: '5px 12px 5px 10px' }}
-                >
-                  <span style={{ fontSize: 11, color: '#ff6060', lineHeight: 1 }}>♥</span>
-                  <span
-                    className="text-white"
-                    style={{ fontSize: 11, fontWeight: 400, letterSpacing: '0.03em', lineHeight: 1 }}
+                {banner.badge && (
+                  <div
+                    className="flex items-center gap-[5px] mb-[12px]"
+                    style={{ background: 'rgba(0,0,0,0.72)', borderRadius: 100, padding: '5px 12px 5px 10px' }}
                   >
-                    {banner.badge}
-                  </span>
-                </div>
+                    <span style={{ fontSize: 11, color: '#ff6060', lineHeight: 1 }}>♥</span>
+                    <span
+                      className="text-white"
+                      style={{ fontSize: 11, fontWeight: 400, letterSpacing: '0.03em', lineHeight: 1 }}
+                    >
+                      {banner.badge}
+                    </span>
+                  </div>
+                )}
 
                 <h2
                   className="text-white"
