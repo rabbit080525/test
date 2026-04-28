@@ -105,8 +105,44 @@ function BrandRecCard({ item }) {
   return (
     <div className="flex-shrink-0" style={{ width: 158, minWidth: 0 }}>
 
-      {/* ── 이미지 + 브랜드 오버레이 ── */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: '3 / 4', borderRadius: 8, background: '#EBEBEB' }}>
+      {/* 1. 브랜드 정보 */}
+      <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
+        <div className="flex items-center gap-[7px]" style={{ minWidth: 0 }}>
+          <div
+            className="flex-shrink-0 overflow-hidden"
+            style={{ width: 28, height: 28, borderRadius: '50%', border: '1px solid #E6E6E6', background: '#F4F4F4' }}
+          >
+            <img
+              src={item.brand.avatar}
+              alt={item.brand.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              loading="lazy"
+            />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <p style={{ fontSize: 11.5, fontWeight: 600, color: '#111', lineHeight: 1.2, letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {item.brand.name}
+            </p>
+            <p style={{ fontSize: 9.5, fontWeight: 400, color: '#AAA', lineHeight: 1.2, letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {item.brand.nameEn}
+            </p>
+          </div>
+        </div>
+        <button
+          aria-label="관심 브랜드"
+          onClick={() => setLiked((v) => !v)}
+          style={{ flexShrink: 0, padding: 2 }}
+        >
+          <Heart
+            size={14}
+            strokeWidth={1.5}
+            style={{ color: liked ? '#FF3300' : '#C0C0C0', fill: liked ? '#FF3300' : 'none', display: 'block' }}
+          />
+        </button>
+      </div>
+
+      {/* 2. 상품 이미지 */}
+      <div className="overflow-hidden" style={{ aspectRatio: '3 / 4', borderRadius: 8, background: '#EBEBEB' }}>
         <img
           src={item.image}
           alt={item.name}
@@ -114,63 +150,19 @@ function BrandRecCard({ item }) {
           loading="lazy"
           decoding="async"
         />
-
-        {/* 하단 화이트 그라데이션 */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.3) 28%, transparent 50%)' }}
-        />
-
-        {/* 브랜드 정보 — 이미지 위 하단 고정 */}
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-[10px] pb-[10px]">
-          <div className="flex items-center gap-[7px]" style={{ minWidth: 0 }}>
-            {/* 브랜드 원형 아바타 */}
-            <div
-              className="flex-shrink-0 overflow-hidden"
-              style={{ width: 26, height: 26, borderRadius: '50%', border: '1.5px solid #fff', background: '#F4F4F4', boxShadow: '0 1px 4px rgba(0,0,0,0.12)' }}
-            >
-              <img
-                src={item.brand.avatar}
-                alt={item.brand.name}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                loading="lazy"
-              />
-            </div>
-            {/* 브랜드명 */}
-            <div style={{ minWidth: 0 }}>
-              <p style={{ fontSize: 11, fontWeight: 600, color: '#111', lineHeight: 1.2, letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {item.brand.name}
-              </p>
-              <p style={{ fontSize: 9, fontWeight: 400, color: '#888', lineHeight: 1.2, letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {item.brand.nameEn}
-              </p>
-            </div>
-          </div>
-          {/* 하트 */}
-          <button
-            aria-label="관심 브랜드"
-            onClick={() => setLiked((v) => !v)}
-            style={{ flexShrink: 0, padding: 2 }}
-          >
-            <Heart
-              size={14}
-              strokeWidth={1.5}
-              style={{ color: liked ? '#FF3300' : '#999', fill: liked ? '#FF3300' : 'none', display: 'block' }}
-            />
-          </button>
-        </div>
       </div>
 
-      {/* ── 상품 텍스트 ── */}
-      <div style={{ marginTop: 8 }}>
-        <p style={{ fontSize: 12, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em', marginBottom: 3 }}>
-          {item.name}
-        </p>
-        <div className="flex items-baseline gap-[4px]">
-          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
-          <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
-        </div>
+      {/* 3. 상품명 */}
+      <p style={{ fontSize: 12, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em', marginTop: 8, marginBottom: 3 }}>
+        {item.name}
+      </p>
+
+      {/* 4. 가격 */}
+      <div className="flex items-baseline gap-[4px]">
+        <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+        <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
       </div>
+
     </div>
   );
 }
