@@ -134,7 +134,7 @@ function ProductCard({ item }) {
         style={{ aspectRatio: '3 / 4', borderRadius: 4, background: '#EBEBEB' }}
       >
         <img
-          src={`https://loremflickr.com/400/533/fashion,woman?lock=${item.id}`}
+          src={`/pd0${item.id}.jpg`}
           alt={item.name}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           loading="lazy"
@@ -428,7 +428,7 @@ export default function WConceptApp() {
             style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
           >
             <img
-              src="https://loremflickr.com/400/533/fashion,woman?lock=99"
+              src="/pd00.jpg"
               alt="최근 본 상품"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
