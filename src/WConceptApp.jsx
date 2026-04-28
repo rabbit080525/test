@@ -312,13 +312,19 @@ export default function WConceptApp() {
 
         <div
           className="flex overflow-x-auto scrollbar-hide"
-          style={{ ...SCROLL_STYLE, gap: 16, paddingLeft: 20 }}
+          style={{
+            ...SCROLL_STYLE,
+            gap: 16,
+            paddingLeft: 20,
+            paddingRight: 20,
+            /* ring 테두리(2px) + gap(3px) + outline(2px) = 7px 여유 확보 */
+            paddingTop: 8,
+            paddingBottom: 8,
+          }}
         >
           {BRANDS.map((brand) => (
             <BrandAvatar key={brand.id} brand={brand} />
           ))}
-          {/* trailing spacer = paddingLeft과 동일한 20px */}
-          <div style={{ width: 20, flexShrink: 0 }} />
         </div>
       </section>
     </div>
