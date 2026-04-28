@@ -59,11 +59,146 @@ const CURATION_PRODUCTS = [
   { id: 'c7', brand: '아무르 무아르',         name: '블라인드 시스루 블라우스',    price: 81532, discount: 25, image: 'https://loremflickr.com/400/533/fashion,woman?lock=64' },
   { id: 'c8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',   price: 72410, discount: 26, image: 'https://loremflickr.com/400/533/fashion,woman?lock=65' },
 ];
+
+const BRAND_RECS = [
+  {
+    id: 1,
+    brand: { name: '모어레스트', nameEn: 'MORREST',  avatar: 'https://loremflickr.com/80/80/fashion?lock=201' },
+    name: '촉촉소프트 슬리밍 카라 니트 카디건', discount: 12, price: 47344,
+    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=202',
+    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=203',
+  },
+  {
+    id: 2,
+    brand: { name: '르세지엠', nameEn: 'LESEIZIEME', avatar: 'https://loremflickr.com/80/80/fashion?lock=204' },
+    name: '울 혼방 크롭 자켓 세트업', discount: 18, price: 132000,
+    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=205',
+    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=206',
+  },
+  {
+    id: 3,
+    brand: { name: '프론트로우', nameEn: 'FRONTROW',  avatar: 'https://loremflickr.com/80/80/fashion?lock=207' },
+    name: '클래식 핀턱 와이드 팬츠', discount: 22, price: 89000,
+    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=208',
+    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=209',
+  },
+  {
+    id: 4,
+    brand: { name: '아무르 무아르', nameEn: 'AMOUR MUAR', avatar: 'https://loremflickr.com/80/80/fashion?lock=210' },
+    name: '플로럴 시스루 맥시 원피스', discount: 15, price: 112000,
+    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=211',
+    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=212',
+  },
+  {
+    id: 5,
+    brand: { name: '몽돌', nameEn: 'MONGDOL', avatar: 'https://loremflickr.com/80/80/fashion?lock=213' },
+    name: '체크 오버핏 시어서커 블레이저', discount: 26, price: 72410,
+    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=214',
+    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=215',
+  },
+];
+
 const SCROLL_STYLE = {
   WebkitOverflowScrolling: 'touch', /* iOS 관성 스크롤 */
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
 };
+
+/* ─── BrandRecCard ──────────────────────────────────── */
+function BrandRecCard({ item }) {
+  const [liked, setLiked] = useState(false);
+  return (
+    <div className="flex-shrink-0" style={{ width: 158, minWidth: 0 }}>
+
+      {/* ── 이중 이미지: 메인 + 서브 오버레이 ── */}
+      <div className="relative overflow-visible" style={{ aspectRatio: '3 / 4' }}>
+        {/* 메인 이미지 */}
+        <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 8, background: '#EBEBEB' }}>
+          <img
+            src={item.mainImg}
+            alt={item.name}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        {/* 서브 이미지 — 우측 상단 오버레이 */}
+        <div
+          className="absolute overflow-hidden"
+          style={{
+            width: '44%',
+            aspectRatio: '3 / 4',
+            top: 8,
+            right: -8,
+            borderRadius: 6,
+            border: '2px solid #fff',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+            background: '#EBEBEB',
+            zIndex: 2,
+          }}
+        >
+          <img
+            src={item.subImg}
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      {/* ── 상품 텍스트 ── */}
+      <div style={{ marginTop: 10 }}>
+        <p style={{ fontSize: 12, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em', marginBottom: 3 }}>
+          {item.name}
+        </p>
+        <div className="flex items-baseline gap-[4px]" style={{ marginBottom: 8 }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
+        </div>
+
+        {/* ── 브랜드 정보 행 ── */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-[7px]" style={{ minWidth: 0 }}>
+            {/* 브랜드 원형 아바타 */}
+            <div
+              className="flex-shrink-0 overflow-hidden"
+              style={{ width: 28, height: 28, borderRadius: '50%', border: '1px solid #E6E6E6', background: '#F4F4F4' }}
+            >
+              <img
+                src={item.brand.avatar}
+                alt={item.brand.name}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                loading="lazy"
+              />
+            </div>
+            {/* 브랜드명 */}
+            <div style={{ minWidth: 0 }}>
+              <p style={{ fontSize: 11.5, fontWeight: 600, color: '#111', lineHeight: 1.2, letterSpacing: '-0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {item.brand.name}
+              </p>
+              <p style={{ fontSize: 9.5, fontWeight: 400, color: '#AAA', lineHeight: 1.2, letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {item.brand.nameEn}
+              </p>
+            </div>
+          </div>
+          {/* 하트 */}
+          <button
+            aria-label="관심 브랜드"
+            onClick={() => setLiked((v) => !v)}
+            style={{ flexShrink: 0, padding: 2 }}
+          >
+            <Heart
+              size={14}
+              strokeWidth={1.5}
+              style={{ color: liked ? '#FF3300' : '#C0C0C0', fill: liked ? '#FF3300' : 'none', display: 'block' }}
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ─── BottomNav ─────────────────────────────────────── */
 const NAV_TABS = [
@@ -597,6 +732,53 @@ export default function WConceptApp() {
         >
           {CURATION_PRODUCTS.map((item) => (
             <ProductCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          추천 브랜드
+      ══════════════════════════════════════ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        {/* 섹션 헤더 */}
+        <div className="flex items-center gap-[10px] px-5 mb-5">
+          <div
+            className="flex-shrink-0 overflow-hidden"
+            style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
+          >
+            <img
+              src="https://loremflickr.com/400/400/fashion,brand?lock=200"
+              alt="마리떼 프랑소와 저버"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              마리떼 프랑소와 저버
+            </h3>
+            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
+              이 브랜드와 결이 비슷한 추천 브랜드
+            </p>
+          </div>
+        </div>
+
+        {/* 브랜드 추천 카드 — 가로 스크롤
+            서브 이미지가 카드 우측으로 8px 삐져나오므로
+            paddingRight을 넉넉하게 설정
+        */}
+        <div
+          className="flex overflow-x-auto scrollbar-hide"
+          style={{
+            ...SCROLL_STYLE,
+            gap: 20,
+            paddingLeft: 20,
+            paddingRight: 24,
+            paddingTop: 4,
+            paddingBottom: 4,
+          }}
+        >
+          {BRAND_RECS.map((item) => (
+            <BrandRecCard key={item.id} item={item} />
           ))}
         </div>
       </section>
