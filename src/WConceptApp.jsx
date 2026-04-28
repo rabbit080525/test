@@ -12,17 +12,77 @@ const TABS = [
 ];
 
 const BRANDS = [
-  { id: 1, name: '우이' },
-  { id: 2, name: '프론트로우' },
-  { id: 3, name: '레이지지' },
-  { id: 4, name: '르세지엠' },
-  { id: 5, name: '마르디' },
+  { id: 1, name: '우이',      hasNewArrivals: true  },
+  { id: 2, name: '프론트로우', hasNewArrivals: false },
+  { id: 3, name: '레이지지',  hasNewArrivals: false },
+  { id: 4, name: '르세지엠',  hasNewArrivals: true  },
+  { id: 5, name: '마르디',    hasNewArrivals: false },
 ];
 
-const BANNER_IMAGE =
-  'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=90&auto=format&fit=crop';
+/* Place the uploaded image at public/banner.jpg  */
+const BANNER_IMAGE = '/banner.jpg';
 
-/* ─── component ─────────────────────────────────────── */
+/* ─── sub-components ────────────────────────────────── */
+
+/** Instagram-story-style brand avatar ring */
+function BrandAvatar({ brand }) {
+  const { name, hasNewArrivals } = brand;
+  return (
+    <button
+      aria-label={name}
+      className="flex flex-col items-center flex-shrink-0 cursor-pointer"
+      style={{ gap: 9 }}
+    >
+      {/*
+        Ring layer: colored border + padding = the gap between ring and image.
+        true  → 2 px #FF3300 ring  + 3 px white gap
+        false → 1 px #E6E6E6 ring  + 3 px white gap
+      */}
+      <div
+        style={{
+          borderRadius: '50%',
+          padding: 3,
+          border: hasNewArrivals
+            ? '2px solid #FF3300'
+            : '1px solid #E6E6E6',
+          /* subtle pulse animation only on active brands */
+          ...(hasNewArrivals && {
+            boxShadow: '0 0 0 0 rgba(255,51,0,0)',
+          }),
+        }}
+      >
+        {/* Avatar circle */}
+        <div
+          style={{
+            width: 64,
+            height: 64,
+            borderRadius: '50%',
+            background: '#F2F2F2',
+            /* crisp white edge separates avatar from ring */
+            outline: '2px solid #ffffff',
+            outlineOffset: -2,
+          }}
+        />
+      </div>
+
+      {/* Brand name */}
+      <span
+        style={{
+          fontSize: 11.5,
+          fontWeight: hasNewArrivals ? 500 : 400,
+          color: hasNewArrivals ? '#111111' : '#666666',
+          letterSpacing: '0.01em',
+          lineHeight: 1,
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {name}
+      </span>
+    </button>
+  );
+}
+
+/* ─── main component ─────────────────────────────────── */
 export default function WConceptApp() {
   const [activeTab, setActiveTab] = useState('추천');
   const tabsRef = useRef(null);
@@ -35,14 +95,13 @@ export default function WConceptApp() {
           "'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       }}
     >
-      {/* ── Status bar spacer (mobile feel) ── */}
+      {/* Status bar spacer */}
       <div className="h-12" />
 
       {/* ══════════════════════════════════════
           TOP NAVIGATION
       ══════════════════════════════════════ */}
       <header className="flex items-center justify-between px-5 pb-[18px]">
-        {/* Logo */}
         <h1
           className="text-black leading-none"
           style={{ fontSize: 21, fontWeight: 700, letterSpacing: '0.2em' }}
@@ -50,21 +109,13 @@ export default function WConceptApp() {
           W CONCEPT
         </h1>
 
-        {/* Icons */}
         <div className="flex items-center gap-[18px]">
-          <button
-            aria-label="검색"
-            className="flex items-center justify-center w-8 h-8 -mr-1"
-          >
+          <button aria-label="검색" className="flex items-center justify-center w-8 h-8">
             <Search size={21} strokeWidth={1} className="text-black" />
           </button>
 
-          <button
-            aria-label="장바구니"
-            className="relative flex items-center justify-center w-8 h-8"
-          >
+          <button aria-label="장바구니" className="relative flex items-center justify-center w-8 h-8">
             <ShoppingBag size={21} strokeWidth={1} className="text-black" />
-            {/* Badge */}
             <span
               className="absolute top-0 right-0 flex items-center justify-center bg-black rounded-full text-white"
               style={{
@@ -124,37 +175,37 @@ export default function WConceptApp() {
           className="relative w-full rounded-2xl overflow-hidden"
           style={{ aspectRatio: '3 / 3.7' }}
         >
-          {/* Photo */}
+          {/* Banner photo — place your image at public/banner.jpg */}
           <img
             src={BANNER_IMAGE}
             alt="르세지엠 브랜드 스토리"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: 'center 15%' }}
+            style={{ objectPosition: 'center 20%' }}
             loading="eager"
             decoding="async"
           />
 
-          {/* Gradient overlay — bottom to top */}
+          {/* Bottom-to-top gradient overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'linear-gradient(to top, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.28) 40%, rgba(0,0,0,0) 65%)',
+                'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.22) 42%, rgba(0,0,0,0) 66%)',
             }}
           />
 
-          {/* Text content */}
+          {/* Text overlay */}
           <div className="absolute bottom-0 left-0 right-0 px-5 pb-6 flex flex-col items-start">
-            {/* "관심있는 브랜드" badge */}
+            {/* 관심있는 브랜드 badge */}
             <div
-              className="flex items-center gap-[5px] mb-[11px]"
+              className="flex items-center gap-[5px] mb-[12px]"
               style={{
-                background: 'rgba(0,0,0,0.75)',
+                background: 'rgba(0,0,0,0.72)',
                 borderRadius: 100,
                 padding: '5px 12px 5px 10px',
               }}
             >
-              <span style={{ fontSize: 11, color: '#ff7070', lineHeight: 1 }}>♥</span>
+              <span style={{ fontSize: 11, color: '#ff6060', lineHeight: 1 }}>♥</span>
               <span
                 className="text-white"
                 style={{ fontSize: 11, fontWeight: 400, letterSpacing: '0.03em', lineHeight: 1 }}
@@ -163,7 +214,7 @@ export default function WConceptApp() {
               </span>
             </div>
 
-            {/* Main headline */}
+            {/* Headline */}
             <h2
               className="text-white"
               style={{
@@ -186,49 +237,21 @@ export default function WConceptApp() {
           관심 브랜드 새 소식
       ══════════════════════════════════════ */}
       <section className="pt-8 pb-10">
-        {/* Section title */}
         <h3
-          className="px-5 mb-5 text-black"
-          style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 20px' }}
+          className="px-5 text-black"
+          style={{
+            fontSize: 17,
+            fontWeight: 600,
+            letterSpacing: '-0.025em',
+            margin: '0 0 20px',
+          }}
         >
           관심 브랜드 새 소식
         </h3>
 
-        {/* Brand list */}
-        <div
-          className="flex gap-[18px] px-5 overflow-x-auto scrollbar-hide"
-        >
+        <div className="flex gap-[16px] px-5 overflow-x-auto scrollbar-hide">
           {BRANDS.map((brand) => (
-            <button
-              key={brand.id}
-              className="flex flex-col items-center gap-[9px] flex-shrink-0 cursor-pointer"
-              aria-label={brand.name}
-            >
-              {/* Circle avatar placeholder */}
-              <div
-                className="rounded-full"
-                style={{
-                  width: 68,
-                  height: 68,
-                  background: '#F4F4F4',
-                  border: '1px solid #E6E6E6',
-                  flexShrink: 0,
-                }}
-              />
-              {/* Brand name */}
-              <span
-                style={{
-                  fontSize: 11.5,
-                  fontWeight: 400,
-                  color: '#555555',
-                  letterSpacing: '0.01em',
-                  lineHeight: 1,
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {brand.name}
-              </span>
-            </button>
+            <BrandAvatar key={brand.id} brand={brand} />
           ))}
         </div>
       </section>
