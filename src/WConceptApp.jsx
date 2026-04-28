@@ -63,38 +63,33 @@ const CURATION_PRODUCTS = [
 const BRAND_RECS = [
   {
     id: 1,
-    brand: { name: '모어레스트', nameEn: 'MORREST',  avatar: 'https://loremflickr.com/80/80/fashion?lock=201' },
+    brand: { name: '모어레스트',   nameEn: 'MORREST',     avatar: 'https://loremflickr.com/80/80/fashion?lock=201' },
     name: '촉촉소프트 슬리밍 카라 니트 카디건', discount: 12, price: 47344,
-    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=202',
-    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=203',
+    image: '/pd03.jpg',
   },
   {
     id: 2,
-    brand: { name: '르세지엠', nameEn: 'LESEIZIEME', avatar: 'https://loremflickr.com/80/80/fashion?lock=204' },
+    brand: { name: '르세지엠',    nameEn: 'LESEIZIEME',  avatar: 'https://loremflickr.com/80/80/fashion?lock=204' },
     name: '울 혼방 크롭 자켓 세트업', discount: 18, price: 132000,
-    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=205',
-    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=206',
+    image: '/pd07.jpg',
   },
   {
     id: 3,
-    brand: { name: '프론트로우', nameEn: 'FRONTROW',  avatar: 'https://loremflickr.com/80/80/fashion?lock=207' },
+    brand: { name: '프론트로우',  nameEn: 'FRONTROW',    avatar: 'https://loremflickr.com/80/80/fashion?lock=207' },
     name: '클래식 핀턱 와이드 팬츠', discount: 22, price: 89000,
-    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=208',
-    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=209',
+    image: '/pd01.jpg',
   },
   {
     id: 4,
     brand: { name: '아무르 무아르', nameEn: 'AMOUR MUAR', avatar: 'https://loremflickr.com/80/80/fashion?lock=210' },
     name: '플로럴 시스루 맥시 원피스', discount: 15, price: 112000,
-    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=211',
-    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=212',
+    image: '/pd05.jpg',
   },
   {
     id: 5,
-    brand: { name: '몽돌', nameEn: 'MONGDOL', avatar: 'https://loremflickr.com/80/80/fashion?lock=213' },
+    brand: { name: '몽돌',        nameEn: 'MONGDOL',     avatar: 'https://loremflickr.com/80/80/fashion?lock=213' },
     name: '체크 오버핏 시어서커 블레이저', discount: 26, price: 72410,
-    mainImg: 'https://loremflickr.com/400/533/fashion,woman?lock=214',
-    subImg:  'https://loremflickr.com/400/533/fashion,woman?lock=215',
+    image: '/pd08.jpg',
   },
 ];
 
@@ -110,41 +105,15 @@ function BrandRecCard({ item }) {
   return (
     <div className="flex-shrink-0" style={{ width: 158, minWidth: 0 }}>
 
-      {/* ── 이중 이미지: 메인 + 서브 오버레이 ── */}
-      <div className="relative overflow-visible" style={{ aspectRatio: '3 / 4' }}>
-        {/* 메인 이미지 */}
-        <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 8, background: '#EBEBEB' }}>
-          <img
-            src={item.mainImg}
-            alt={item.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        {/* 서브 이미지 — 우측 상단 오버레이 */}
-        <div
-          className="absolute overflow-hidden"
-          style={{
-            width: '44%',
-            aspectRatio: '3 / 4',
-            top: 8,
-            right: -8,
-            borderRadius: 6,
-            border: '2px solid #fff',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-            background: '#EBEBEB',
-            zIndex: 2,
-          }}
-        >
-          <img
-            src={item.subImg}
-            alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+      {/* ── 상품 이미지 ── */}
+      <div className="overflow-hidden" style={{ aspectRatio: '3 / 4', borderRadius: 8, background: '#EBEBEB' }}>
+        <img
+          src={item.image}
+          alt={item.name}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       {/* ── 상품 텍스트 ── */}
