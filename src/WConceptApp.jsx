@@ -32,7 +32,7 @@ const BANNERS = [
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=90&auto=format&fit=crop',
+    image: '/banner.jpg',
     title: '봄을 맞이하는\n마르디의 새 컬렉션',
   },
   {
