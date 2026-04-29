@@ -1023,6 +1023,90 @@ export default function WConceptApp() {
         </div>
       </div>
 
+      {/* ══════════════════════════════════════
+          광고 배너 하단 — 연관 추천 상품
+      ══════════════════════════════════════ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}>
+        <div className="flex items-center gap-[10px] px-5 mb-5">
+          <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
+            <img src="/pd03.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
+              울 혼방 크롭 자켓 세트업
+            </h3>
+            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
+              이 상품과 비슷한 무드의 아이템
+            </p>
+          </div>
+        </div>
+        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
+          {RELATED_PRODUCTS.map((item, i) => (
+            <motion.div key={'b2-' + item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          광고 배너 하단 — 에디토리얼
+      ══════════════════════════════════════ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+          지금 주목할 스타일 콘텐츠
+        </h3>
+        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
+          {STYLE_CARDS.map((card) => (
+            <StyleCard
+              key={'b2-' + card.id}
+              card={card}
+              onClick={() => handleProductClick({ ...card.product, id: card.id, brand: card.product.brand })}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          광고 배너 하단 — 브랜드 추천
+      ══════════════════════════════════════ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        <div className="flex items-center gap-[10px] px-5 mb-5">
+          <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
+            <img src="https://loremflickr.com/400/400/fashion,brand?lock=200" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              레이지지
+            </h3>
+            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
+              이 브랜드와 결이 비슷한 추천 브랜드
+            </p>
+          </div>
+        </div>
+        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 20, paddingLeft: 20, paddingRight: 24, paddingTop: 4, paddingBottom: 4 }}>
+          {BRAND_RECS.map((item) => (
+            <BrandRecCard key={'b2-' + item.id} item={item} onClick={() => handleProductClick(item)} />
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          광고 배너 하단 — 뷰티 추천
+      ══════════════════════════════════════ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+          피부 고민별 뷰티 솔루션
+        </h3>
+        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
+          {BEAUTY_PRODUCTS.map((item, i) => (
+            <motion.div key={'b2-' + item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
     </div>{/* end 홈 스크롤 영역 */}
 
     {/* ── 상세 페이지 오버레이 (슬라이드 인/아웃) ── */}
