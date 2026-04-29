@@ -115,50 +115,6 @@ const BEAUTY_PRODUCTS = [
   { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: 'https://loremflickr.com/400/533/skincare,oil?lock=308' },
 ];
 
-const RELATED_PRODUCTS_2 = [
-  { id: 'r2a', brand: '르세지엠',           name: 'Silk Twist Draped Dress',        discount: 20, price: 145000, image: 'https://loremflickr.com/400/533/fashion,woman?lock=111' },
-  { id: 'r2b', brand: '프론트로우',          name: '데님 와이드 팬츠',                discount: 15, price: 89000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=112' },
-  { id: 'r2c', brand: '아무르 무아르',       name: '플리츠 미디 스커트',              discount: 30, price: 68000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=113' },
-  { id: 'r2d', brand: '시아쥬',             name: '크롭 트위드 자켓',                discount: 25, price: 125000, image: 'https://loremflickr.com/400/533/fashion,woman?lock=114' },
-  { id: 'r2e', brand: '온앤온',             name: '리넨 오버핏 셔츠',               discount: 18, price: 52000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=115' },
-  { id: 'r2f', brand: '마리떼 프랑소와 저버', name: 'STRIPE TEE SHIRT',             discount: 10, price: 65000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=116' },
-  { id: 'r2g', brand: '몽돌',               name: '버킷햇 코튼 캡',                  discount: 22, price: 38000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=117' },
-  { id: 'r2h', brand: '레이지지',            name: '울 블렌드 롱 코트',               discount: 35, price: 238000, image: 'https://loremflickr.com/400/533/fashion,woman?lock=118' },
-];
-
-const BEAUTY_PRODUCTS_2 = [
-  { id: 'bb1', brand: '설화수',   name: '윤조에센스 60ml',                   price: 95000,  discount: 10, image: 'https://loremflickr.com/400/533/skincare,beauty?lock=401' },
-  { id: 'bb2', brand: '후',      name: '공진향 모이스처 크림',               price: 128000, discount: 15, image: 'https://loremflickr.com/400/533/skincare,lotion?lock=402' },
-  { id: 'bb3', brand: '바비브라운', name: '클리어링 크림 SPF30',             price: 72000,  discount: 20, image: 'https://loremflickr.com/400/533/beauty,makeup?lock=403' },
-  { id: 'bb4', brand: '나스',     name: 'Radiant Creamy Concealer',         price: 58000,  discount: 12, image: 'https://loremflickr.com/400/533/makeup,beauty?lock=404' },
-  { id: 'bb5', brand: '맥',      name: 'Studio Fix Foundation',             price: 52000,  discount: 18, image: 'https://loremflickr.com/400/533/beauty,skincare?lock=405' },
-  { id: 'bb6', brand: '샤넬',    name: 'N°1 드 샤넬 세럼',                  price: 245000, discount: 8,  image: 'https://loremflickr.com/400/533/skincare,luxury?lock=406' },
-  { id: 'bb7', brand: '키엘',    name: 'Ultra Facial Cream 125ml',          price: 68000,  discount: 22, image: 'https://loremflickr.com/400/533/skincare,cream?lock=407' },
-  { id: 'bb8', brand: '오리진스', name: 'Original Skin Moisturizer',        price: 45000,  discount: 25, image: 'https://loremflickr.com/400/533/skincare?lock=408' },
-];
-
-const RELATED_PRODUCTS_3 = [
-  { id: 'r3a', brand: '마리떼 프랑소와 저버', name: 'LOGO HOODIE SWEATSHIRT',      discount: 8,  price: 112000, image: 'https://loremflickr.com/400/533/fashion,woman?lock=121' },
-  { id: 'r3b', brand: '온앤온',             name: '스트라이프 니트 가디건',          discount: 25, price: 78000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=122' },
-  { id: 'r3c', brand: '르세지엠',           name: '프렌치 슬리브리스 블라우스',      discount: 18, price: 89000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=123' },
-  { id: 'r3d', brand: '레이지지',            name: 'Check Maxi Skirt',             discount: 30, price: 95000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=124' },
-  { id: 'r3e', brand: '아무르 무아르',       name: '실크 새틴 슬립 드레스',           discount: 22, price: 158000, image: 'https://loremflickr.com/400/533/fashion,woman?lock=125' },
-  { id: 'r3f', brand: '시아쥬',             name: '베이직 테일러드 수트',            discount: 15, price: 225000, image: 'https://loremflickr.com/400/533/fashion,woman?lock=126' },
-  { id: 'r3g', brand: '프론트로우',          name: '코튼 터틀넥 니트',               discount: 12, price: 68000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=127' },
-  { id: 'r3h', brand: '몽돌',               name: '버클 스트랩 샌들',               discount: 28, price: 85000,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=128' },
-];
-
-const BEAUTY_PRODUCTS_3 = [
-  { id: 'bc1', brand: '탬버린즈',  name: '퍼퓸 세럼 30ml',                   price: 62000,  discount: 15, image: 'https://loremflickr.com/400/533/perfume,beauty?lock=501' },
-  { id: 'bc2', brand: '조 말론',   name: '블랙베리 앤 베이 코롱',             price: 185000, discount: 10, image: 'https://loremflickr.com/400/533/perfume,luxury?lock=502' },
-  { id: 'bc3', brand: '닥터지',    name: 'Red Blemish Clear Soothing',       price: 28000,  discount: 30, image: 'https://loremflickr.com/400/533/skincare,serum?lock=503' },
-  { id: 'bc4', brand: '에스트라',  name: '아토베리어365 크림',                price: 32000,  discount: 20, image: 'https://loremflickr.com/400/533/skincare,cream?lock=504' },
-  { id: 'bc5', brand: '코스알엑스', name: 'Advanced Snail 96 Mucin',         price: 22000,  discount: 25, image: 'https://loremflickr.com/400/533/skincare?lock=505' },
-  { id: 'bc6', brand: '토리든',    name: 'DIVE-IN Low Molecular Serum',      price: 35000,  discount: 18, image: 'https://loremflickr.com/400/533/skincare,serum?lock=506' },
-  { id: 'bc7', brand: '아누아',    name: '어성초 77 토너 패드',               price: 18000,  discount: 22, image: 'https://loremflickr.com/400/533/skincare,lotion?lock=507' },
-  { id: 'bc8', brand: '미샤',      name: 'Time Revolution 3rd Generation',   price: 24000,  discount: 35, image: 'https://loremflickr.com/400/533/beauty,skincare?lock=508' },
-];
-
 const BRAND_RECS = [
   {
     id: 1,
@@ -1015,82 +971,6 @@ export default function WConceptApp() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}
             >
-              <ProductCard item={item} onClick={() => handleProductClick(item)} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════ 반복 1 — 연관 추천 상품 ══════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}>
-        <div className="flex items-center gap-[10px] px-5 mb-5">
-          <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
-            <img src="/pd03.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-          <div style={{ minWidth: 0 }}>
-            <h3 style={{ fontSize: 14, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
-              울 혼방 크롭 자켓 세트업
-            </h3>
-            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
-              이 상품과 비슷한 무드의 아이템
-            </p>
-          </div>
-        </div>
-        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
-          {RELATED_PRODUCTS_2.map((item, i) => (
-            <motion.div key={item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
-              <ProductCard item={item} onClick={() => handleProductClick(item)} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════ 반복 1 — 뷰티 추천 ══════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
-        <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-          피부 고민별 뷰티 솔루션
-        </h3>
-        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
-          {BEAUTY_PRODUCTS_2.map((item, i) => (
-            <motion.div key={item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
-              <ProductCard item={item} onClick={() => handleProductClick(item)} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════ 반복 2 — 연관 추천 상품 ══════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}>
-        <div className="flex items-center gap-[10px] px-5 mb-5">
-          <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
-            <img src="/pd07.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-          <div style={{ minWidth: 0 }}>
-            <h3 style={{ fontSize: 14, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
-              실크 오버핏 블라우스 [아이보리]
-            </h3>
-            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
-              이 상품과 비슷한 무드의 아이템
-            </p>
-          </div>
-        </div>
-        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
-          {RELATED_PRODUCTS_3.map((item, i) => (
-            <motion.div key={item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
-              <ProductCard item={item} onClick={() => handleProductClick(item)} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════ 반복 2 — 뷰티 추천 ══════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
-        <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-          여름 메이크업 필수 뷰티템
-        </h3>
-        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
-          {BEAUTY_PRODUCTS_3.map((item, i) => (
-            <motion.div key={item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
               <ProductCard item={item} onClick={() => handleProductClick(item)} />
             </motion.div>
           ))}
