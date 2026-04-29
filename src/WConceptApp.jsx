@@ -106,14 +106,14 @@ const STYLE_CARDS = [
 ];
 
 const BEAUTY_PRODUCTS = [
-  { id: 'b1', brand: '이솝',        name: 'Parsley Seed Anti-Oxidant Serum',    price: 82000,  discount: 10, image: '/bdp01.jpg' },
-  { id: 'b2', brand: '조말론',      name: '잉글리쉬 페어 앤드 프리지아 크림',   price: 68000,  discount: 15, image: '/bdp02.jpg' },
-  { id: 'b3', brand: '라네즈',      name: '워터 슬리핑 마스크 EX 70ml',         price: 29000,  discount: 20, image: '/bdp03.jpg' },
-  { id: 'b4', brand: '드렁크엘리펀트', name: 'T.L.C Framboos Glycolic Serum',  price: 138000, discount: 12, image: '/bdp04.jpg' },
-  { id: 'b5', brand: '구달',        name: '청귤 비타C 세럼 30ml',               price: 19800,  discount: 30, image: '/bdp05.jpg' },
-  { id: 'b6', brand: '클라랑스',    name: '더블 세럼 EX 50ml 기획세트',          price: 142000, discount: 18, image: '/bdp06.jpg' },
-  { id: 'b7', brand: '닥터자르트', name: '세라마이딘 크림 15ml + 마이크로 젤',  price: 44000,  discount: 22, image: '/bdp07.jpg' },
-  { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: '/bdp08.jpg' },
+  { id: 'b1', brand: '이솝',        name: 'Parsley Seed Anti-Oxidant Serum',    price: 82000,  discount: 10, image: '/bpd01.jpg' },
+  { id: 'b2', brand: '조말론',      name: '잉글리쉬 페어 앤드 프리지아 크림',   price: 68000,  discount: 15, image: '/bpd02.jpg' },
+  { id: 'b3', brand: '라네즈',      name: '워터 슬리핑 마스크 EX 70ml',         price: 29000,  discount: 20, image: '/bpd03.jpg' },
+  { id: 'b4', brand: '드렁크엘리펀트', name: 'T.L.C Framboos Glycolic Serum',  price: 138000, discount: 12, image: '/bpd04.jpg' },
+  { id: 'b5', brand: '구달',        name: '청귤 비타C 세럼 30ml',               price: 19800,  discount: 30, image: '/bpd05.jpg' },
+  { id: 'b6', brand: '클라랑스',    name: '더블 세럼 EX 50ml 기획세트',          price: 142000, discount: 18, image: '/bpd06.jpg' },
+  { id: 'b7', brand: '닥터자르트', name: '세라마이딘 크림 15ml + 마이크로 젤',  price: 44000,  discount: 22, image: '/bpd07.jpg' },
+  { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: '/bpd08.jpg' },
 ];
 
 const LIFESTYLE_PRODUCTS = [
