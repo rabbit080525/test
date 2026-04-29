@@ -71,6 +71,37 @@ const CURATION_PRODUCTS = [
   { id: 'c8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',   price: 72410, discount: 26, image: 'https://loremflickr.com/400/533/fashion,woman?lock=65' },
 ];
 
+const STYLE_CARDS = [
+  {
+    id: 'sl1',
+    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=71',
+    tag: 'W CONCEPT 성수 팝업스토어',
+    title: '공주들아\n여기 꼭 가야해!',
+    product: { image: '/pd02.jpg', brand: '마리떼 프랑소와 저버', name: '다이아 퀼팅 자수 니트', price: 89000, discount: 15 },
+  },
+  {
+    id: 'sl2',
+    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=72',
+    tag: 'Outfit of the Day',
+    title: 'Outfit of\nthe Day',
+    product: { image: '/pd04.jpg', brand: '레이브', name: 'Leo Shoulder Bag', price: 88000, discount: 10 },
+  },
+  {
+    id: 'sl3',
+    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=73',
+    tag: '주말 브런치 룩',
+    title: '여유로운\n주말 아침',
+    product: { image: '/pd06.jpg', brand: '온앤온', name: '린넨 와이드 팬츠', price: 62000, discount: 20 },
+  },
+  {
+    id: 'sl4',
+    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=74',
+    tag: '데일리 무드',
+    title: '오늘도\n예쁘게!',
+    product: { image: '/pd08.jpg', brand: '르세지엠', name: '실크 오버핏 블라우스', price: 115000, discount: 18 },
+  },
+];
+
 const BEAUTY_PRODUCTS = [
   { id: 'b1', brand: '이솝',        name: 'Parsley Seed Anti-Oxidant Serum',    price: 82000,  discount: 10, image: 'https://loremflickr.com/400/533/skincare,serum?lock=301' },
   { id: 'b2', brand: '조말론',      name: '잉글리쉬 페어 앤드 프리지아 크림',   price: 68000,  discount: 15, image: 'https://loremflickr.com/400/533/skincare,cream?lock=302' },
@@ -120,6 +151,50 @@ const SCROLL_STYLE = {
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
 };
+
+/* ─── StyleCard ─────────────────────────────────────── */
+function StyleCard({ card, onClick }) {
+  return (
+    <div style={{ flexShrink: 0, width: 170, cursor: 'pointer' }} onClick={onClick}>
+      {/* 에디토리얼 이미지 */}
+      <div style={{ aspectRatio: '3 / 4', borderRadius: 10, overflow: 'hidden', position: 'relative', background: '#EBEBEB' }}>
+        <img
+          src={card.contentImage}
+          alt={card.title}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          loading="lazy"
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 52%, transparent 72%)' }} />
+        {card.tag && (
+          <p style={{ position: 'absolute', top: 12, left: 12, margin: 0, fontSize: 10, color: 'rgba(255,255,255,0.82)', letterSpacing: '0.03em', lineHeight: 1 }}>
+            {card.tag}
+          </p>
+        )}
+        <p style={{ position: 'absolute', bottom: 14, left: 12, right: 12, margin: 0, fontSize: 17, fontWeight: 700, color: '#fff', whiteSpace: 'pre-line', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
+          {card.title}
+        </p>
+      </div>
+
+      {/* 상품 정보 행 */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, paddingTop: 10 }}>
+        <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
+          <img src={card.product.image} alt={card.product.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+        <div style={{ minWidth: 0 }}>
+          <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: '#111', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: '-0.01em' }}>
+            {card.product.brand}
+          </p>
+          <p style={{ margin: '3px 0 4px', fontSize: 11, color: '#999', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: '-0.01em' }}>
+            {card.product.name}
+          </p>
+          <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>
+            {card.product.price.toLocaleString()}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ─── ProductDetailPage ─────────────────────────────── */
 function ProductDetailPage({ item, onBack }) {
@@ -789,33 +864,17 @@ export default function WConceptApp() {
           주말에 어울리는 모던 시크 룩
         </h3>
 
-        {/* 추천 상품 구좌와 동일한 2행 CSS Grid */}
+        {/* 에디토리얼 스타일 카드 — 단일행 가로 스크롤 */}
         <div
-          className="overflow-x-auto scrollbar-hide"
-          style={{
-            ...SCROLL_STYLE,
-            display: 'grid',
-            gridTemplateRows: 'auto auto',
-            gridAutoFlow: 'column',
-            gridAutoColumns: 98,
-            columnGap: 10,
-            rowGap: 20,
-            paddingLeft: 20,
-            paddingRight: 20,
-            paddingTop: 2,
-            paddingBottom: 4,
-          }}
+          className="flex overflow-x-auto scrollbar-hide"
+          style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}
         >
-          {displayedCuration.map((item, i) => (
-            <motion.div
-              key={refreshKey + '-' + item.id}
-              style={{ minWidth: 0 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}
-            >
-              <ProductCard item={item} onClick={() => handleProductClick(item)} />
-            </motion.div>
+          {STYLE_CARDS.map((card) => (
+            <StyleCard
+              key={card.id}
+              card={card}
+              onClick={() => handleProductClick({ ...card.product, id: card.id, brand: card.product.brand })}
+            />
           ))}
         </div>
       </section>
