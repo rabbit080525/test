@@ -115,6 +115,17 @@ const BEAUTY_PRODUCTS = [
   { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: 'https://loremflickr.com/400/533/skincare,oil?lock=308' },
 ];
 
+const LIFESTYLE_PRODUCTS = [
+  { id: 'lf1', brand: '르크루제',      name: '시그니처 라운드 코코트 22cm',    price: 298000, discount: 15, image: 'https://loremflickr.com/400/533/tableware,kitchen?lock=601' },
+  { id: 'lf2', brand: '이딸라',        name: 'Teema 머그컵 세트 2p',           price: 78000,  discount: 10, image: 'https://loremflickr.com/400/533/mug,coffee?lock=602' },
+  { id: 'lf3', brand: '덴비',          name: '내추럴 캔버스 볼 4p',             price: 62000,  discount: 20, image: 'https://loremflickr.com/400/533/tableware,bowl?lock=603' },
+  { id: 'lf4', brand: '스타우브',      name: '피코 코코트 라운드 18cm',         price: 245000, discount: 12, image: 'https://loremflickr.com/400/533/kitchen,cookware?lock=604' },
+  { id: 'lf5', brand: '아라비아',      name: 'Moomin 머그 0.4L',               price: 48000,  discount: 25, image: 'https://loremflickr.com/400/533/mug,tableware?lock=605' },
+  { id: 'lf6', brand: '헤이',          name: 'Porcelain 접시 세트 4p',          price: 89000,  discount: 18, image: 'https://loremflickr.com/400/533/plate,ceramic?lock=606' },
+  { id: 'lf7', brand: '보덤',          name: 'KENYA 커피 프레스 0.5L',          price: 52000,  discount: 22, image: 'https://loremflickr.com/400/533/coffee,kitchen?lock=607' },
+  { id: 'lf8', brand: '카이보이콧',    name: '린넨 테이블클로스 140×240',       price: 68000,  discount: 30, image: 'https://loremflickr.com/400/533/linen,interior?lock=608' },
+];
+
 const BRAND_RECS = [
   {
     id: 1,
@@ -1054,7 +1065,7 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
         <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-          지금 주목할 스타일 콘텐츠
+          오피스룩으로 입기 좋은 베이직 룩
         </h3>
         <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
           {STYLE_CARDS.map((card) => (
@@ -1096,10 +1107,10 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
         <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-          피부 고민별 뷰티 솔루션
+          주말 아침을 깨우는 감성 테이블웨어
         </h3>
         <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
-          {BEAUTY_PRODUCTS.map((item, i) => (
+          {LIFESTYLE_PRODUCTS.map((item, i) => (
             <motion.div key={'b2-' + item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
               <ProductCard item={item} onClick={() => handleProductClick(item)} />
             </motion.div>
