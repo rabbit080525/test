@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ShoppingBag, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
+import InfiniteFeed from './InfiniteFeed';
 
 /* ─── utils ─────────────────────────────────────────── */
 function shuffle(arr) {
@@ -1258,6 +1259,9 @@ export default function WConceptApp() {
           ))}
         </div>
       </section>
+
+      {/* ══ 취향 기반 무한 피드 ══ */}
+      <InfiniteFeed onProductClick={handleProductClick} />
 
     </div>{/* end 홈 스크롤 영역 */}
 
