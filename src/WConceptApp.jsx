@@ -93,13 +93,13 @@ const STYLE_CARDS = [
   },
   {
     id: 'sl4',
-    contentImage: '/con01.jpg',
+    contentImage: '/con04.jpg',
     tag: '브랜드스토리',
     product: { image: '/pd08.jpg', brand: '르세지엠', name: '실크 오버핏 블라우스', price: 115000, discount: 18 },
   },
   {
     id: 'sl5',
-    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=75',
+    contentImage: '/con05.jpg',
     tag: '라이브',
     product: { image: '/pd01.jpg', brand: '프론트로우', name: '클래식 핀턱 와이드 팬츠', price: 89000, discount: 22 },
   },
