@@ -75,13 +75,13 @@ const CURATION_PRODUCTS = [
 const STYLE_CARDS = [
   {
     id: 'sl1',
-    contentImage: '/con01.jpg',
+    contentImage: '/con02.jpg',
     tag: '룩북',
     product: { image: '/pd02.jpg', brand: '마리떼 프랑소와 저버', name: '다이아 퀼팅 자수 니트', price: 89000, discount: 15 },
   },
   {
     id: 'sl2',
-    contentImage: '/con02.jpg',
+    contentImage: '/con01.jpg',
     tag: '스타일링',
     product: { image: '/pd04.jpg', brand: '레이브', name: 'Leo Shoulder Bag', price: 88000, discount: 10 },
   },
@@ -106,25 +106,25 @@ const STYLE_CARDS = [
 ];
 
 const BEAUTY_PRODUCTS = [
-  { id: 'b1', brand: '이솝',        name: 'Parsley Seed Anti-Oxidant Serum',    price: 82000,  discount: 10, image: 'https://loremflickr.com/400/533/skincare,serum?lock=301' },
-  { id: 'b2', brand: '조말론',      name: '잉글리쉬 페어 앤드 프리지아 크림',   price: 68000,  discount: 15, image: 'https://loremflickr.com/400/533/skincare,cream?lock=302' },
-  { id: 'b3', brand: '라네즈',      name: '워터 슬리핑 마스크 EX 70ml',         price: 29000,  discount: 20, image: 'https://loremflickr.com/400/533/skincare,mask?lock=303' },
-  { id: 'b4', brand: '드렁크엘리펀트', name: 'T.L.C Framboos Glycolic Serum',  price: 138000, discount: 12, image: 'https://loremflickr.com/400/533/skincare,serum?lock=304' },
-  { id: 'b5', brand: '구달',        name: '청귤 비타C 세럼 30ml',               price: 19800,  discount: 30, image: 'https://loremflickr.com/400/533/skincare?lock=305' },
-  { id: 'b6', brand: '클라랑스',    name: '더블 세럼 EX 50ml 기획세트',          price: 142000, discount: 18, image: 'https://loremflickr.com/400/533/skincare,lotion?lock=306' },
-  { id: 'b7', brand: '닥터자르트', name: '세라마이딘 크림 15ml + 마이크로 젤',  price: 44000,  discount: 22, image: 'https://loremflickr.com/400/533/skincare,cream?lock=307' },
-  { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: 'https://loremflickr.com/400/533/skincare,oil?lock=308' },
+  { id: 'b1', brand: '이솝',        name: 'Parsley Seed Anti-Oxidant Serum',    price: 82000,  discount: 10, image: '/bdp01.jpg' },
+  { id: 'b2', brand: '조말론',      name: '잉글리쉬 페어 앤드 프리지아 크림',   price: 68000,  discount: 15, image: '/bdp02.jpg' },
+  { id: 'b3', brand: '라네즈',      name: '워터 슬리핑 마스크 EX 70ml',         price: 29000,  discount: 20, image: '/bdp03.jpg' },
+  { id: 'b4', brand: '드렁크엘리펀트', name: 'T.L.C Framboos Glycolic Serum',  price: 138000, discount: 12, image: '/bdp04.jpg' },
+  { id: 'b5', brand: '구달',        name: '청귤 비타C 세럼 30ml',               price: 19800,  discount: 30, image: '/bdp05.jpg' },
+  { id: 'b6', brand: '클라랑스',    name: '더블 세럼 EX 50ml 기획세트',          price: 142000, discount: 18, image: '/bdp06.jpg' },
+  { id: 'b7', brand: '닥터자르트', name: '세라마이딘 크림 15ml + 마이크로 젤',  price: 44000,  discount: 22, image: '/bdp07.jpg' },
+  { id: 'b8', brand: '헉슬리',      name: 'Oil; Grab-and-Go 30ml',              price: 38000,  discount: 25, image: '/bdp08.jpg' },
 ];
 
 const LIFESTYLE_PRODUCTS = [
-  { id: 'lf1', brand: '르크루제',      name: '시그니처 라운드 코코트 22cm',    price: 298000, discount: 15, image: 'https://loremflickr.com/400/533/tableware,kitchen?lock=601' },
-  { id: 'lf2', brand: '이딸라',        name: 'Teema 머그컵 세트 2p',           price: 78000,  discount: 10, image: 'https://loremflickr.com/400/533/mug,coffee?lock=602' },
-  { id: 'lf3', brand: '덴비',          name: '내추럴 캔버스 볼 4p',             price: 62000,  discount: 20, image: 'https://loremflickr.com/400/533/tableware,bowl?lock=603' },
-  { id: 'lf4', brand: '스타우브',      name: '피코 코코트 라운드 18cm',         price: 245000, discount: 12, image: 'https://loremflickr.com/400/533/kitchen,cookware?lock=604' },
-  { id: 'lf5', brand: '아라비아',      name: 'Moomin 머그 0.4L',               price: 48000,  discount: 25, image: 'https://loremflickr.com/400/533/mug,tableware?lock=605' },
-  { id: 'lf6', brand: '헤이',          name: 'Porcelain 접시 세트 4p',          price: 89000,  discount: 18, image: 'https://loremflickr.com/400/533/plate,ceramic?lock=606' },
-  { id: 'lf7', brand: '보덤',          name: 'KENYA 커피 프레스 0.5L',          price: 52000,  discount: 22, image: 'https://loremflickr.com/400/533/coffee,kitchen?lock=607' },
-  { id: 'lf8', brand: '카이보이콧',    name: '린넨 테이블클로스 140×240',       price: 68000,  discount: 30, image: 'https://loremflickr.com/400/533/linen,interior?lock=608' },
+  { id: 'lf1', brand: '르크루제',      name: '시그니처 라운드 코코트 22cm',    price: 298000, discount: 15, image: '/lpd01.jpg' },
+  { id: 'lf2', brand: '이딸라',        name: 'Teema 머그컵 세트 2p',           price: 78000,  discount: 10, image: '/lpd02.jpg' },
+  { id: 'lf3', brand: '덴비',          name: '내추럴 캔버스 볼 4p',             price: 62000,  discount: 20, image: '/lpd03.jpg' },
+  { id: 'lf4', brand: '스타우브',      name: '피코 코코트 라운드 18cm',         price: 245000, discount: 12, image: '/lpd04.jpg' },
+  { id: 'lf5', brand: '아라비아',      name: 'Moomin 머그 0.4L',               price: 48000,  discount: 25, image: '/lpd05.jpg' },
+  { id: 'lf6', brand: '헤이',          name: 'Porcelain 접시 세트 4p',          price: 89000,  discount: 18, image: '/lpd06.jpg' },
+  { id: 'lf7', brand: '보덤',          name: 'KENYA 커피 프레스 0.5L',          price: 52000,  discount: 22, image: '/lpd07.jpg' },
+  { id: 'lf8', brand: '카이보이콧',    name: '린넨 테이블클로스 140×240',       price: 68000,  discount: 30, image: '/lpd08.jpg' },
 ];
 
 const ACTIVE_PRODUCTS = [
