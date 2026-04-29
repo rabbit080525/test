@@ -32,12 +32,12 @@ const BANNERS = [
   },
   {
     id: 2,
-    image: '/banner2.jpg',
+    image: '/banner3.jpg',
     title: '봄을 맞이하는\n마르디의 새 컬렉션',
   },
   {
     id: 3,
-    image: '/banner3.jpg',
+    image: '/banner2.jpg',
     title: '지금만 만날 수 있는\n프론트로우 시즌 오프',
   },
 ];
@@ -128,14 +128,14 @@ const LIFESTYLE_PRODUCTS = [
 ];
 
 const ACTIVE_PRODUCTS = [
-  { id: 'ac1', brand: '젝시믹스',  name: '에어쿨 레깅스 풀렝스',          price: 49000,  discount: 20, image: 'https://loremflickr.com/400/533/sportswear,woman?lock=701' },
-  { id: 'ac2', brand: '안다르',    name: '시그니처 스포츠브라',            price: 38000,  discount: 15, image: 'https://loremflickr.com/400/533/yoga,fitness?lock=702' },
-  { id: 'ac3', brand: '뮬라웨어',  name: '에어리 크롭 집업',              price: 62000,  discount: 25, image: 'https://loremflickr.com/400/533/sportswear,active?lock=703' },
-  { id: 'ac4', brand: '나이키',    name: 'Dri-FIT 런닝 쇼츠',            price: 55000,  discount: 10, image: 'https://loremflickr.com/400/533/running,fitness?lock=704' },
-  { id: 'ac5', brand: '룰루레몬',  name: 'Align High-Rise Pant 25"',     price: 148000, discount: 12, image: 'https://loremflickr.com/400/533/yoga,leggings?lock=705' },
-  { id: 'ac6', brand: '젝시믹스',  name: '피치스킨 하이웨이스트 팬츠',    price: 52000,  discount: 30, image: 'https://loremflickr.com/400/533/sportswear,fitness?lock=706' },
-  { id: 'ac7', brand: '안다르',    name: '리얼 퍼포먼스 티셔츠',          price: 42000,  discount: 18, image: 'https://loremflickr.com/400/533/active,woman?lock=707' },
-  { id: 'ac8', brand: '뮬라웨어',  name: '코어 메쉬 탱크탑',             price: 35000,  discount: 22, image: 'https://loremflickr.com/400/533/yoga,woman?lock=708' },
+  { id: 'ac1', brand: '젝시믹스',  name: '에어쿨 레깅스 풀렝스',          price: 49000,  discount: 20, image: '/apd01.jpg' },
+  { id: 'ac2', brand: '안다르',    name: '시그니처 스포츠브라',            price: 38000,  discount: 15, image: '/apd02.jpg' },
+  { id: 'ac3', brand: '뮬라웨어',  name: '에어리 크롭 집업',              price: 62000,  discount: 25, image: '/apd03.jpg' },
+  { id: 'ac4', brand: '나이키',    name: 'Dri-FIT 런닝 쇼츠',            price: 55000,  discount: 10, image: '/apd04.jpg' },
+  { id: 'ac5', brand: '룰루레몬',  name: 'Align High-Rise Pant 25"',     price: 148000, discount: 12, image: '/apd05.jpg' },
+  { id: 'ac6', brand: '젝시믹스',  name: '피치스킨 하이웨이스트 팬츠',    price: 52000,  discount: 30, image: '/apd06.jpg' },
+  { id: 'ac7', brand: '안다르',    name: '리얼 퍼포먼스 티셔츠',          price: 42000,  discount: 18, image: '/apd07.jpg' },
+  { id: 'ac8', brand: '뮬라웨어',  name: '코어 메쉬 탱크탑',             price: 35000,  discount: 22, image: '/apd08.jpg' },
 ];
 
 const BRAND_AD = {
