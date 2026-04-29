@@ -977,6 +977,54 @@ export default function WConceptApp() {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════
+          광고 배너
+      ══════════════════════════════════════ */}
+      <div style={{ padding: '4px 16px 32px' }}>
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16 / 9',
+            borderRadius: 12,
+            overflow: 'hidden',
+            background: '#CFCFCF',
+            cursor: 'pointer',
+          }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=85&auto=format&fit=crop"
+            alt="광고 배너"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            loading="lazy"
+          />
+          {/* 하단 그라디언트 */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.0) 55%)' }} />
+
+          {/* 광고 태그 — 우상단 */}
+          <div style={{
+            position: 'absolute', top: 10, right: 10,
+            background: 'rgba(255,255,255,0.22)',
+            border: '1px solid rgba(255,255,255,0.5)',
+            borderRadius: 4,
+            padding: '3px 7px',
+            backdropFilter: 'blur(4px)',
+          }}>
+            <span style={{ fontSize: 10, fontWeight: 500, color: '#fff', letterSpacing: '0.04em', lineHeight: 1 }}>광고</span>
+          </div>
+
+          {/* 텍스트 — 좌하단 */}
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px 18px' }}>
+            <p style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+              오디에르 SUMMER
+            </p>
+            <p style={{ margin: 0, fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.88)', letterSpacing: '0.01em', lineHeight: 1, display: 'flex', alignItems: 'center', gap: 3 }}>
+              기획전 둘러보기 <span style={{ fontSize: 12 }}>›</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>{/* end 홈 스크롤 영역 */}
 
     {/* ── 상세 페이지 오버레이 (슬라이드 인/아웃) ── */}
