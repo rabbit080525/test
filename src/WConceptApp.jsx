@@ -164,15 +164,6 @@ function StyleCard({ card, onClick }) {
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           loading="lazy"
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 52%, transparent 72%)' }} />
-        {card.tag && (
-          <p style={{ position: 'absolute', top: 12, left: 12, margin: 0, fontSize: 10, color: 'rgba(255,255,255,0.82)', letterSpacing: '0.03em', lineHeight: 1 }}>
-            {card.tag}
-          </p>
-        )}
-        <p style={{ position: 'absolute', bottom: 14, left: 12, right: 12, margin: 0, fontSize: 17, fontWeight: 700, color: '#fff', whiteSpace: 'pre-line', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
-          {card.title}
-        </p>
       </div>
 
       {/* 상품 정보 행 */}
