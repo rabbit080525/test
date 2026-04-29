@@ -75,25 +75,25 @@ const CURATION_PRODUCTS = [
 const STYLE_CARDS = [
   {
     id: 'sl1',
-    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=71',
+    contentImage: '/con01.jpg',
     tag: '룩북',
     product: { image: '/pd02.jpg', brand: '마리떼 프랑소와 저버', name: '다이아 퀼팅 자수 니트', price: 89000, discount: 15 },
   },
   {
     id: 'sl2',
-    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=72',
+    contentImage: '/con02.jpg',
     tag: '스타일링',
     product: { image: '/pd04.jpg', brand: '레이브', name: 'Leo Shoulder Bag', price: 88000, discount: 10 },
   },
   {
     id: 'sl3',
-    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=73',
+    contentImage: '/con03.jpg',
     tag: 'W시리즈',
     product: { image: '/pd06.jpg', brand: '온앤온', name: '린넨 와이드 팬츠', price: 62000, discount: 20 },
   },
   {
     id: 'sl4',
-    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=74',
+    contentImage: '/con01.jpg',
     tag: '브랜드스토리',
     product: { image: '/pd08.jpg', brand: '르세지엠', name: '실크 오버핏 블라우스', price: 115000, discount: 18 },
   },
@@ -1017,7 +1017,7 @@ export default function WConceptApp() {
           }}
         >
           <img
-            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=85&auto=format&fit=crop"
+            src="/ADBANNER.jpg"
             alt="광고 배너"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             loading="lazy"
