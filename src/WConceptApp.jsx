@@ -32,12 +32,12 @@ const BANNERS = [
   },
   {
     id: 2,
-    image: '/banner.jpg',
+    image: '/banner2.jpg',
     title: '봄을 맞이하는\n마르디의 새 컬렉션',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=90&auto=format&fit=crop',
+    image: '/banner3.jpg',
     title: '지금만 만날 수 있는\n프론트로우 시즌 오프',
   },
 ];
