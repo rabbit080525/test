@@ -2,23 +2,31 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, X } from 'lucide-react';
 
-const FEED_TABS = ['취향', '테마', '무드'];
+const FEED_TABS = [
+  { id: '내 취향',   label: '내 취향',   emoji: '✨' },
+  { id: '5월 하객룩', label: '5월 하객룩', emoji: '🌸' },
+  { id: '주말 캠핑',  label: '주말 캠핑',  emoji: '🏕️' },
+];
 
 const HASHTAG_MAP = {
-  취향: ['#미니멀', '#클래식', '#캐주얼', '#페미닌', '#스트릿'],
-  테마: ['#출근룩', '#데이트룩', '#주말룩', '#여행룩', '#홈웨어'],
-  무드: ['#2026SS', '#올블랙', '#어스톤', '#파스텔', '#모노톤'],
+  '내 취향':   ['#미니멀', '#클래식', '#캐주얼', '#페미닌', '#스트릿'],
+  '5월 하객룩': ['#로맨틱', '#드레시', '#세미포멀', '#플로럴', '#우아한'],
+  '주말 캠핑':  ['#아웃도어', '#레이어드', '#실용적', '#어스톤', '#캐주얼'],
 };
 
-const IMG_KW = { 취향: 'fashion,woman', 테마: 'fashion,street', 무드: 'fashion,minimal' };
+const IMG_KW = {
+  '내 취향':   'fashion,woman',
+  '5월 하객룩': 'fashion,dress',
+  '주말 캠핑':  'outdoor,fashion',
+};
 
-const BRANDS = ['마리떼 프랑소와 저버', '르세지엠', '레이지지', '온앤온', '아무르 무아르', '시아쥬', '프론트로우', '몽돌'];
-const NAMES  = ['AEROCOOL LEMON T-SHIRT', '플리츠 와이드 슬랙스', 'Check Maxi Skirt', '실크 루즈핏 블라우스', '오버핏 니트 가디건', 'Classic Oversized Blazer', '미디 플리츠 드레스', '크롭 트위드 자켓'];
+const BRANDS    = ['마리떼 프랑소와 저버', '르세지엠', '레이지지', '온앤온', '아무르 무아르', '시아쥬', '프론트로우', '몽돌'];
+const NAMES     = ['AEROCOOL LEMON T-SHIRT', '플리츠 와이드 슬랙스', 'Check Maxi Skirt', '실크 루즈핏 블라우스', '오버핏 니트 가디건', 'Classic Oversized Blazer', '미디 플리츠 드레스', '크롭 트위드 자켓'];
 const PRICES    = [56050, 89000, 76736, 68000, 52000, 125000, 98000, 72000];
 const DISCOUNTS = [5, 10, 15, 20, 25, 30, 12, 18];
 
 function generateItems(tab, tag, page) {
-  const tags = HASHTAG_MAP[tab] ?? HASHTAG_MAP['취향'];
+  const tags = HASHTAG_MAP[tab] ?? HASHTAG_MAP['내 취향'];
   const kw   = IMG_KW[tab] ?? 'fashion,woman';
   return Array.from({ length: 8 }, (_, i) => {
     const idx      = (page * 8 + i) % 8;
@@ -37,6 +45,53 @@ function generateItems(tab, tag, page) {
   });
 }
 
+/* ── DiscoveryTabs ───────────────────────────────────── */
+function DiscoveryTabs({ activeTab, onChange }) {
+  return (
+    <div style={{
+      display: 'flex',
+      gap: 7,
+      padding: '14px 16px 12px',
+      overflowX: 'auto',
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none',
+      WebkitOverflowScrolling: 'touch',
+    }}>
+      {FEED_TABS.map(({ id, label, emoji }) => {
+        const on = activeTab === id;
+        return (
+          <button
+            key={id}
+            onClick={() => onChange(id)}
+            style={{
+              flexShrink: 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 5,
+              padding: '8px 16px',
+              borderRadius: 100,
+              border: on ? 'none' : '0.5px solid #D4D8DC',
+              background: on ? '#111' : '#F7F8F9',
+              color: on ? '#fff' : '#555',
+              fontSize: 13,
+              fontWeight: on ? 600 : 400,
+              letterSpacing: '-0.01em',
+              lineHeight: 1,
+              whiteSpace: 'nowrap',
+              cursor: 'pointer',
+              transition: 'background 0.15s, color 0.15s',
+            }}
+          >
+            <span style={{ fontSize: 14 }}>{emoji}</span>
+            <span>{label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ── SkeletonCard ────────────────────────────────────── */
 function SkeletonCard() {
   return (
     <div>
@@ -50,6 +105,7 @@ function SkeletonCard() {
   );
 }
 
+/* ── FeedCard ────────────────────────────────────────── */
 function FeedCard({ item, onTagClick, onProductClick }) {
   const [liked, setLiked] = useState(false);
   return (
@@ -72,22 +128,16 @@ function FeedCard({ item, onTagClick, onProductClick }) {
             position: 'absolute', top: 8, right: 8,
             width: 28, height: 28, borderRadius: '50%',
             background: 'rgba(255,255,255,0.88)', border: 'none',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
           }}
         >
           <Heart size={13} strokeWidth={1.5}
             style={{ color: liked ? '#FF3300' : '#888', fill: liked ? '#FF3300' : 'none', display: 'block' }} />
         </button>
       </div>
-
       <div style={{ padding: '8px 4px 12px' }}>
-        <p style={{ margin: '0 0 2px', fontSize: 11, color: '#999', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {item.brand}
-        </p>
-        <p style={{ margin: '0 0 4px', fontSize: 12, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {item.name}
-        </p>
+        <p style={{ margin: '0 0 2px', fontSize: 11, color: '#999', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.brand}</p>
+        <p style={{ margin: '0 0 4px', fontSize: 12, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</p>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 3, marginBottom: 6 }}>
           <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
           <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
@@ -100,7 +150,7 @@ function FeedCard({ item, onTagClick, onProductClick }) {
               style={{
                 fontSize: 10, color: '#666', background: '#F5F5F5',
                 borderRadius: 100, padding: '3px 8px',
-                border: 'none', cursor: 'pointer', lineHeight: 1,
+                border: 'none', cursor: 'pointer', lineHeight: 1, whiteSpace: 'nowrap',
               }}
             >{tag}</button>
           ))}
@@ -110,19 +160,19 @@ function FeedCard({ item, onTagClick, onProductClick }) {
   );
 }
 
+/* ── InfiniteFeed ────────────────────────────────────── */
 export default function InfiniteFeed({ onProductClick }) {
-  const tabRef     = useRef('취향');
-  const tagRef     = useRef(null);
-  const pageRef    = useRef(1);       // page 0 already pre-loaded
-  const loadingRef = useRef(false);
+  const tabRef      = useRef('내 취향');
+  const tagRef      = useRef(null);
+  const pageRef     = useRef(1);
+  const loadingRef  = useRef(false);
   const sentinelRef = useRef(null);
 
-  const [activeTab, setActiveTab] = useState('취향');
+  const [activeTab, setActiveTab] = useState('내 취향');
   const [activeTag, setActiveTag] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  // 첫 8개를 즉시 렌더링 — 로딩 없이 바로 표시
-  const [items, setItems] = useState(() => generateItems('취향', null, 0));
+  const [feedKey,   setFeedKey]   = useState(0);
+  const [items, setItems] = useState(() => generateItems('내 취향', null, 0));
 
   const loadMore = useCallback(() => {
     if (loadingRef.current) return;
@@ -137,7 +187,6 @@ export default function InfiniteFeed({ onProductClick }) {
     }, 600);
   }, []);
 
-  // IntersectionObserver — document scroll 기준 동작
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el) return;
@@ -150,12 +199,12 @@ export default function InfiniteFeed({ onProductClick }) {
   }, [loadMore]);
 
   const reset = useCallback((tab, tag) => {
-    tabRef.current   = tab;
-    tagRef.current   = tag;
-    pageRef.current  = 1;
+    tabRef.current     = tab;
+    tagRef.current     = tag;
+    pageRef.current    = 1;
     loadingRef.current = false;
     setIsLoading(false);
-    // 즉시 첫 페이지 데이터 표시
+    setFeedKey(k => k + 1);
     setItems(generateItems(tab, tag, 0));
   }, []);
 
@@ -175,31 +224,11 @@ export default function InfiniteFeed({ onProductClick }) {
   return (
     <section style={{ borderTop: '8px solid #F5F5F5', fontFamily: "'Inter','Pretendard',-apple-system,sans-serif" }}>
 
-      <div style={{ padding: '22px 16px 14px' }}>
-        <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#111', letterSpacing: '-0.03em' }}>
-          취향 기반 추천 피드
-        </h2>
-      </div>
-
-      {/* 탭 */}
-      <div style={{ display: 'flex', gap: 7, padding: '0 16px 12px' }}>
-        {FEED_TABS.map(tab => (
-          <button
-            key={tab}
-            onClick={() => handleTabChange(tab)}
-            style={{
-              padding: '7px 18px', borderRadius: 100, border: 'none', cursor: 'pointer',
-              background: activeTab === tab ? '#111' : '#F4F4F4',
-              color:      activeTab === tab ? '#fff' : '#555',
-              fontSize: 13, fontWeight: activeTab === tab ? 600 : 400,
-              letterSpacing: '-0.01em', lineHeight: 1,
-            }}
-          >{tab}</button>
-        ))}
-      </div>
+      {/* 탭만 — 타이틀 없음 */}
+      <DiscoveryTabs activeTab={activeTab} onChange={handleTabChange} />
 
       {/* 해시태그 필터 */}
-      <div style={{ display: 'flex', gap: 6, padding: '0 16px 12px', overflowX: 'auto', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: 6, padding: '0 16px 10px', overflowX: 'auto', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
         {(HASHTAG_MAP[activeTab] ?? []).map(tag => {
           const on = activeTag === tag;
           return (
@@ -210,8 +239,9 @@ export default function InfiniteFeed({ onProductClick }) {
                 flexShrink: 0, padding: '5px 13px', borderRadius: 100, cursor: 'pointer',
                 background: on ? '#111' : '#fff',
                 color:      on ? '#fff' : '#555',
-                border: `1px solid ${on ? '#111' : '#E2E2E2'}`,
-                fontSize: 12, fontWeight: on ? 600 : 400, lineHeight: 1,
+                border: `0.5px solid ${on ? '#111' : '#D4D8DC'}`,
+                fontSize: 12, fontWeight: on ? 600 : 400,
+                lineHeight: 1, whiteSpace: 'nowrap',
               }}
             >{tag}</button>
           );
@@ -223,14 +253,12 @@ export default function InfiniteFeed({ onProductClick }) {
         {activeTag && (
           <motion.div
             initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}
-            style={{ padding: '0 16px 12px' }}
+            transition={{ duration: 0.18 }}
+            style={{ padding: '0 16px 10px' }}
           >
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#111', borderRadius: 100, padding: '5px 10px 5px 14px' }}>
-              <span style={{ fontSize: 12, color: '#fff' }}>{activeTag} 필터 적용 중</span>
-              <button
-                onClick={() => handleTagClick(activeTag)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 2 }}
-              >
+              <span style={{ fontSize: 12, color: '#fff', whiteSpace: 'nowrap' }}>{activeTag} 필터 적용 중</span>
+              <button onClick={() => handleTagClick(activeTag)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 2 }}>
                 <X size={12} color="rgba(255,255,255,0.75)" />
               </button>
             </div>
@@ -238,22 +266,30 @@ export default function InfiniteFeed({ onProductClick }) {
         )}
       </AnimatePresence>
 
-      {/* 2열 그리드 */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, padding: '0 16px' }}>
-        {items.map(item => (
-          <FeedCard key={item.id} item={item} onTagClick={handleTagClick} onProductClick={onProductClick} />
-        ))}
-        {isLoading && (
-          <>
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </>
-        )}
-      </div>
+      {/* 피드 그리드 — 탭 전환 시 fade+slide 애니메이션 */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={feedKey}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, padding: '0 16px' }}
+        >
+          {items.map(item => (
+            <FeedCard key={item.id} item={item} onTagClick={handleTagClick} onProductClick={onProductClick} />
+          ))}
+          {isLoading && (
+            <>
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          )}
+        </motion.div>
+      </AnimatePresence>
 
-      {/* IntersectionObserver sentinel */}
       <div ref={sentinelRef} style={{ height: 40 }} />
     </section>
   );
