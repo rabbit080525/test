@@ -126,6 +126,17 @@ const LIFESTYLE_PRODUCTS = [
   { id: 'lf8', brand: '카이보이콧',    name: '린넨 테이블클로스 140×240',       price: 68000,  discount: 30, image: 'https://loremflickr.com/400/533/linen,interior?lock=608' },
 ];
 
+const BRAND_AD = {
+  brand: { name: '마르디 메르크디', avatar: 'https://loremflickr.com/80/80/fashion,brand?lock=220' },
+  products: [
+    { id: 'ad1', name: 'Flower Logo Tee', price: 65000, discount: 10, image: 'https://loremflickr.com/400/533/fashion,woman?lock=231' },
+    { id: 'ad2', name: '플라워 크롭 자켓', price: 128000, discount: 15, image: 'https://loremflickr.com/400/533/fashion,woman?lock=232' },
+    { id: 'ad3', name: 'Knit Beret Hat', price: 42000, discount: 20, image: 'https://loremflickr.com/400/533/fashion,woman?lock=233' },
+    { id: 'ad4', name: '로고 니트 가디건', price: 98000, discount: 12, image: 'https://loremflickr.com/400/533/fashion,woman?lock=234' },
+    { id: 'ad5', name: 'Wide Denim Pants', price: 89000, discount: 18, image: 'https://loremflickr.com/400/533/fashion,woman?lock=235' },
+  ],
+};
+
 const BRAND_RECS = [
   {
     id: 1,
@@ -1115,6 +1126,57 @@ export default function WConceptApp() {
               <ProductCard item={item} onClick={() => handleProductClick(item)} />
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          브랜드 광고
+      ══════════════════════════════════════ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 20, paddingBottom: 32 }}>
+        {/* 헤더: 브랜드 정보 + 광고 태그 */}
+        <div className="flex items-center gap-[12px] px-5 mb-4">
+          <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
+            <img src={BRAND_AD.brand.avatar} alt={BRAND_AD.brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{BRAND_AD.brand.name}</p>
+            <p style={{ margin: '3px 0 0', fontSize: 12, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em' }}>추천 브랜드</p>
+          </div>
+          <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 400, color: '#AAA', border: '1px solid #DDD', borderRadius: 4, padding: '3px 7px', lineHeight: 1 }}>광고</span>
+        </div>
+
+        {/* 상품 카드 — 단일행 가로 스크롤 */}
+        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}>
+          {BRAND_AD.products.map((item) => (
+            <div
+              key={item.id}
+              style={{ flexShrink: 0, width: 140, cursor: 'pointer' }}
+              onClick={() => handleProductClick({ ...item, brand: BRAND_AD.brand.name })}
+            >
+              <div style={{ aspectRatio: '3 / 4', borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
+                <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+              </div>
+              <p style={{ margin: '8px 0 2px', fontSize: 11.5, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>{item.name}</p>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA 버튼 */}
+        <div style={{ paddingLeft: 20, paddingRight: 20, marginTop: 16 }}>
+          <button
+            style={{
+              width: '100%', height: 46,
+              border: '1px solid #DEDEDE', borderRadius: 8,
+              background: '#fff', cursor: 'pointer',
+              fontSize: 14, fontWeight: 500, color: '#111', letterSpacing: '-0.01em',
+            }}
+          >
+            브랜드관 바로가기 &gt;
+          </button>
         </div>
       </section>
 
