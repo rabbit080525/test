@@ -980,13 +980,12 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           광고 배너
       ══════════════════════════════════════ */}
-      <div style={{ padding: '4px 16px 32px' }}>
+      <div style={{ padding: '4px 0 32px' }}>
         <div
           style={{
             position: 'relative',
             width: '100%',
             aspectRatio: '16 / 9',
-            borderRadius: 12,
             overflow: 'hidden',
             background: '#CFCFCF',
             cursor: 'pointer',
