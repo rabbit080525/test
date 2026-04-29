@@ -1,5 +1,16 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Search, ShoppingBag, Heart, Home, LayoutGrid, User } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, ShoppingBag, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
+
+/* ─── utils ─────────────────────────────────────────── */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 /* ─── data ─────────────────────────────────────────── */
 const TABS = [
@@ -110,11 +121,55 @@ const SCROLL_STYLE = {
   msOverflowStyle: 'none',
 };
 
+/* ─── ProductDetailPage ─────────────────────────────── */
+function ProductDetailPage({ item, onBack }) {
+  const image = item.image || `/pd0${item.id}.jpg`;
+  const brandName = typeof item.brand === 'string' ? item.brand : (item.brand?.name ?? '');
+  return (
+    <>
+      <header style={{
+        position: 'sticky', top: 0, zIndex: 10,
+        display: 'flex', alignItems: 'center',
+        padding: '0 8px', height: 52,
+        background: '#fff', borderBottom: '1px solid #F0F0F0',
+      }}>
+        <button
+          onClick={onBack}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          <ChevronLeft size={24} strokeWidth={1.5} color="#111" />
+        </button>
+        <p style={{ flex: 1, textAlign: 'center', fontSize: 15, fontWeight: 500, color: '#111', letterSpacing: '-0.01em', margin: 0 }}>
+          상품 상세
+        </p>
+        <div style={{ width: 40 }} />
+      </header>
+
+      <div style={{ aspectRatio: '3 / 4', background: '#EBEBEB' }}>
+        <img src={image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      </div>
+
+      <div style={{ padding: '20px 20px 60px' }}>
+        <p style={{ fontSize: 12.5, color: '#888', letterSpacing: '-0.01em', marginBottom: 8, margin: '0 0 8px' }}>{brandName}</p>
+        <h1 style={{ fontSize: 16, fontWeight: 500, color: '#111', lineHeight: 1.45, letterSpacing: '-0.02em', margin: '0 0 14px' }}>
+          {item.name}
+        </h1>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+          <span style={{ fontSize: 22, fontWeight: 700, color: '#111', letterSpacing: '-0.03em' }}>
+            {item.price.toLocaleString()}원
+          </span>
+        </div>
+      </div>
+    </>
+  );
+}
+
 /* ─── BrandRecCard ──────────────────────────────────── */
-function BrandRecCard({ item }) {
+function BrandRecCard({ item, onClick }) {
   const [liked, setLiked] = useState(false);
   return (
-    <div className="flex-shrink-0" style={{ width: 158, minWidth: 0 }}>
+    <div className="flex-shrink-0" style={{ width: 158, minWidth: 0, cursor: 'pointer' }} onClick={onClick}>
 
       {/* 1. 브랜드 정보 */}
       <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
@@ -141,7 +196,7 @@ function BrandRecCard({ item }) {
         </div>
         <button
           aria-label="관심 브랜드"
-          onClick={() => setLiked((v) => !v)}
+          onClick={(e) => { e.stopPropagation(); setLiked((v) => !v); }}
           style={{ flexShrink: 0, padding: 2 }}
         >
           <Heart
@@ -317,11 +372,10 @@ function BrandAvatar({ brand }) {
 }
 
 /* ─── ProductCard ────────────────────────────────────── */
-function ProductCard({ item }) {
+function ProductCard({ item, onClick }) {
   const [liked, setLiked] = useState(false);
   return (
-    /* minWidth:0 — grid 컬럼 너비 초과 방지 */
-    <div style={{ minWidth: 0 }}>
+    <div style={{ minWidth: 0, cursor: 'pointer' }} onClick={onClick}>
       {/* 3:4 이미지 — 하트 없음 */}
       <div
         className="overflow-hidden"
@@ -352,7 +406,7 @@ function ProductCard({ item }) {
           </span>
           <button
             aria-label="관심 상품"
-            onClick={() => setLiked((v) => !v)}
+            onClick={(e) => { e.stopPropagation(); setLiked((v) => !v); }}
             style={{ flexShrink: 0, padding: 1 }}
           >
             <Heart
@@ -395,22 +449,58 @@ export default function WConceptApp() {
   const [activeNav,    setActiveNav]    = useState('home');
   const bannerTrackRef = useRef(null);
 
-  /* dot indicator: track which banner is snapped */
+  /* ── 페이지 네비게이션 ── */
+  const [page,          setPage]          = useState('home');
+  const [selectedItem,  setSelectedItem]  = useState(null);
+
+  /* ── 추천 상품 shuffle ── */
+  const [refreshKey,        setRefreshKey]        = useState(0);
+  const [displayedRelated,  setDisplayedRelated]  = useState(RELATED_PRODUCTS);
+  const [displayedCuration, setDisplayedCuration] = useState(CURATION_PRODUCTS);
+  const [displayedBeauty,   setDisplayedBeauty]   = useState(BEAUTY_PRODUCTS);
+
+  const handleProductClick = useCallback((item) => {
+    setSelectedItem(item);
+    setPage('detail');
+  }, []);
+
+  /* 홈으로 돌아올 때 세 구좌 모두 셔플 + refreshKey 증가 → 카드 stagger 재실행 */
+  const handleBack = useCallback(() => {
+    setPage('home');
+    setDisplayedRelated(shuffle(RELATED_PRODUCTS));
+    setDisplayedCuration(shuffle(CURATION_PRODUCTS));
+    setDisplayedBeauty(shuffle(BEAUTY_PRODUCTS));
+    setRefreshKey(k => k + 1);
+  }, []);
+
   const handleBannerScroll = useCallback((e) => {
     const el = e.currentTarget;
     const first = el.firstElementChild;
     if (!first) return;
-    const slideStep = first.offsetWidth + 12; /* banner width + gap-3 */
+    const slideStep = first.offsetWidth + 12;
     const idx = Math.round(el.scrollLeft / slideStep);
     setActiveBanner(Math.max(0, Math.min(idx, BANNERS.length - 1)));
   }, []);
 
   return (
+    /* 앱 컨테이너: 고정 높이 + overflow hidden → 슬라이드 클리핑 */
     <div
-      className="relative max-w-[390px] mx-auto bg-white min-h-screen overflow-x-hidden select-none"
+      className="select-none"
       style={{
+        position: 'relative',
+        maxWidth: 390,
+        margin: '0 auto',
+        height: '100dvh',
+        overflow: 'hidden',
+        background: '#fff',
         fontFamily: "'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
-        /* 탭바 높이(56px) + 안전 여백 확보 */
+      }}
+    >
+    {/* ── 홈 스크롤 영역 ── */}
+    <div
+      style={{
+        position: 'absolute', inset: 0,
+        overflowY: 'auto', WebkitOverflowScrolling: 'touch',
         paddingBottom: 72,
       }}
     >
@@ -672,8 +762,16 @@ export default function WConceptApp() {
             paddingBottom: 4,
           }}
         >
-          {RELATED_PRODUCTS.map((item) => (
-            <ProductCard key={item.id} item={item} />
+          {displayedRelated.map((item, i) => (
+            <motion.div
+              key={refreshKey + '-' + item.id}
+              style={{ minWidth: 0 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
           ))}
         </div>
       </section>
@@ -708,8 +806,16 @@ export default function WConceptApp() {
             paddingBottom: 4,
           }}
         >
-          {CURATION_PRODUCTS.map((item) => (
-            <ProductCard key={item.id} item={item} />
+          {displayedCuration.map((item, i) => (
+            <motion.div
+              key={refreshKey + '-' + item.id}
+              style={{ minWidth: 0 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
           ))}
         </div>
       </section>
@@ -756,7 +862,7 @@ export default function WConceptApp() {
           }}
         >
           {BRAND_RECS.map((item) => (
-            <BrandRecCard key={item.id} item={item} />
+            <BrandRecCard key={item.id} item={item} onClick={() => handleProductClick(item)} />
           ))}
         </div>
       </section>
@@ -790,14 +896,43 @@ export default function WConceptApp() {
             paddingBottom: 4,
           }}
         >
-          {BEAUTY_PRODUCTS.map((item) => (
-            <ProductCard key={item.id} item={item} />
+          {displayedBeauty.map((item, i) => (
+            <motion.div
+              key={refreshKey + '-' + item.id}
+              style={{ minWidth: 0 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ── 하단 고정 탭바 ── */}
-      <BottomNav active={activeNav} onChange={setActiveNav} />
+    </div>{/* end 홈 스크롤 영역 */}
+
+    {/* ── 상세 페이지 오버레이 (슬라이드 인/아웃) ── */}
+    <AnimatePresence>
+      {page === 'detail' && selectedItem && (
+        <motion.div
+          key="detail"
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          style={{
+            position: 'absolute', inset: 0,
+            background: '#fff', overflowY: 'auto', zIndex: 30,
+          }}
+        >
+          <ProductDetailPage item={selectedItem} onBack={handleBack} />
+        </motion.div>
+      )}
+    </AnimatePresence>
+
+    {/* ── 하단 탭바 ── */}
+    <BottomNav active={activeNav} onChange={setActiveNav} />
     </div>
   );
 }
