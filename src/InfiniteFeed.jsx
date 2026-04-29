@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 const FEED_TABS = [
   { id: '내 취향',   label: '내 취향',   emoji: '✨' },
   { id: '5월 하객룩', label: '5월 하객룩', emoji: '🌸' },
   { id: '주말 캠핑',  label: '주말 캠핑',  emoji: '🏕️' },
 ];
-
-const HASHTAG_MAP = {
-  '내 취향':   ['#미니멀', '#클래식', '#캐주얼', '#페미닌', '#스트릿'],
-  '5월 하객룩': ['#로맨틱', '#드레시', '#세미포멀', '#플로럴', '#우아한'],
-  '주말 캠핑':  ['#아웃도어', '#레이어드', '#실용적', '#어스톤', '#캐주얼'],
-};
 
 const IMG_KW = {
   '내 취향':   'fashion,woman',
@@ -25,14 +19,10 @@ const NAMES     = ['AEROCOOL LEMON T-SHIRT', '플리츠 와이드 슬랙스', 'C
 const PRICES    = [56050, 89000, 76736, 68000, 52000, 125000, 98000, 72000];
 const DISCOUNTS = [5, 10, 15, 20, 25, 30, 12, 18];
 
-function generateItems(tab, tag, page) {
-  const tags = HASHTAG_MAP[tab] ?? HASHTAG_MAP['내 취향'];
-  const kw   = IMG_KW[tab] ?? 'fashion,woman';
+function generateItems(tab, page) {
+  const kw = IMG_KW[tab] ?? 'fashion,woman';
   return Array.from({ length: 8 }, (_, i) => {
-    const idx      = (page * 8 + i) % 8;
-    const itemTags = tag
-      ? [tag, tags[(i + 1) % tags.length]]
-      : [tags[i % tags.length], tags[(i + 2) % tags.length]];
+    const idx = (page * 8 + i) % 8;
     return {
       id:       `${tab}-p${page}-i${i}`,
       image:    `https://loremflickr.com/400/533/${kw}?lock=${850 + page * 8 + i}`,
@@ -40,7 +30,6 @@ function generateItems(tab, tag, page) {
       name:     NAMES[idx],
       price:    PRICES[idx],
       discount: DISCOUNTS[idx],
-      tags:     itemTags,
     };
   });
 }
@@ -106,7 +95,7 @@ function SkeletonCard() {
 }
 
 /* ── FeedCard ────────────────────────────────────────── */
-function FeedCard({ item, onTagClick, onProductClick }) {
+function FeedCard({ item, onProductClick }) {
   const [liked, setLiked] = useState(false);
   return (
     <motion.div
@@ -142,20 +131,7 @@ function FeedCard({ item, onTagClick, onProductClick }) {
           <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
           <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
         </div>
-        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-          {item.tags.slice(0, 2).map(tag => (
-            <button
-              key={tag}
-              onClick={e => { e.stopPropagation(); onTagClick(tag); }}
-              style={{
-                fontSize: 10, color: '#666', background: '#F5F5F5',
-                borderRadius: 100, padding: '3px 8px',
-                border: 'none', cursor: 'pointer', lineHeight: 1, whiteSpace: 'nowrap',
-              }}
-            >{tag}</button>
-          ))}
         </div>
-      </div>
     </motion.div>
   );
 }
@@ -163,23 +139,21 @@ function FeedCard({ item, onTagClick, onProductClick }) {
 /* ── InfiniteFeed ────────────────────────────────────── */
 export default function InfiniteFeed({ onProductClick }) {
   const tabRef      = useRef('내 취향');
-  const tagRef      = useRef(null);
   const pageRef     = useRef(1);
   const loadingRef  = useRef(false);
   const sentinelRef = useRef(null);
 
   const [activeTab, setActiveTab] = useState('내 취향');
-  const [activeTag, setActiveTag] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [feedKey,   setFeedKey]   = useState(0);
-  const [items, setItems] = useState(() => generateItems('내 취향', null, 0));
+  const [items, setItems] = useState(() => generateItems('내 취향', 0));
 
   const loadMore = useCallback(() => {
     if (loadingRef.current) return;
     loadingRef.current = true;
     setIsLoading(true);
     setTimeout(() => {
-      const next = generateItems(tabRef.current, tagRef.current, pageRef.current);
+      const next = generateItems(tabRef.current, pageRef.current);
       pageRef.current += 1;
       setItems(prev => [...prev, ...next]);
       setIsLoading(false);
@@ -198,73 +172,22 @@ export default function InfiniteFeed({ onProductClick }) {
     return () => obs.disconnect();
   }, [loadMore]);
 
-  const reset = useCallback((tab, tag) => {
+  const handleTabChange = useCallback((tab) => {
+    if (tab === tabRef.current) return;
     tabRef.current     = tab;
-    tagRef.current     = tag;
     pageRef.current    = 1;
     loadingRef.current = false;
+    setActiveTab(tab);
     setIsLoading(false);
     setFeedKey(k => k + 1);
-    setItems(generateItems(tab, tag, 0));
+    setItems(generateItems(tab, 0));
   }, []);
-
-  const handleTabChange = useCallback((tab) => {
-    if (tab === tabRef.current && tagRef.current === null) return;
-    setActiveTab(tab);
-    setActiveTag(null);
-    reset(tab, null);
-  }, [reset]);
-
-  const handleTagClick = useCallback((tag) => {
-    const next = tagRef.current === tag ? null : tag;
-    setActiveTag(next);
-    reset(tabRef.current, next);
-  }, [reset]);
 
   return (
     <section style={{ borderTop: '8px solid #F5F5F5', fontFamily: "'Inter','Pretendard',-apple-system,sans-serif" }}>
 
       {/* 탭만 — 타이틀 없음 */}
       <DiscoveryTabs activeTab={activeTab} onChange={handleTabChange} />
-
-      {/* 해시태그 필터 */}
-      <div style={{ display: 'flex', gap: 6, padding: '0 16px 10px', overflowX: 'auto', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-        {(HASHTAG_MAP[activeTab] ?? []).map(tag => {
-          const on = activeTag === tag;
-          return (
-            <button
-              key={tag}
-              onClick={() => handleTagClick(tag)}
-              style={{
-                flexShrink: 0, padding: '5px 13px', borderRadius: 100, cursor: 'pointer',
-                background: on ? '#111' : '#fff',
-                color:      on ? '#fff' : '#555',
-                border: `0.5px solid ${on ? '#111' : '#D4D8DC'}`,
-                fontSize: 12, fontWeight: on ? 600 : 400,
-                lineHeight: 1, whiteSpace: 'nowrap',
-              }}
-            >{tag}</button>
-          );
-        })}
-      </div>
-
-      {/* 활성 태그 배지 */}
-      <AnimatePresence>
-        {activeTag && (
-          <motion.div
-            initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.18 }}
-            style={{ padding: '0 16px 10px' }}
-          >
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#111', borderRadius: 100, padding: '5px 10px 5px 14px' }}>
-              <span style={{ fontSize: 12, color: '#fff', whiteSpace: 'nowrap' }}>{activeTag} 필터 적용 중</span>
-              <button onClick={() => handleTagClick(activeTag)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 2 }}>
-                <X size={12} color="rgba(255,255,255,0.75)" />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* 피드 그리드 — 탭 전환 시 fade+slide 애니메이션 */}
       <AnimatePresence mode="wait">
@@ -277,7 +200,7 @@ export default function InfiniteFeed({ onProductClick }) {
           style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, padding: '0 16px' }}
         >
           {items.map(item => (
-            <FeedCard key={item.id} item={item} onTagClick={handleTagClick} onProductClick={onProductClick} />
+            <FeedCard key={item.id} item={item} onProductClick={onProductClick} />
           ))}
           {isLoading && (
             <>
