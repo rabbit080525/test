@@ -75,30 +75,32 @@ const STYLE_CARDS = [
   {
     id: 'sl1',
     contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=71',
-    tag: 'W CONCEPT 성수 팝업스토어',
-    title: '공주들아\n여기 꼭 가야해!',
+    tag: '룩북',
     product: { image: '/pd02.jpg', brand: '마리떼 프랑소와 저버', name: '다이아 퀼팅 자수 니트', price: 89000, discount: 15 },
   },
   {
     id: 'sl2',
     contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=72',
-    tag: 'Outfit of the Day',
-    title: 'Outfit of\nthe Day',
+    tag: '스타일링',
     product: { image: '/pd04.jpg', brand: '레이브', name: 'Leo Shoulder Bag', price: 88000, discount: 10 },
   },
   {
     id: 'sl3',
     contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=73',
-    tag: '주말 브런치 룩',
-    title: '여유로운\n주말 아침',
+    tag: 'W시리즈',
     product: { image: '/pd06.jpg', brand: '온앤온', name: '린넨 와이드 팬츠', price: 62000, discount: 20 },
   },
   {
     id: 'sl4',
     contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=74',
-    tag: '데일리 무드',
-    title: '오늘도\n예쁘게!',
+    tag: '브랜드스토리',
     product: { image: '/pd08.jpg', brand: '르세지엠', name: '실크 오버핏 블라우스', price: 115000, discount: 18 },
+  },
+  {
+    id: 'sl5',
+    contentImage: 'https://loremflickr.com/400/533/fashion,woman?lock=75',
+    tag: '라이브',
+    product: { image: '/pd01.jpg', brand: '프론트로우', name: '클래식 핀턱 와이드 팬츠', price: 89000, discount: 22 },
   },
 ];
 
@@ -160,10 +162,25 @@ function StyleCard({ card, onClick }) {
       <div style={{ aspectRatio: '3 / 4', borderRadius: 10, overflow: 'hidden', position: 'relative', background: '#EBEBEB' }}>
         <img
           src={card.contentImage}
-          alt={card.title}
+          alt={card.tag}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           loading="lazy"
         />
+        {card.tag && (
+          <div style={{
+            position: 'absolute', top: 10, left: 10,
+            display: 'flex', alignItems: 'center', gap: 5,
+            background: 'rgba(30,30,30,0.62)',
+            backdropFilter: 'blur(6px)',
+            borderRadius: 100,
+            padding: '5px 11px 5px 9px',
+          }}>
+            <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#fff', flexShrink: 0, display: 'block' }} />
+            <span style={{ fontSize: 11.5, fontWeight: 500, color: '#fff', letterSpacing: '0.01em', lineHeight: 1 }}>
+              {card.tag}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* 상품 정보 행 */}
