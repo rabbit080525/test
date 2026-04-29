@@ -600,28 +600,18 @@ export default function WConceptApp() {
   }, []);
 
   return (
-    /* 앱 컨테이너: 고정 높이 + overflow hidden → 슬라이드 클리핑 */
     <div
-      className="select-none"
       style={{
         position: 'relative',
         maxWidth: 390,
         margin: '0 auto',
-        height: '100dvh',
-        overflow: 'hidden',
+        minHeight: '100dvh',
         background: '#fff',
         fontFamily: "'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
       }}
     >
-    {/* ── 홈 스크롤 영역 ── */}
-    <div
-      style={{
-        position: 'absolute', inset: 0,
-        overflowY: 'auto', WebkitOverflowScrolling: 'touch',
-        paddingBottom: 72,
-      }}
-    >
-      <div className="h-12" />
+    {/* ── 홈 컨텐츠 (자연 흐름 — 브라우저 스크롤) ── */}
+    <div style={{ paddingBottom: 80 }}>
 
       {/* ══════════════════════════════════════
           NAVIGATION
@@ -1263,7 +1253,7 @@ export default function WConceptApp() {
       {/* ══ 취향 기반 무한 피드 ══ */}
       <InfiniteFeed onProductClick={handleProductClick} />
 
-    </div>{/* end 홈 스크롤 영역 */}
+    </div>{/* end 홈 컨텐츠 */}
 
     {/* ── 상세 페이지 오버레이 (슬라이드 인/아웃) ── */}
     <AnimatePresence>
@@ -1275,7 +1265,9 @@ export default function WConceptApp() {
           exit={{ x: '100%' }}
           transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           style={{
-            position: 'absolute', inset: 0,
+            position: 'fixed', top: 0, bottom: 0,
+            left: '50%', transform: 'translateX(-50%)',
+            width: '100%', maxWidth: 390,
             background: '#fff', overflowY: 'auto', zIndex: 30,
           }}
         >
