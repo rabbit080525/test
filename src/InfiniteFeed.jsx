@@ -148,14 +148,20 @@ export default function InfiniteFeed({ onProductClick }) {
   const [feedKey,   setFeedKey]   = useState(0);
   const [items, setItems] = useState(() => generateItems('내 취향', 0));
 
+  const itemsRef = useRef(0);
+
   const loadMore = useCallback(() => {
-    if (loadingRef.current) return;
+    if (loadingRef.current || itemsRef.current >= 100) return;
     loadingRef.current = true;
     setIsLoading(true);
     setTimeout(() => {
       const next = generateItems(tabRef.current, pageRef.current);
       pageRef.current += 1;
-      setItems(prev => [...prev, ...next]);
+      setItems(prev => {
+        const combined = [...prev, ...next].slice(0, 100);
+        itemsRef.current = combined.length;
+        return combined;
+      });
       setIsLoading(false);
       loadingRef.current = false;
     }, 600);
@@ -177,6 +183,7 @@ export default function InfiniteFeed({ onProductClick }) {
     tabRef.current     = tab;
     pageRef.current    = 1;
     loadingRef.current = false;
+    itemsRef.current   = 8;
     setActiveTab(tab);
     setIsLoading(false);
     setFeedKey(k => k + 1);
