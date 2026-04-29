@@ -616,25 +616,26 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           NAVIGATION
       ══════════════════════════════════════ */}
-      <header className="flex items-center justify-between px-5 pb-[18px]">
-        <h1
-          className="text-black leading-none"
-          style={{ fontSize: 21, fontWeight: 700, letterSpacing: '0.2em' }}
-        >
+      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px 18px 20px' }}>
+        <h1 style={{ fontSize: 21, fontWeight: 700, letterSpacing: '0.2em', margin: 0, color: '#111', lineHeight: 1 }}>
           W CONCEPT
         </h1>
 
-        <div className="flex items-center gap-[18px]">
-          <button aria-label="검색" className="flex items-center justify-center w-8 h-8">
-            <Search size={21} strokeWidth={1} className="text-black" />
+        {/* 아이콘 그룹 — 우측 여백 포함 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18, paddingRight: 4 }}>
+          <button aria-label="검색" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+            <Search size={21} strokeWidth={1} color="#111" />
           </button>
 
-          <button aria-label="장바구니" className="relative flex items-center justify-center w-8 h-8">
-            <ShoppingBag size={21} strokeWidth={1} className="text-black" />
-            <span
-              className="absolute top-0 right-0 flex items-center justify-center bg-black rounded-full text-white"
-              style={{ width: 16, height: 16, fontSize: 9, fontWeight: 600, lineHeight: 1, transform: 'translate(30%,-20%)' }}
-            >
+          <button aria-label="장바구니" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+            <ShoppingBag size={21} strokeWidth={1} color="#111" />
+            <span style={{
+              position: 'absolute', top: -1, right: -1,
+              width: 16, height: 16,
+              background: '#111', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 9, fontWeight: 600, color: '#fff', lineHeight: 1,
+            }}>
               8
             </span>
           </button>
