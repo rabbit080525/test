@@ -1001,16 +1001,15 @@ export default function WConceptApp() {
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.0) 55%)' }} />
 
           {/* 광고 태그 — 우상단 */}
-          <div style={{
+          <span style={{
             position: 'absolute', top: 10, right: 10,
-            background: 'rgba(255,255,255,0.22)',
-            border: '1px solid rgba(255,255,255,0.5)',
+            background: 'rgba(255,255,255,0.28)',
+            border: '1px solid rgba(255,255,255,0.55)',
             borderRadius: 4,
-            padding: '3px 7px',
-            backdropFilter: 'blur(4px)',
-          }}>
-            <span style={{ fontSize: 10, fontWeight: 500, color: '#fff', letterSpacing: '0.04em', lineHeight: 1 }}>광고</span>
-          </div>
+            padding: '3px 6px',
+            fontSize: 10, fontWeight: 500, color: '#fff',
+            letterSpacing: '0.04em', lineHeight: 1,
+          }}>광고</span>
 
           {/* 텍스트 — 좌하단 */}
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px 18px' }}>
