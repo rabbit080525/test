@@ -126,6 +126,17 @@ const LIFESTYLE_PRODUCTS = [
   { id: 'lf8', brand: '카이보이콧',    name: '린넨 테이블클로스 140×240',       price: 68000,  discount: 30, image: 'https://loremflickr.com/400/533/linen,interior?lock=608' },
 ];
 
+const ACTIVE_PRODUCTS = [
+  { id: 'ac1', brand: '젝시믹스',  name: '에어쿨 레깅스 풀렝스',          price: 49000,  discount: 20, image: 'https://loremflickr.com/400/533/sportswear,woman?lock=701' },
+  { id: 'ac2', brand: '안다르',    name: '시그니처 스포츠브라',            price: 38000,  discount: 15, image: 'https://loremflickr.com/400/533/yoga,fitness?lock=702' },
+  { id: 'ac3', brand: '뮬라웨어',  name: '에어리 크롭 집업',              price: 62000,  discount: 25, image: 'https://loremflickr.com/400/533/sportswear,active?lock=703' },
+  { id: 'ac4', brand: '나이키',    name: 'Dri-FIT 런닝 쇼츠',            price: 55000,  discount: 10, image: 'https://loremflickr.com/400/533/running,fitness?lock=704' },
+  { id: 'ac5', brand: '룰루레몬',  name: 'Align High-Rise Pant 25"',     price: 148000, discount: 12, image: 'https://loremflickr.com/400/533/yoga,leggings?lock=705' },
+  { id: 'ac6', brand: '젝시믹스',  name: '피치스킨 하이웨이스트 팬츠',    price: 52000,  discount: 30, image: 'https://loremflickr.com/400/533/sportswear,fitness?lock=706' },
+  { id: 'ac7', brand: '안다르',    name: '리얼 퍼포먼스 티셔츠',          price: 42000,  discount: 18, image: 'https://loremflickr.com/400/533/active,woman?lock=707' },
+  { id: 'ac8', brand: '뮬라웨어',  name: '코어 메쉬 탱크탑',             price: 35000,  discount: 22, image: 'https://loremflickr.com/400/533/yoga,woman?lock=708' },
+];
+
 const BRAND_AD = {
   brand: { name: '마르디 메르크디', avatar: 'https://loremflickr.com/80/80/fashion,brand?lock=220' },
   products: [
@@ -1177,6 +1188,74 @@ export default function WConceptApp() {
           >
             브랜드관 바로가기 &gt;
           </button>
+        </div>
+      </section>
+
+      {/* ══ 추가 — 연관 추천 상품 ══ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}>
+        <div className="flex items-center gap-[10px] px-5 mb-5">
+          <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
+            <img src="/pd05.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
+              플로럴 시스루 맥시 원피스
+            </h3>
+            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
+              이 상품과 비슷한 무드의 아이템
+            </p>
+          </div>
+        </div>
+        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
+          {RELATED_PRODUCTS.map((item, i) => (
+            <motion.div key={'c3-' + item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ 추가 — 에디토리얼 ══ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+          트렌드를 입다, 이번 주 픽
+        </h3>
+        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
+          {STYLE_CARDS.map((card) => (
+            <StyleCard key={'c3-' + card.id} card={card} onClick={() => handleProductClick({ ...card.product, id: card.id, brand: card.product.brand })} />
+          ))}
+        </div>
+      </section>
+
+      {/* ══ 추가 — 브랜드 추천 ══ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        <div className="flex items-center gap-[10px] px-5 mb-5">
+          <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
+            <img src="https://loremflickr.com/400/400/fashion,brand?lock=202" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>온앤온</h3>
+            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>이 브랜드와 결이 비슷한 추천 브랜드</p>
+          </div>
+        </div>
+        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 20, paddingLeft: 20, paddingRight: 24, paddingTop: 4, paddingBottom: 4 }}>
+          {BRAND_RECS.map((item) => (
+            <BrandRecCard key={'c3-' + item.id} item={item} onClick={() => handleProductClick(item)} />
+          ))}
+        </div>
+      </section>
+
+      {/* ══ 추가 — 액티브 추천 ══ */}
+      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+        <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+          활동적인 하루를 위한 액티브웨어
+        </h3>
+        <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
+          {ACTIVE_PRODUCTS.map((item, i) => (
+            <motion.div key={item.id} style={{ minWidth: 0 }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}>
+              <ProductCard item={item} onClick={() => handleProductClick(item)} />
+            </motion.div>
+          ))}
         </div>
       </section>
 
