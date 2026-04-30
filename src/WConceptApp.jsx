@@ -961,7 +961,7 @@ export default function WConceptApp() {
           뷰티 상품 추천 — 2행 그리드 (스타일 추천과 동일)
       ══════════════════════════════════════ */}
       <section
-        style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}
+        style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 32 }}
       >
         <h3
           className="px-5"
@@ -997,6 +997,11 @@ export default function WConceptApp() {
               <ProductCard item={item} onClick={() => handleProductClick(item)} />
             </motion.div>
           ))}
+        </div>
+        <div style={{ padding: '16px 20px 0' }}>
+          <button style={{ width: '100%', height: 42, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, background: '#fff', border: '1px solid #E0E0E0', borderRadius: 4, fontSize: 13, fontWeight: 400, color: '#444', letterSpacing: '-0.01em', cursor: 'pointer' }}>
+            뷰티 더보기 <span style={{ fontSize: 15, lineHeight: 1 }}>›</span>
+          </button>
         </div>
       </section>
 
@@ -1128,6 +1133,11 @@ export default function WConceptApp() {
             </motion.div>
           ))}
         </div>
+        <div style={{ padding: '16px 20px 0' }}>
+          <button style={{ width: '100%', height: 42, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, background: '#fff', border: '1px solid #E0E0E0', borderRadius: 4, fontSize: 13, fontWeight: 400, color: '#444', letterSpacing: '-0.01em', cursor: 'pointer' }}>
+            라이프 더보기 <span style={{ fontSize: 15, lineHeight: 1 }}>›</span>
+          </button>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════
@@ -1246,6 +1256,11 @@ export default function WConceptApp() {
               <ProductCard item={item} onClick={() => handleProductClick(item)} />
             </motion.div>
           ))}
+        </div>
+        <div style={{ padding: '16px 20px 0' }}>
+          <button style={{ width: '100%', height: 42, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, background: '#fff', border: '1px solid #E0E0E0', borderRadius: 4, fontSize: 13, fontWeight: 400, color: '#444', letterSpacing: '-0.01em', cursor: 'pointer' }}>
+            액티브 더보기 <span style={{ fontSize: 15, lineHeight: 1 }}>›</span>
+          </button>
         </div>
       </section>
 
