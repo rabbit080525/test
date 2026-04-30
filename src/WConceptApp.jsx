@@ -781,7 +781,7 @@ export default function WConceptApp() {
       <section className="pt-3 pb-4">
         <h3
           className="px-5 text-black"
-          style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 20px' }}
+          style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 10px' }}
         >
           관심 브랜드 새 소식
         </h3>
