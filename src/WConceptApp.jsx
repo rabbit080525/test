@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingBag, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
+import { Search, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
 import InfiniteFeed from './InfiniteFeed';
 
 /* ─── utils ─────────────────────────────────────────── */
@@ -128,14 +128,14 @@ const LIFESTYLE_PRODUCTS = [
 ];
 
 const ACTIVE_PRODUCTS = [
-  { id: 'ac1', brand: '젝시믹스',  name: '에어쿨 레깅스 풀렝스',          price: 49000,  discount: 20, image: '/apd01.jpg' },
-  { id: 'ac2', brand: '안다르',    name: '시그니처 스포츠브라',            price: 38000,  discount: 15, image: '/apd02.jpg' },
-  { id: 'ac3', brand: '뮬라웨어',  name: '에어리 크롭 집업',              price: 62000,  discount: 25, image: '/apd03.jpg' },
-  { id: 'ac4', brand: '나이키',    name: 'Dri-FIT 런닝 쇼츠',            price: 55000,  discount: 10, image: '/apd04.jpg' },
+  { id: 'ac1', brand: '젝시믹스',  name: '에어쿨 레깅스 풀렝스',          price: 49000,  discount: 20, image: '/apd07.jpg' },
+  { id: 'ac2', brand: '안다르',    name: '시그니처 스포츠브라',            price: 38000,  discount: 15, image: '/apd03.jpg' },
+  { id: 'ac3', brand: '뮬라웨어',  name: '에어리 크롭 집업',              price: 62000,  discount: 25, image: '/apd09.jpg' },
+  { id: 'ac4', brand: '나이키',    name: 'Dri-FIT 런닝 쇼츠',            price: 55000,  discount: 10, image: '/apd01.jpg' },
   { id: 'ac5', brand: '룰루레몬',  name: 'Align High-Rise Pant 25"',     price: 148000, discount: 12, image: '/apd05.jpg' },
-  { id: 'ac6', brand: '젝시믹스',  name: '피치스킨 하이웨이스트 팬츠',    price: 52000,  discount: 30, image: '/apd06.jpg' },
-  { id: 'ac7', brand: '안다르',    name: '리얼 퍼포먼스 티셔츠',          price: 42000,  discount: 18, image: '/apd07.jpg' },
-  { id: 'ac8', brand: '뮬라웨어',  name: '코어 메쉬 탱크탑',             price: 35000,  discount: 22, image: '/apd08.jpg' },
+  { id: 'ac6', brand: '젝시믹스',  name: '피치스킨 하이웨이스트 팬츠',    price: 52000,  discount: 30, image: '/apd10.jpg' },
+  { id: 'ac7', brand: '안다르',    name: '리얼 퍼포먼스 티셔츠',          price: 42000,  discount: 18, image: '/apd02.jpg' },
+  { id: 'ac8', brand: '뮬라웨어',  name: '코어 메쉬 탱크탑',             price: 35000,  discount: 22, image: '/apd06.jpg' },
 ];
 
 const BRAND_AD = {
@@ -617,18 +617,16 @@ export default function WConceptApp() {
           NAVIGATION
       ══════════════════════════════════════ */}
       <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px 18px 20px' }}>
-        <h1 style={{ fontSize: 21, fontWeight: 700, letterSpacing: '0.2em', margin: 0, color: '#111', lineHeight: 1 }}>
-          W CONCEPT
-        </h1>
+        <img src="/logo_new.svg" alt="W CONCEPT" style={{ height: 20, display: 'block' }} />
 
         {/* 아이콘 그룹 — 우측 여백 포함 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 18, paddingRight: 4 }}>
           <button aria-label="검색" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-            <Search size={21} strokeWidth={1} color="#111" />
+            <img src="/ic_search_new.svg" alt="검색" style={{ width: 22, height: 22, display: 'block' }} />
           </button>
 
           <button aria-label="장바구니" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-            <ShoppingBag size={21} strokeWidth={1} color="#111" />
+            <img src="/ic_basket_new.svg" alt="장바구니" style={{ width: 22, height: 22, display: 'block' }} />
             <span style={{
               position: 'absolute', top: -1, right: -1,
               width: 16, height: 16,
