@@ -35,6 +35,7 @@ function generateItems(tab, page) {
       name:     NAMES[seed % 8],
       price:    PRICES[seed % 8],
       discount: DISCOUNTS[seed % 8],
+      isAd:     seed % 4 === 3,
     };
   });
 }
@@ -128,6 +129,21 @@ function FeedCard({ item, onProductClick }) {
           <Heart size={13} strokeWidth={1.5}
             style={{ color: liked ? '#FF3300' : '#888', fill: liked ? '#FF3300' : 'none', display: 'block' }} />
         </button>
+        {item.isAd && (
+          <span style={{
+            position: 'absolute', bottom: 7, left: 7,
+            padding: '2px 5px',
+            background: 'rgba(255,255,255,0.80)',
+            color: '#999',
+            fontSize: 9,
+            fontWeight: 300,
+            letterSpacing: '0.04em',
+            lineHeight: 1,
+            borderRadius: 2,
+          }}>
+            AD
+          </span>
+        )}
       </div>
       <div style={{ padding: '8px 4px 12px' }}>
         <p style={{ margin: '0 0 2px', fontSize: 11, color: '#999', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.brand}</p>
