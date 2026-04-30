@@ -62,14 +62,14 @@ const RELATED_PRODUCTS = [
 ];
 
 const CURATION_PRODUCTS = [
-  { id: 'c1', brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON T-SHIRT',    price: 56050, discount: 5,  image: 'https://loremflickr.com/400/533/fashion,woman?lock=52' },
-  { id: 'c2', brand: '온앤온',               name: '넥 스트링 라이트 윈드 점퍼', price: 84550, discount: 10, image: 'https://loremflickr.com/400/533/fashion,woman?lock=53' },
-  { id: 'c3', brand: '레이지지',             name: 'Loose Fit Classic Check',    price: 76736, discount: 29, image: 'https://loremflickr.com/400/533/fashion,woman?lock=54' },
-  { id: 'c4', brand: '시아쥬',               name: '노블 시어서커 오버핏 셔츠',  price: 62640, discount: 28, image: 'https://loremflickr.com/400/533/fashion,woman?lock=55' },
-  { id: 'c5', brand: '르세지엠',             name: '타임리스 와이드 슬랙스',      price: 89000, discount: 15, image: 'https://loremflickr.com/400/533/fashion,woman?lock=62' },
-  { id: 'c6', brand: '프론트로우',            name: '크리스프 버튼다운 블라우스',  price: 78000, discount: 20, image: 'https://loremflickr.com/400/533/fashion,woman?lock=63' },
-  { id: 'c7', brand: '아무르 무아르',         name: '블라인드 시스루 블라우스',    price: 81532, discount: 25, image: 'https://loremflickr.com/400/533/fashion,woman?lock=64' },
-  { id: 'c8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',   price: 72410, discount: 26, image: 'https://loremflickr.com/400/533/fashion,woman?lock=65' },
+  { id: 'c1', brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON T-SHIRT',    price: 56050, discount: 5,  image: '/pd04.jpg' },
+  { id: 'c2', brand: '온앤온',               name: '넥 스트링 라이트 윈드 점퍼', price: 84550, discount: 10, image: '/pd07.jpg' },
+  { id: 'c3', brand: '레이지지',             name: 'Loose Fit Classic Check',    price: 76736, discount: 29, image: '/pd01.jpg' },
+  { id: 'c4', brand: '시아쥬',               name: '노블 시어서커 오버핏 셔츠',  price: 62640, discount: 28, image: '/pd08.jpg' },
+  { id: 'c5', brand: '르세지엠',             name: '타임리스 와이드 슬랙스',      price: 89000, discount: 15, image: '/pd00.jpg' },
+  { id: 'c6', brand: '프론트로우',            name: '크리스프 버튼다운 블라우스',  price: 78000, discount: 20, image: '/pd03.jpg' },
+  { id: 'c7', brand: '아무르 무아르',         name: '블라인드 시스루 블라우스',    price: 81532, discount: 25, image: '/pd05.jpg' },
+  { id: 'c8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',   price: 72410, discount: 26, image: '/pd02.jpg' },
 ];
 
 const STYLE_CARDS = [
@@ -139,44 +139,44 @@ const ACTIVE_PRODUCTS = [
 ];
 
 const BRAND_AD = {
-  brand: { name: '마르디 메르크디', avatar: 'https://loremflickr.com/80/80/fashion,brand?lock=220' },
+  brand: { name: '마르디 메르크디', avatar: '/pd06.jpg' },
   products: [
-    { id: 'ad1', name: 'Flower Logo Tee', price: 65000, discount: 10, image: 'https://loremflickr.com/400/533/fashion,woman?lock=231' },
-    { id: 'ad2', name: '플라워 크롭 자켓', price: 128000, discount: 15, image: 'https://loremflickr.com/400/533/fashion,woman?lock=232' },
-    { id: 'ad3', name: 'Knit Beret Hat', price: 42000, discount: 20, image: 'https://loremflickr.com/400/533/fashion,woman?lock=233' },
-    { id: 'ad4', name: '로고 니트 가디건', price: 98000, discount: 12, image: 'https://loremflickr.com/400/533/fashion,woman?lock=234' },
-    { id: 'ad5', name: 'Wide Denim Pants', price: 89000, discount: 18, image: 'https://loremflickr.com/400/533/fashion,woman?lock=235' },
+    { id: 'ad1', name: 'Flower Logo Tee',  price: 65000,  discount: 10, image: '/pd03.jpg' },
+    { id: 'ad2', name: '플라워 크롭 자켓',  price: 128000, discount: 15, image: '/pd00.jpg' },
+    { id: 'ad3', name: 'Knit Beret Hat',   price: 42000,  discount: 20, image: '/pd05.jpg' },
+    { id: 'ad4', name: '로고 니트 가디건',  price: 98000,  discount: 12, image: '/pd02.jpg' },
+    { id: 'ad5', name: 'Wide Denim Pants', price: 89000,  discount: 18, image: '/pd07.jpg' },
   ],
 };
 
 const BRAND_RECS = [
   {
     id: 1,
-    brand: { name: '모어레스트',   nameEn: 'MORREST',     avatar: 'https://loremflickr.com/80/80/fashion?lock=201' },
+    brand: { name: '모어레스트',   nameEn: 'MORREST',     avatar: '/pd01.jpg' },
     name: '촉촉소프트 슬리밍 카라 니트 카디건', discount: 12, price: 47344,
     image: '/pd03.jpg',
   },
   {
     id: 2,
-    brand: { name: '르세지엠',    nameEn: 'LESEIZIEME',  avatar: 'https://loremflickr.com/80/80/fashion?lock=204' },
+    brand: { name: '르세지엠',    nameEn: 'LESEIZIEME',  avatar: '/LESEIZIEME_logo.jpg' },
     name: '울 혼방 크롭 자켓 세트업', discount: 18, price: 132000,
     image: '/pd07.jpg',
   },
   {
     id: 3,
-    brand: { name: '프론트로우',  nameEn: 'FRONTROW',    avatar: 'https://loremflickr.com/80/80/fashion?lock=207' },
+    brand: { name: '프론트로우',  nameEn: 'FRONTROW',    avatar: '/frontrow_logo.jpg' },
     name: '클래식 핀턱 와이드 팬츠', discount: 22, price: 89000,
     image: '/pd01.jpg',
   },
   {
     id: 4,
-    brand: { name: '아무르 무아르', nameEn: 'AMOUR MUAR', avatar: 'https://loremflickr.com/80/80/fashion?lock=210' },
+    brand: { name: '아무르 무아르', nameEn: 'AMOUR MUAR', avatar: '/pd04.jpg' },
     name: '플로럴 시스루 맥시 원피스', discount: 15, price: 112000,
     image: '/pd05.jpg',
   },
   {
     id: 5,
-    brand: { name: '몽돌',        nameEn: 'MONGDOL',     avatar: 'https://loremflickr.com/80/80/fashion?lock=213' },
+    brand: { name: '몽돌',        nameEn: 'MONGDOL',     avatar: '/pd08.jpg' },
     name: '체크 오버핏 시어서커 블레이저', discount: 26, price: 72410,
     image: '/pd08.jpg',
   },
@@ -921,7 +921,7 @@ export default function WConceptApp() {
             style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
           >
             <img
-              src="https://loremflickr.com/400/400/fashion,brand?lock=200"
+              src="/pd07.jpg"
               alt="마리떼 프랑소와 저버"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
@@ -1096,7 +1096,7 @@ export default function WConceptApp() {
       <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
-            <img src="https://loremflickr.com/400/400/fashion,brand?lock=200" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/lazy_logo.jpg" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -1221,7 +1221,7 @@ export default function WConceptApp() {
       <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
-            <img src="https://loremflickr.com/400/400/fashion,brand?lock=202" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/oui_logo.jpg" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>온앤온</h3>

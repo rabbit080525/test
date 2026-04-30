@@ -8,11 +8,16 @@ const FEED_TABS = [
   { id: '주말 캠핑',  label: '주말 캠핑',  emoji: '🏕️' },
 ];
 
-const IMG_KW = {
-  '내 취향':   'fashion,woman',
-  '5월 하객룩': 'fashion,dress',
-  '주말 캠핑':  'outdoor,fashion',
-};
+const ALL_IMAGES = [
+  '/pd00.jpg', '/pd01.jpg', '/pd02.jpg', '/pd03.jpg', '/pd04.jpg',
+  '/pd05.jpg', '/pd06.jpg', '/pd07.jpg', '/pd08.jpg',
+  '/apd01.jpg', '/apd02.jpg', '/apd03.jpg', '/apd04.jpg', '/apd05.jpg',
+  '/apd06.jpg', '/apd07.jpg', '/apd08.jpg', '/apd09.jpg', '/apd10.jpg',
+  '/bpd01.jpg', '/bpd02.jpg', '/bpd03.jpg', '/bpd04.jpg', '/bpd05.jpg',
+  '/bpd06.jpg', '/bpd07.jpg', '/bpd08.jpg',
+  '/lpd01.jpg', '/lpd02.jpg', '/lpd03.jpg', '/lpd04.jpg', '/lpd05.jpg',
+  '/lpd06.jpg', '/lpd07.jpg', '/lpd08.jpg',
+];
 
 const BRANDS    = ['마리떼 프랑소와 저버', '르세지엠', '레이지지', '온앤온', '아무르 무아르', '시아쥬', '프론트로우', '몽돌'];
 const NAMES     = ['AEROCOOL LEMON T-SHIRT', '플리츠 와이드 슬랙스', 'Check Maxi Skirt', '실크 루즈핏 블라우스', '오버핏 니트 가디건', 'Classic Oversized Blazer', '미디 플리츠 드레스', '크롭 트위드 자켓'];
@@ -20,16 +25,16 @@ const PRICES    = [56050, 89000, 76736, 68000, 52000, 125000, 98000, 72000];
 const DISCOUNTS = [5, 10, 15, 20, 25, 30, 12, 18];
 
 function generateItems(tab, page) {
-  const kw = IMG_KW[tab] ?? 'fashion,woman';
+  const tabOffset = FEED_TABS.findIndex(t => t.id === tab) * 11;
   return Array.from({ length: 8 }, (_, i) => {
-    const idx = (page * 8 + i) % 8;
+    const seed = page * 8 + i;
     return {
       id:       `${tab}-p${page}-i${i}`,
-      image:    `https://loremflickr.com/400/533/${kw}?lock=${850 + page * 8 + i}`,
-      brand:    BRANDS[idx],
-      name:     NAMES[idx],
-      price:    PRICES[idx],
-      discount: DISCOUNTS[idx],
+      image:    ALL_IMAGES[(seed + tabOffset) % ALL_IMAGES.length],
+      brand:    BRANDS[seed % 8],
+      name:     NAMES[seed % 8],
+      price:    PRICES[seed % 8],
+      discount: DISCOUNTS[seed % 8],
     };
   });
 }
