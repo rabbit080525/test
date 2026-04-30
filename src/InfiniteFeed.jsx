@@ -117,18 +117,6 @@ function FeedCard({ item, onProductClick }) {
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           loading="lazy"
         />
-        <button
-          onClick={e => { e.stopPropagation(); setLiked(v => !v); }}
-          style={{
-            position: 'absolute', top: 8, right: 8,
-            width: 28, height: 28, borderRadius: '50%',
-            background: 'rgba(255,255,255,0.88)', border: 'none',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-          }}
-        >
-          <Heart size={13} strokeWidth={1.5}
-            style={{ color: liked ? '#FF3300' : '#888', fill: liked ? '#FF3300' : 'none', display: 'block' }} />
-        </button>
         {item.isAd && (
           <span style={{
             position: 'absolute', bottom: 7, left: 7,
@@ -146,13 +134,22 @@ function FeedCard({ item, onProductClick }) {
         )}
       </div>
       <div style={{ padding: '8px 4px 12px' }}>
-        <p style={{ margin: '0 0 2px', fontSize: 11, color: '#999', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.brand}</p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+          <p style={{ margin: 0, fontSize: 11, color: '#999', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{item.brand}</p>
+          <button
+            onClick={e => { e.stopPropagation(); setLiked(v => !v); }}
+            style={{ flexShrink: 0, padding: 2, background: 'none', border: 'none', cursor: 'pointer', lineHeight: 0 }}
+          >
+            <Heart size={13} strokeWidth={1.5}
+              style={{ color: liked ? '#FF3300' : '#C0C0C0', fill: liked ? '#FF3300' : 'none', display: 'block' }} />
+          </button>
+        </div>
         <p style={{ margin: '0 0 4px', fontSize: 12, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</p>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 3, marginBottom: 6 }}>
           <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
           <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
         </div>
-        </div>
+      </div>
     </motion.div>
   );
 }
