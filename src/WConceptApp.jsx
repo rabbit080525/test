@@ -778,7 +778,7 @@ export default function WConceptApp() {
           마지막 아이템 뒤 trailing spacer로
           오른쪽 여백을 왼쪽 여백과 동일하게 유지
       ══════════════════════════════════════ */}
-      <section className="pt-8 pb-10">
+      <section className="pt-3 pb-4">
         <h3
           className="px-5 text-black"
           style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 20px' }}
