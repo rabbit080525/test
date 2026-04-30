@@ -1265,8 +1265,8 @@ export default function WConceptApp() {
           transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           style={{
             position: 'fixed', top: 0, bottom: 0,
-            left: '50%', transform: 'translateX(-50%)',
-            width: '100%', maxWidth: 390,
+            left: '50%', 
+            width: '100%',
             background: '#fff', overflowY: 'auto', zIndex: 30,
           }}
         >
