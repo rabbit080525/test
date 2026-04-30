@@ -35,7 +35,7 @@ function generateItems(tab, page) {
       name:     NAMES[seed % 8],
       price:    PRICES[seed % 8],
       discount: DISCOUNTS[seed % 8],
-      isAd:     seed % 4 === 3,
+      isAd:     tab === '내 취향' && seed % 4 === 3,
     };
   });
 }
