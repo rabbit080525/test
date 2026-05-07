@@ -646,8 +646,8 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <div style={{ position: 'sticky', top: 0, zIndex: 20, background: '#fff', borderBottom: '1px solid #F0F0F0' }}>
         <div
-          className="flex items-center gap-[7px] pb-5 overflow-x-auto scrollbar-hide"
-          style={{ ...SCROLL_STYLE, paddingLeft: 20, paddingTop: 12 }}
+          className="flex items-center gap-[7px] overflow-x-auto scrollbar-hide"
+          style={{ ...SCROLL_STYLE, paddingLeft: 20, paddingTop: 14, paddingBottom: 12 }}
         >
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
