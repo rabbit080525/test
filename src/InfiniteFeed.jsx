@@ -211,8 +211,10 @@ export default function InfiniteFeed({ onProductClick }) {
   return (
     <section style={{ borderTop: '8px solid #F5F5F5', fontFamily: "'Inter','Pretendard',-apple-system,sans-serif" }}>
 
-      {/* 탭만 — 타이틀 없음 */}
-      <DiscoveryTabs activeTab={activeTab} onChange={handleTabChange} />
+      {/* 탭만 — 타이틀 없음 / 카테고리 탭(66px) 바로 아래 고정 */}
+      <div style={{ position: 'sticky', top: 66, zIndex: 19, background: '#fff', borderBottom: '1px solid #F0F0F0' }}>
+        <DiscoveryTabs activeTab={activeTab} onChange={handleTabChange} />
+      </div>
 
       {/* 피드 그리드 — 탭 전환 시 fade+slide 애니메이션 */}
       <AnimatePresence mode="wait">

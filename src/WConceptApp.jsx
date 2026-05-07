@@ -644,36 +644,38 @@ export default function WConceptApp() {
           CATEGORY TABS  — horizontal scroll
           overflow-x:auto + snap feel via -webkit-overflow-scrolling
       ══════════════════════════════════════ */}
-      <div
-        className="flex items-center gap-[7px] pb-5 overflow-x-auto scrollbar-hide"
-        style={{ ...SCROLL_STYLE, paddingLeft: 20 }}
-      >
-        {TABS.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={[
-                'flex-shrink-0 flex items-center gap-[4px] px-[14px] rounded-full transition-all duration-200',
-                isActive
-                  ? 'bg-black text-white border border-black'
-                  : 'bg-white text-black border border-gray-200',
-              ].join(' ')}
-              style={{ height: 34, fontSize: 13, fontWeight: isActive ? 500 : 400 }}
-            >
-              <span>{tab.label}</span>
-              {tab.dot && (
-                <span
-                  className="flex-shrink-0 rounded-full bg-orange-500"
-                  style={{ width: 5, height: 5, marginTop: -8, marginRight: -2 }}
-                />
-              )}
-            </button>
-          );
-        })}
-        {/* trailing spacer — right padding 유지 */}
-        <div style={{ width: 20, flexShrink: 0 }} />
+      <div style={{ position: 'sticky', top: 0, zIndex: 20, background: '#fff', borderBottom: '1px solid #F0F0F0' }}>
+        <div
+          className="flex items-center gap-[7px] pb-5 overflow-x-auto scrollbar-hide"
+          style={{ ...SCROLL_STYLE, paddingLeft: 20, paddingTop: 12 }}
+        >
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={[
+                  'flex-shrink-0 flex items-center gap-[4px] px-[14px] rounded-full transition-all duration-200',
+                  isActive
+                    ? 'bg-black text-white border border-black'
+                    : 'bg-white text-black border border-gray-200',
+                ].join(' ')}
+                style={{ height: 34, fontSize: 13, fontWeight: isActive ? 500 : 400 }}
+              >
+                <span>{tab.label}</span>
+                {tab.dot && (
+                  <span
+                    className="flex-shrink-0 rounded-full bg-orange-500"
+                    style={{ width: 5, height: 5, marginTop: -8, marginRight: -2 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+          {/* trailing spacer — right padding 유지 */}
+          <div style={{ width: 20, flexShrink: 0 }} />
+        </div>
       </div>
 
       {/* ══════════════════════════════════════
