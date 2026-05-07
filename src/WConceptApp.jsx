@@ -616,7 +616,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           NAVIGATION
       ══════════════════════════════════════ */}
-      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px 18px 20px' }}>
+      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px 10px 20px' }}>
         <img src="/logo_new.svg" alt="W CONCEPT" style={{ height: 20, display: 'block' }} />
 
         {/* 아이콘 그룹 — 우측 여백 포함 */}
