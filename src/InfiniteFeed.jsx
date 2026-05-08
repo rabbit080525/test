@@ -41,7 +41,7 @@ function generateItems(tab, page) {
 }
 
 /* ── DiscoveryTabs ───────────────────────────────────── */
-function DiscoveryTabs({ activeTab, onChange }) {
+function DiscoveryTabs({ activeTab, onChange, tabs }) {
   return (
     <div style={{
       display: 'flex',
@@ -52,7 +52,7 @@ function DiscoveryTabs({ activeTab, onChange }) {
       msOverflowStyle: 'none',
       WebkitOverflowScrolling: 'touch',
     }}>
-      {visibleTabs.map(({ id, label, emoji }) => {
+      {tabs.map(({ id, label, emoji }) => {
         const on = activeTab === id;
         return (
           <button
@@ -231,7 +231,7 @@ export default function InfiniteFeed({ onProductClick, coldStart = false }) {
 
       {/* 탭만 — 타이틀 없음 / 카테고리 탭(66px) 바로 아래 고정 */}
       <div style={{ position: 'sticky', top: 60, zIndex: 19, background: '#fff', borderBottom: '1px solid #F0F0F0' }}>
-        <DiscoveryTabs activeTab={activeTab} onChange={handleTabChange} />
+        <DiscoveryTabs activeTab={activeTab} onChange={handleTabChange} tabs={visibleTabs} />
       </div>
 
       {/* 피드 그리드 — 탭 전환 시 fade+slide 애니메이션 */}
