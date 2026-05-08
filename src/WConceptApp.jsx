@@ -1009,7 +1009,7 @@ export default function WConceptApp() {
           연관 추천 / 실시간 베스트 (콜드스타트 전환)
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {isColdStart ? (
+      {(!isWarmed.clicked && isColdStart) ? (
         <motion.section key="best"
           style={{ paddingTop: 28, paddingBottom: 40 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1067,7 +1067,7 @@ export default function WConceptApp() {
           스타일 큐레이션 / 스타일 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {!isStylePicked && isColdStart ? (
+      {!isStylePicked && isColdStart && !isWarmed.clicked ? (
         <motion.section key="style-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1127,7 +1127,7 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         {/* 섹션 헤더 */}
-        {isColdStart ? (
+        {(!isWarmed.clicked && isColdStart) ? (
           <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
             요즘 사랑받는 브랜드
           </h3>
@@ -1179,7 +1179,7 @@ export default function WConceptApp() {
           뷰티 추천 / 카테고리 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {!isCategoryPicked && isColdStart ? (
+      {!isCategoryPicked && isColdStart && !isWarmed.clicked ? (
         <motion.section key="cat-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1263,8 +1263,14 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
-      {/* 광고 배너 ~ 액티브 추천: 개인화 상태에서만 노출 */}
-      {!isColdStart && (<>
+      {/* ── 섹션 5~8: 장바구니 담기 시 노출 ── */}
+      <AnimatePresence>
+      {(isWarmed.carted || !isColdStart) && (
+      <motion.div
+        key="carted-sections"
+        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      ><>
       {/* ══════════════════════════════════════
           광고 배너
       ══════════════════════════════════════ */}
@@ -1400,6 +1406,18 @@ export default function WConceptApp() {
         </div>
       </section>
 
+      </></motion.div>
+      )}
+      </AnimatePresence>
+
+      {/* ── 섹션 9~12: 마이하트 클릭 시 노출 ── */}
+      <AnimatePresence>
+      {(isWarmed.hearted || !isColdStart) && (
+      <motion.div
+        key="hearted-sections"
+        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      ><>
       {/* ══════════════════════════════════════
           브랜드 광고
       ══════════════════════════════════════ */}
@@ -1523,7 +1541,9 @@ export default function WConceptApp() {
           </button>
         </div>
       </section>
-      </>)}
+      </></motion.div>
+      )}
+      </AnimatePresence>
 
       {/* ══ 취향 기반 무한 피드 ══ */}
       <InfiniteFeed onProductClick={handleProductClick} coldStart={isColdStart} onHeart={handleHeart} />
