@@ -983,10 +983,16 @@ export default function WConceptApp() {
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          <div className="px-5" style={{ marginBottom: 20 }}>
+          <div className="px-5" style={{ marginBottom: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
               주말에 어울리는 모던 시크 룩
             </h3>
+            <button
+              onClick={() => { setIsStylePicked(false); setSelectedStyle(null); }}
+              style={{ flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 3, padding: 0 }}
+            >
+              <span style={{ fontSize: 11, color: '#AAA', letterSpacing: '-0.01em', textDecoration: 'underline', textUnderlineOffset: 3 }}>다시 고르기</span>
+            </button>
           </div>
           <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
             {STYLE_CARDS.map((card) => (
