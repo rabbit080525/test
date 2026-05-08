@@ -1027,12 +1027,14 @@ export default function WConceptApp() {
             <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
               주말에 어울리는 모던 시크 룩
             </h3>
+            {isStylePicked && isColdStart && (
             <button
               onClick={() => { setIsStylePicked(false); setSelectedStyle(null); }}
               style={{ flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 3, padding: 0 }}
             >
               <span style={{ fontSize: 11, color: '#AAA', letterSpacing: '-0.01em', textDecoration: 'underline', textUnderlineOffset: 3 }}>다시 고르기</span>
             </button>
+            )}
           </div>
           <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
             {STYLE_CARDS.map((card) => (
@@ -1137,12 +1139,14 @@ export default function WConceptApp() {
           <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
             여름 휴가에서 빛나는 수분 글로우 픽
           </h3>
+          {isCategoryPicked && isColdStart && (
           <button
             onClick={() => { setIsCategoryPicked(false); setSelectedCategory(null); }}
             style={{ flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
             <span style={{ fontSize: 11, color: '#AAA', letterSpacing: '-0.01em', textDecoration: 'underline', textUnderlineOffset: 3 }}>다시 고르기</span>
           </button>
+          )}
         </div>
 
         <div
