@@ -776,6 +776,7 @@ export default function WConceptApp() {
   const handleBack = useCallback(() => {
     setPage('home');
     setIsColdStart(false);
+    setIsWarmed(prev => ({ ...prev, clicked: true }));
     setDisplayedRelated(shuffle(RELATED_PRODUCTS));
     setDisplayedCuration(shuffle(CURATION_PRODUCTS));
     setDisplayedBeauty(shuffle(BEAUTY_PRODUCTS));
@@ -1005,11 +1006,23 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
+      {/* ── 섹션 1~4: 상품 클릭 시 노출 ── */}
+      <AnimatePresence>
+      {isWarmed.clicked && (
+      <motion.div
+        key="clicked-sections"
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: 'auto', opacity: 1 }}
+        exit={{ height: 0, opacity: 0 }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        style={{ overflow: 'hidden' }}
+      >
+
       {/* ══════════════════════════════════════
-          연관 추천 / 실시간 베스트 (콜드스타트 전환)
+          연관 추천
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {(!isWarmed.clicked && isColdStart) ? (
+      {(false) ? ( /* cold best — isWarmed.clicked 시 항상 warm 버전 */
         <motion.section key="best"
           style={{ paddingTop: 28, paddingBottom: 40 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1067,7 +1080,7 @@ export default function WConceptApp() {
           스타일 큐레이션 / 스타일 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {!isStylePicked && isColdStart && !isWarmed.clicked ? (
+      {!isStylePicked ? (
         <motion.section key="style-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1104,7 +1117,7 @@ export default function WConceptApp() {
             <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
               주말에 어울리는 모던 시크 룩
             </h3>
-            {isStylePicked && isColdStart && (
+            {isStylePicked && (
             <button
               onClick={() => { setIsStylePicked(false); setSelectedStyle(null); }}
               style={{ flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 3, padding: 0 }}
@@ -1127,7 +1140,7 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         {/* 섹션 헤더 */}
-        {(!isWarmed.clicked && isColdStart) ? (
+        {(false) ? (
           <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
             요즘 사랑받는 브랜드
           </h3>
@@ -1179,7 +1192,7 @@ export default function WConceptApp() {
           뷰티 추천 / 카테고리 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {!isCategoryPicked && isColdStart && !isWarmed.clicked ? (
+      {!isCategoryPicked ? (
         <motion.section key="cat-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1216,7 +1229,7 @@ export default function WConceptApp() {
           <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
             여름 휴가에서 빛나는 수분 글로우 픽
           </h3>
-          {isCategoryPicked && isColdStart && (
+          {isCategoryPicked && (
           <button
             onClick={() => { setIsCategoryPicked(false); setSelectedCategory(null); }}
             style={{ flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
@@ -1263,13 +1276,20 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
+      </motion.div>
+      )}
+      </AnimatePresence>
+
       {/* ── 섹션 5~8: 장바구니 담기 시 노출 ── */}
       <AnimatePresence>
-      {(isWarmed.carted || !isColdStart) && (
+      {isWarmed.carted && (
       <motion.div
         key="carted-sections"
-        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: 'auto', opacity: 1 }}
+        exit={{ height: 0, opacity: 0 }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        style={{ overflow: 'hidden' }}
       ><>
       {/* ══════════════════════════════════════
           광고 배너
@@ -1412,11 +1432,14 @@ export default function WConceptApp() {
 
       {/* ── 섹션 9~12: 마이하트 클릭 시 노출 ── */}
       <AnimatePresence>
-      {(isWarmed.hearted || !isColdStart) && (
+      {isWarmed.hearted && (
       <motion.div
         key="hearted-sections"
-        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: 'auto', opacity: 1 }}
+        exit={{ height: 0, opacity: 0 }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        style={{ overflow: 'hidden' }}
       ><>
       {/* ══════════════════════════════════════
           브랜드 광고
@@ -1583,10 +1606,15 @@ export default function WConceptApp() {
         const next = !isColdStart;
         setIsColdStart(next);
         if (next) {
+          // COLD 복귀: 모든 상태 리셋
+          setIsWarmed({ clicked: false, carted: false, hearted: false });
           setIsStylePicked(false);
           setSelectedStyle(null);
           setIsCategoryPicked(false);
           setSelectedCategory(null);
+        } else {
+          // WARM: 모든 구역 즉시 노출
+          setIsWarmed({ clicked: true, carted: true, hearted: true });
         }
       }}
       style={{
