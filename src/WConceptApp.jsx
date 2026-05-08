@@ -52,11 +52,16 @@ const BRANDS = [
 ];
 
 const STYLE_TABS = [
-  { id: 'st1', label: '#미니멀',        image: '/apd04.jpg' },
-  { id: 'st2', label: '#프렌치시크',    image: '/pd00.jpg'  },
-  { id: 'st3', label: '#고프코어',      image: '/apd08.jpg' },
-  { id: 'st4', label: '#모던클래식',    image: '/pd03.jpg'  },
-  { id: 'st5', label: '#스트리트캐주얼', image: '/apd02.jpg' },
+  { id: 'st1',  label: '#미니멀',        image: '/apd04.jpg' },
+  { id: 'st2',  label: '#프렌치시크',    image: '/pd00.jpg'  },
+  { id: 'st3',  label: '#고프코어',      image: '/apd08.jpg' },
+  { id: 'st4',  label: '#모던클래식',    image: '/pd03.jpg'  },
+  { id: 'st5',  label: '#스트리트캐주얼', image: '/apd02.jpg' },
+  { id: 'st6',  label: '#페미닌',        image: '/pd05.jpg'  },
+  { id: 'st7',  label: '#오피스룩',      image: '/pd07.jpg'  },
+  { id: 'st8',  label: '#빈티지',        image: '/pd01.jpg'  },
+  { id: 'st9',  label: '#스포티',        image: '/apd06.jpg' },
+  { id: 'st10', label: '#로맨틱',        image: '/pd08.jpg'  },
 ];
 
 const CATEGORY_OPTIONS = [
