@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { Search, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
 import InfiniteFeed from './InfiniteFeed';
 import ScrollToTop from './ScrollToTop';
@@ -1280,6 +1280,54 @@ export default function WConceptApp() {
       </div>
       )}
 
+      {/* ── 브랜드 광고: carted 여부에 따라 위치 이동 (layoutId 공유 애니메이션) ── */}
+      <LayoutGroup id="brand-ad-group">
+
+      {/* Case A: 5~8 미노출 상태 → 배너 바로 뒤 */}
+      <AnimatePresence>
+      {(!isColdStart && !isWarmed.carted) && (
+        <motion.div
+          layoutId="brand-ad"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ layout: { duration: 0.45, ease: [0.4, 0, 0.2, 1] }, opacity: { duration: 0.2 } }}
+        >
+          <section style={{ paddingTop: 20, paddingBottom: 32 }}>
+            <div className="flex items-center gap-[12px] px-5 mb-4">
+              <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
+                <img src={BRAND_AD.brand.avatar} alt={BRAND_AD.brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{BRAND_AD.brand.name}</p>
+                <p style={{ margin: '3px 0 0', fontSize: 12, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em' }}>추천 브랜드</p>
+              </div>
+              <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 400, color: '#AAA', border: '1px solid #DDD', borderRadius: 4, padding: '3px 7px', lineHeight: 1 }}>광고</span>
+            </div>
+            <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}>
+              {BRAND_AD.products.map((item) => (
+                <div key={item.id} style={{ flexShrink: 0, width: 140, cursor: 'pointer' }} onClick={() => handleProductClick({ ...item, brand: BRAND_AD.brand.name })}>
+                  <div style={{ aspectRatio: '3 / 4', borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
+                    <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+                  </div>
+                  <p style={{ margin: '8px 0 2px', fontSize: 11.5, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>{item.name}</p>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                    <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+                    <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ paddingLeft: 20, paddingRight: 20, marginTop: 16 }}>
+              <button style={{ width: '100%', height: 46, border: '1px solid #DEDEDE', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 500, color: '#111', letterSpacing: '-0.01em' }}>
+                브랜드관 바로가기 &gt;
+              </button>
+            </div>
+          </section>
+        </motion.div>
+      )}
+      </AnimatePresence>
+
       {/* ── 섹션 5~8: 장바구니 담기 시 노출 ── */}
       <AnimatePresence>
       {(isWarmed.carted && !isColdStart) && (
@@ -1380,44 +1428,56 @@ export default function WConceptApp() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════
-          브랜드 광고 — 섹션 5~8 그룹 하단
-      ══════════════════════════════════════ */}
-      <section style={{ paddingTop: 20, paddingBottom: 32 }}>
-        <div className="flex items-center gap-[12px] px-5 mb-4">
-          <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
-            <img src={BRAND_AD.brand.avatar} alt={BRAND_AD.brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{BRAND_AD.brand.name}</p>
-            <p style={{ margin: '3px 0 0', fontSize: 12, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em' }}>추천 브랜드</p>
-          </div>
-          <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 400, color: '#AAA', border: '1px solid #DDD', borderRadius: 4, padding: '3px 7px', lineHeight: 1 }}>광고</span>
-        </div>
-        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}>
-          {BRAND_AD.products.map((item) => (
-            <div key={item.id} style={{ flexShrink: 0, width: 140, cursor: 'pointer' }} onClick={() => handleProductClick({ ...item, brand: BRAND_AD.brand.name })}>
-              <div style={{ aspectRatio: '3 / 4', borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
-              </div>
-              <p style={{ margin: '8px 0 2px', fontSize: 11.5, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>{item.name}</p>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
-                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div style={{ paddingLeft: 20, paddingRight: 20, marginTop: 16 }}>
-          <button style={{ width: '100%', height: 46, border: '1px solid #DEDEDE', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 500, color: '#111', letterSpacing: '-0.01em' }}>
-            브랜드관 바로가기 &gt;
-          </button>
-        </div>
-      </section>
-
       </></motion.div>
       )}
       </AnimatePresence>
+
+      {/* Case B: 5~8 노출 후 → 섹션 5~8 바로 뒤로 밀려 내려옴 */}
+      <AnimatePresence>
+      {(isWarmed.carted && !isColdStart) && (
+        <motion.div
+          layoutId="brand-ad"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ layout: { duration: 0.45, ease: [0.4, 0, 0.2, 1] }, opacity: { duration: 0.2 } }}
+        >
+          <section style={{ paddingTop: 20, paddingBottom: 32 }}>
+            <div className="flex items-center gap-[12px] px-5 mb-4">
+              <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
+                <img src={BRAND_AD.brand.avatar} alt={BRAND_AD.brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{BRAND_AD.brand.name}</p>
+                <p style={{ margin: '3px 0 0', fontSize: 12, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em' }}>추천 브랜드</p>
+              </div>
+              <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 400, color: '#AAA', border: '1px solid #DDD', borderRadius: 4, padding: '3px 7px', lineHeight: 1 }}>광고</span>
+            </div>
+            <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}>
+              {BRAND_AD.products.map((item) => (
+                <div key={item.id} style={{ flexShrink: 0, width: 140, cursor: 'pointer' }} onClick={() => handleProductClick({ ...item, brand: BRAND_AD.brand.name })}>
+                  <div style={{ aspectRatio: '3 / 4', borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
+                    <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+                  </div>
+                  <p style={{ margin: '8px 0 2px', fontSize: 11.5, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>{item.name}</p>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                    <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+                    <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ paddingLeft: 20, paddingRight: 20, marginTop: 16 }}>
+              <button style={{ width: '100%', height: 46, border: '1px solid #DEDEDE', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 500, color: '#111', letterSpacing: '-0.01em' }}>
+                브랜드관 바로가기 &gt;
+              </button>
+            </div>
+          </section>
+        </motion.div>
+      )}
+      </AnimatePresence>
+
+      </LayoutGroup>{/* end brand-ad-group */}
 
       {/* ── 섹션 9~12: 마이하트 클릭 시 노출 ── */}
       <AnimatePresence>
