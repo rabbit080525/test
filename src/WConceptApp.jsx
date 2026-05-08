@@ -60,10 +60,16 @@ const STYLE_TABS = [
 ];
 
 const CATEGORY_OPTIONS = [
-  { id: 'c1', label: '상의' },    { id: 'c2', label: '하의' },
-  { id: 'c3', label: '아우터' },  { id: 'c4', label: '드레스' },
-  { id: 'c5', label: '뷰티' },    { id: 'c6', label: '라이프' },
-  { id: 'c7', label: '액세서리' },{ id: 'c8', label: '슈즈' },
+  { id: 'c1',  label: '#스킨케어',  image: '/bpd01.jpg' },
+  { id: 'c2',  label: '#이너뷰티',  image: '/bpd03.jpg' },
+  { id: 'c3',  label: '#바디케어',  image: '/bpd05.jpg' },
+  { id: 'c4',  label: '#테이블웨어', image: '/lpd01.jpg' },
+  { id: 'c5',  label: '#요리도구',  image: '/lpd04.jpg' },
+  { id: 'c6',  label: '#주방소품',  image: '/lpd02.jpg' },
+  { id: 'c7',  label: '#비치웨어',  image: '/apd05.jpg' },
+  { id: 'c8',  label: '#러닝화',    image: '/apd01.jpg' },
+  { id: 'c9',  label: '#요가웨어',  image: '/apd09.jpg' },
+  { id: 'c10', label: '#홈케어',    image: '/lpd06.jpg' },
 ];
 
 const REALTIME_BEST = [
@@ -247,6 +253,35 @@ function StyleOnboardCard({ tab, onClick }) {
           letterSpacing: '-0.01em', lineHeight: 1,
         }}>
           {tab.label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ─── CategoryOnboardCard ───────────────────────────── */
+function CategoryOnboardCard({ opt, onClick }) {
+  return (
+    <div onClick={onClick} style={{ flexShrink: 0, width: 118, cursor: 'pointer' }}>
+      <div style={{
+        position: 'relative', width: '100%', aspectRatio: '3/4',
+        borderRadius: 10, overflow: 'hidden', background: '#EBEBEB',
+      }}>
+        <img
+          src={opt.image} alt={opt.label}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          loading="lazy"
+        />
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%)',
+        }} />
+        <span style={{
+          position: 'absolute', bottom: 11, left: 11,
+          fontSize: 12.5, fontWeight: 700, color: '#fff',
+          letterSpacing: '-0.01em', lineHeight: 1,
+        }}>
+          {opt.label}
         </span>
       </div>
     </div>
@@ -1066,17 +1101,24 @@ export default function WConceptApp() {
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
-            관심 카테고리를 선택해주세요
-          </h3>
-          <p className="px-5" style={{ fontSize: 12.5, color: '#999', margin: '0 0 18px' }}>선택한 카테고리 기반으로 상품을 추천해 드려요</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, padding: '0 20px' }}>
+          <div className="px-5" style={{ marginBottom: 20 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 5px' }}>
+              어떤 카테고리에 관심이 있나요?
+            </h3>
+            <p style={{ margin: 0, fontSize: 12.5, color: '#999', letterSpacing: '-0.01em' }}>
+              관심 카테고리를 선택하시면 맞춤 추천을 드려요
+            </p>
+          </div>
+          <div
+            className="flex overflow-x-auto scrollbar-hide"
+            style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}
+          >
             {CATEGORY_OPTIONS.map(opt => (
-              <button key={opt.id} onClick={() => { setSelectedCategory(opt.label); setIsCategoryPicked(true); }}
-                style={{ padding: '14px 0', borderRadius: 8, border: '1px solid #E0E0E0', background: '#F7F8F9', fontSize: 13, color: '#333', cursor: 'pointer', textAlign: 'center' }}
-              >
-                {opt.label}
-              </button>
+              <CategoryOnboardCard
+                key={opt.id}
+                opt={opt}
+                onClick={() => { setSelectedCategory(opt.label); setIsCategoryPicked(true); }}
+              />
             ))}
           </div>
         </motion.section>
@@ -1086,10 +1128,16 @@ export default function WConceptApp() {
         initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
       >
-        <div className="px-5" style={{ marginBottom: 20 }}>
+        <div className="px-5" style={{ marginBottom: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
             여름 휴가에서 빛나는 수분 글로우 픽
           </h3>
+          <button
+            onClick={() => { setIsCategoryPicked(false); setSelectedCategory(null); }}
+            style={{ flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          >
+            <span style={{ fontSize: 11, color: '#AAA', letterSpacing: '-0.01em', textDecoration: 'underline', textUnderlineOffset: 3 }}>다시 고르기</span>
+          </button>
         </div>
 
         <div
