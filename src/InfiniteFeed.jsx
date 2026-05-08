@@ -24,7 +24,7 @@ const NAMES     = ['AEROCOOL LEMON T-SHIRT', '플리츠 와이드 슬랙스', 'C
 const PRICES    = [56050, 89000, 76736, 68000, 52000, 125000, 98000, 72000];
 const DISCOUNTS = [5, 10, 15, 20, 25, 30, 12, 18];
 
-function generateItems(tab, page) {
+function generateItems(tab, page, coldStart = false) {
   const tabOffset = FEED_TABS.findIndex(t => t.id === tab) * 11;
   return Array.from({ length: 8 }, (_, i) => {
     const seed = page * 8 + i;
@@ -35,7 +35,7 @@ function generateItems(tab, page) {
       name:     NAMES[seed % 8],
       price:    PRICES[seed % 8],
       discount: DISCOUNTS[seed % 8],
-      isAd:     tab === '내 취향' && seed % 4 === 3,
+      isAd:     !coldStart && tab === '내 취향' && seed % 4 === 3,
     };
   });
 }
@@ -169,19 +169,19 @@ export default function InfiniteFeed({ onProductClick, coldStart = false, onHear
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [isLoading, setIsLoading] = useState(false);
   const [feedKey,   setFeedKey]   = useState(0);
-  const [items, setItems] = useState(() => generateItems(defaultTab, 0));
+  const [items, setItems] = useState(() => generateItems(defaultTab, 0, coldStart));
 
-  // coldStart 해제 시 '내 취향' 탭으로 전환
+  // coldStart 변화 시 탭 동기화
   useEffect(() => {
-    if (!coldStart && tabRef.current !== '내 취향') {
-      tabRef.current = '내 취향';
-      pageRef.current = 1;
-      loadingRef.current = false;
-      itemsRef.current = 8;
-      setActiveTab('내 취향');
-      setFeedKey(k => k + 1);
-      setItems(generateItems('내 취향', 0));
-    }
+    const target = coldStart ? '5월 하객룩' : '내 취향';
+    if (tabRef.current === target) return;
+    tabRef.current     = target;
+    pageRef.current    = 1;
+    loadingRef.current = false;
+    itemsRef.current   = 8;
+    setActiveTab(target);
+    setFeedKey(k => k + 1);
+    setItems(generateItems(target, 0, coldStart));
   }, [coldStart]);
 
   const itemsRef = useRef(0);
@@ -191,7 +191,7 @@ export default function InfiniteFeed({ onProductClick, coldStart = false, onHear
     loadingRef.current = true;
     setIsLoading(true);
     setTimeout(() => {
-      const next = generateItems(tabRef.current, pageRef.current);
+      const next = generateItems(tabRef.current, pageRef.current, coldStart);
       pageRef.current += 1;
       setItems(prev => {
         const combined = [...prev, ...next].slice(0, 100);
@@ -201,7 +201,7 @@ export default function InfiniteFeed({ onProductClick, coldStart = false, onHear
       setIsLoading(false);
       loadingRef.current = false;
     }, 600);
-  }, []);
+  }, [coldStart]);
 
   useEffect(() => {
     const el = sentinelRef.current;
@@ -223,8 +223,8 @@ export default function InfiniteFeed({ onProductClick, coldStart = false, onHear
     setActiveTab(tab);
     setIsLoading(false);
     setFeedKey(k => k + 1);
-    setItems(generateItems(tab, 0));
-  }, []);
+    setItems(generateItems(tab, 0, coldStart));
+  }, [coldStart]);
 
   return (
     <section style={{ borderTop: '8px solid #F5F5F5', fontFamily: "'Inter','Pretendard',-apple-system,sans-serif" }}>
