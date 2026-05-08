@@ -947,26 +947,32 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         {/* 섹션 헤더 */}
-        <div className="flex items-center gap-[10px] px-5 mb-5">
-          <div
-            className="flex-shrink-0 overflow-hidden"
-            style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
-          >
-            <img
-              src="/pd07.jpg"
-              alt="마리떼 프랑소와 저버"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
+        {isColdStart ? (
+          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+            인기 브랜드
+          </h3>
+        ) : (
+          <div className="flex items-center gap-[10px] px-5 mb-5">
+            <div
+              className="flex-shrink-0 overflow-hidden"
+              style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
+            >
+              <img
+                src="/pd07.jpg"
+                alt="마리떼 프랑소와 저버"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                마리떼 프랑소와 저버
+              </h3>
+              <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
+                이 브랜드와 결이 비슷한 추천 브랜드
+              </p>
+            </div>
           </div>
-          <div style={{ minWidth: 0 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              마리떼 프랑소와 저버
-            </h3>
-            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
-              {isColdStart ? '인기 브랜드' : '이 브랜드와 결이 비슷한 추천 브랜드'}
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* 브랜드 추천 카드 — 가로 스크롤
             서브 이미지가 카드 우측으로 8px 삐져나오므로
