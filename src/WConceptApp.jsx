@@ -1061,6 +1061,8 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
+      {/* 광고 배너 ~ 액티브 추천: 개인화 상태에서만 노출 */}
+      {!isColdStart && (<>
       {/* ══════════════════════════════════════
           광고 배너
       ══════════════════════════════════════ */}
@@ -1319,6 +1321,7 @@ export default function WConceptApp() {
           </button>
         </div>
       </section>
+      </>)}
 
       {/* ══ 취향 기반 무한 피드 ══ */}
       <InfiniteFeed onProductClick={handleProductClick} coldStart={isColdStart} />
