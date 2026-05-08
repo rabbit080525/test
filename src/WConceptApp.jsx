@@ -1263,6 +1263,23 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
+      {/* ══════════════════════════════════════
+          광고 배너 — 섹션 1~4 그룹 하단
+      ══════════════════════════════════════ */}
+      {!isColdStart && (
+      <div style={{ padding: '4px 0 32px' }}>
+        <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', overflow: 'hidden', background: '#CFCFCF', cursor: 'pointer' }}>
+          <img src="/ADBANNER.jpg" alt="광고 배너" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.0) 55%)' }} />
+          <span style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(255,255,255,0.28)', border: '1px solid rgba(255,255,255,0.55)', borderRadius: 4, padding: '3px 6px', fontSize: 10, fontWeight: 500, color: '#fff', letterSpacing: '0.04em', lineHeight: 1 }}>광고</span>
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px 18px' }}>
+            <p style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>오디에르 SUMMER</p>
+            <p style={{ margin: 0, fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.88)', letterSpacing: '0.01em', lineHeight: 1, display: 'flex', alignItems: 'center', gap: 3 }}>기획전 둘러보기 <span style={{ fontSize: 12 }}>›</span></p>
+          </div>
+        </div>
+      </div>
+      )}
+
       {/* ── 섹션 5~8: 장바구니 담기 시 노출 ── */}
       <AnimatePresence>
       {(isWarmed.carted && !isColdStart) && (
@@ -1364,19 +1381,39 @@ export default function WConceptApp() {
       </section>
 
       {/* ══════════════════════════════════════
-          광고 배너
+          브랜드 광고 — 섹션 5~8 그룹 하단
       ══════════════════════════════════════ */}
-      <div style={{ padding: '4px 0 32px' }}>
-        <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', overflow: 'hidden', background: '#CFCFCF', cursor: 'pointer' }}>
-          <img src="/ADBANNER.jpg" alt="광고 배너" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.0) 55%)' }} />
-          <span style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(255,255,255,0.28)', border: '1px solid rgba(255,255,255,0.55)', borderRadius: 4, padding: '3px 6px', fontSize: 10, fontWeight: 500, color: '#fff', letterSpacing: '0.04em', lineHeight: 1 }}>광고</span>
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px 18px' }}>
-            <p style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>오디에르 SUMMER</p>
-            <p style={{ margin: 0, fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.88)', letterSpacing: '0.01em', lineHeight: 1, display: 'flex', alignItems: 'center', gap: 3 }}>기획전 둘러보기 <span style={{ fontSize: 12 }}>›</span></p>
+      <section style={{ paddingTop: 20, paddingBottom: 32 }}>
+        <div className="flex items-center gap-[12px] px-5 mb-4">
+          <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
+            <img src={BRAND_AD.brand.avatar} alt={BRAND_AD.brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{BRAND_AD.brand.name}</p>
+            <p style={{ margin: '3px 0 0', fontSize: 12, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em' }}>추천 브랜드</p>
+          </div>
+          <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 400, color: '#AAA', border: '1px solid #DDD', borderRadius: 4, padding: '3px 7px', lineHeight: 1 }}>광고</span>
         </div>
-      </div>
+        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}>
+          {BRAND_AD.products.map((item) => (
+            <div key={item.id} style={{ flexShrink: 0, width: 140, cursor: 'pointer' }} onClick={() => handleProductClick({ ...item, brand: BRAND_AD.brand.name })}>
+              <div style={{ aspectRatio: '3 / 4', borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
+                <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
+              </div>
+              <p style={{ margin: '8px 0 2px', fontSize: 11.5, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>{item.name}</p>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
+                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ paddingLeft: 20, paddingRight: 20, marginTop: 16 }}>
+          <button style={{ width: '100%', height: 46, border: '1px solid #DEDEDE', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 500, color: '#111', letterSpacing: '-0.01em' }}>
+            브랜드관 바로가기 &gt;
+          </button>
+        </div>
+      </section>
 
       </></motion.div>
       )}
@@ -1466,40 +1503,6 @@ export default function WConceptApp() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════
-          브랜드 광고 — 섹션 12 하단
-      ══════════════════════════════════════ */}
-      <section style={{ paddingTop: 20, paddingBottom: 32 }}>
-        <div className="flex items-center gap-[12px] px-5 mb-4">
-          <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
-            <img src={BRAND_AD.brand.avatar} alt={BRAND_AD.brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{BRAND_AD.brand.name}</p>
-            <p style={{ margin: '3px 0 0', fontSize: 12, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em' }}>추천 브랜드</p>
-          </div>
-          <span style={{ flexShrink: 0, fontSize: 11, fontWeight: 400, color: '#AAA', border: '1px solid #DDD', borderRadius: 4, padding: '3px 7px', lineHeight: 1 }}>광고</span>
-        </div>
-        <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}>
-          {BRAND_AD.products.map((item) => (
-            <div key={item.id} style={{ flexShrink: 0, width: 140, cursor: 'pointer' }} onClick={() => handleProductClick({ ...item, brand: BRAND_AD.brand.name })}>
-              <div style={{ aspectRatio: '3 / 4', borderRadius: 6, overflow: 'hidden', background: '#EBEBEB' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
-              </div>
-              <p style={{ margin: '8px 0 2px', fontSize: 11.5, fontWeight: 400, color: '#333', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', letterSpacing: '-0.01em' }}>{item.name}</p>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                <span style={{ fontSize: 11.5, fontWeight: 700, color: '#FF3300' }}>{item.discount}%</span>
-                <span style={{ fontSize: 12.5, fontWeight: 700, color: '#111', letterSpacing: '-0.02em' }}>{item.price.toLocaleString()}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div style={{ paddingLeft: 20, paddingRight: 20, marginTop: 16 }}>
-          <button style={{ width: '100%', height: 46, border: '1px solid #DEDEDE', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 500, color: '#111', letterSpacing: '-0.01em' }}>
-            브랜드관 바로가기 &gt;
-          </button>
-        </div>
-      </section>
       </></motion.div>
       )}
       </AnimatePresence>
