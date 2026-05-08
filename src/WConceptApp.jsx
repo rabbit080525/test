@@ -1214,10 +1214,10 @@ export default function WConceptApp() {
       </AnimatePresence>
 
       {/* ══════════════════════════════════════
-          광고 배너 — 섹션 1~4 그룹 하단
+          배너 광고 — 상시 노출, 섹션 1~4 하단
       ══════════════════════════════════════ */}
-      {!isColdStart && (
-      <div style={{ padding: '4px 0 32px' }}>
+      <motion.div layout transition={{ layout: { duration: 0.45, ease: [0.4, 0, 0.2, 1] } }}
+        style={{ padding: '4px 0 32px' }}>
         <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9', overflow: 'hidden', background: '#CFCFCF', cursor: 'pointer' }}>
           <img src="/ADBANNER.jpg" alt="광고 배너" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.0) 55%)' }} />
@@ -1227,15 +1227,14 @@ export default function WConceptApp() {
             <p style={{ margin: 0, fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.88)', letterSpacing: '0.01em', lineHeight: 1, display: 'flex', alignItems: 'center', gap: 3 }}>기획전 둘러보기 <span style={{ fontSize: 12 }}>›</span></p>
           </div>
         </div>
-      </div>
-      )}
+      </motion.div>
 
       {/* ── 브랜드 광고: carted 여부에 따라 위치 이동 (layoutId 공유 애니메이션) ── */}
       <LayoutGroup id="brand-ad-group">
 
-      {/* Case A: 5~8 미노출 상태 → 배너 바로 뒤 */}
+      {/* Case A: 5~8 미노출 상태 → 배너 바로 뒤 (상시 노출) */}
       <AnimatePresence>
-      {(!isColdStart && !isWarmed.carted) && (
+      {!isWarmed.carted && (
         <motion.div
           layoutId="brand-ad"
           initial={{ opacity: 0 }}
@@ -1382,9 +1381,9 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
-      {/* Case B: 5~8 노출 후 → 섹션 5~8 바로 뒤로 밀려 내려옴 */}
+      {/* Case B: 5~8 노출 후 → 섹션 5~8 바로 뒤로 밀려 내려옴 (상시 노출) */}
       <AnimatePresence>
-      {(isWarmed.carted && !isColdStart) && (
+      {isWarmed.carted && (
         <motion.div
           layoutId="brand-ad"
           initial={{ opacity: 0 }}
