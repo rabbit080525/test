@@ -950,12 +950,9 @@ export default function WConceptApp() {
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
           <div className="px-5" style={{ marginBottom: 20 }}>
-            <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
+            <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
               주말에 어울리는 모던 시크 룩
             </h3>
-            <p style={{ margin: 0, fontSize: 12, color: '#AAA', letterSpacing: '-0.01em' }}>
-              {selectedStyle} 취향 기반 추천
-            </p>
           </div>
           <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
             {STYLE_CARDS.map((card) => (
@@ -1050,12 +1047,9 @@ export default function WConceptApp() {
         transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
       >
         <div className="px-5" style={{ marginBottom: 20 }}>
-          <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
+          <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: 0 }}>
             여름 휴가에서 빛나는 수분 글로우 픽
           </h3>
-          <p style={{ margin: 0, fontSize: 12, color: '#AAA', letterSpacing: '-0.01em' }}>
-            {selectedCategory} 카테고리 기반 추천
-          </p>
         </div>
 
         <div
