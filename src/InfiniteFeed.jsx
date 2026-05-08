@@ -52,7 +52,7 @@ function DiscoveryTabs({ activeTab, onChange }) {
       msOverflowStyle: 'none',
       WebkitOverflowScrolling: 'touch',
     }}>
-      {FEED_TABS.map(({ id, label, emoji }) => {
+      {visibleTabs.map(({ id, label, emoji }) => {
         const on = activeTab === id;
         return (
           <button
@@ -155,16 +155,34 @@ function FeedCard({ item, onProductClick }) {
 }
 
 /* ── InfiniteFeed ────────────────────────────────────── */
-export default function InfiniteFeed({ onProductClick }) {
-  const tabRef      = useRef('내 취향');
+export default function InfiniteFeed({ onProductClick, coldStart = false }) {
+  const visibleTabs = coldStart
+    ? FEED_TABS.filter(t => t.id !== '내 취향')
+    : FEED_TABS;
+  const defaultTab = coldStart ? '5월 하객룩' : '내 취향';
+
+  const tabRef      = useRef(defaultTab);
   const pageRef     = useRef(1);
   const loadingRef  = useRef(false);
   const sentinelRef = useRef(null);
 
-  const [activeTab, setActiveTab] = useState('내 취향');
+  const [activeTab, setActiveTab] = useState(defaultTab);
   const [isLoading, setIsLoading] = useState(false);
   const [feedKey,   setFeedKey]   = useState(0);
-  const [items, setItems] = useState(() => generateItems('내 취향', 0));
+  const [items, setItems] = useState(() => generateItems(defaultTab, 0));
+
+  // coldStart 해제 시 '내 취향' 탭으로 전환
+  useEffect(() => {
+    if (!coldStart && tabRef.current !== '내 취향') {
+      tabRef.current = '내 취향';
+      pageRef.current = 1;
+      loadingRef.current = false;
+      itemsRef.current = 8;
+      setActiveTab('내 취향');
+      setFeedKey(k => k + 1);
+      setItems(generateItems('내 취향', 0));
+    }
+  }, [coldStart]);
 
   const itemsRef = useRef(0);
 

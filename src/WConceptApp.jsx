@@ -50,6 +50,31 @@ const BRANDS = [
   { id: 5, name: '마르디',    hasNewArrivals: false, logo: null,                  url: null },
 ];
 
+const STYLE_OPTIONS = [
+  { id: 's1', label: '미니멀' }, { id: 's2', label: '캐주얼' },
+  { id: 's3', label: '페미닌' }, { id: 's4', label: '스트릿' },
+  { id: 's5', label: '오피스룩' }, { id: 's6', label: '빈티지' },
+  { id: 's7', label: '스포티' }, { id: 's8', label: '로맨틱' },
+];
+
+const CATEGORY_OPTIONS = [
+  { id: 'c1', label: '상의' },    { id: 'c2', label: '하의' },
+  { id: 'c3', label: '아우터' },  { id: 'c4', label: '드레스' },
+  { id: 'c5', label: '뷰티' },    { id: 'c6', label: '라이프' },
+  { id: 'c7', label: '액세서리' },{ id: 'c8', label: '슈즈' },
+];
+
+const REALTIME_BEST = [
+  { id: 'rb1', brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON T-SHIRT',       discount: 5,  price: 56050,  image: '/pd04.jpg' },
+  { id: 'rb2', brand: '레이지지',             name: 'Classic Check Jacket',          discount: 29, price: 76736,  image: '/pd01.jpg' },
+  { id: 'rb3', brand: '온앤온',               name: '넥 스트링 라이트 윈드 점퍼',    discount: 34, price: 170940, image: '/pd07.jpg' },
+  { id: 'rb4', brand: '르세지엠',             name: '타임리스 와이드 슬랙스',         discount: 15, price: 89000,  image: '/pd00.jpg' },
+  { id: 'rb5', brand: '시아쥬',               name: '노블 시어서커 오버핏 셔츠',     discount: 28, price: 62640,  image: '/pd08.jpg' },
+  { id: 'rb6', brand: '아무르 무아르',         name: '블라인드 시스루 블라우스',      discount: 25, price: 81532,  image: '/pd05.jpg' },
+  { id: 'rb7', brand: '프론트로우',            name: '크리스프 버튼다운 블라우스',    discount: 20, price: 78000,  image: '/pd03.jpg' },
+  { id: 'rb8', brand: '몽돌',                 name: '체크 시어서커 오버핏 셔츠',     discount: 26, price: 72410,  image: '/pd02.jpg' },
+];
+
 const RELATED_PRODUCTS = [
   { id: 1,  brand: '마리떼 프랑소와 저버', name: 'AEROCOOL LEMON SHORT SLEEVE T-SHIRT', discount: 5,  price: 56050  },
   { id: 2,  brand: '레이지지',             name: 'Loose Fit Classic Check Jacket',       discount: 29, price: 76736  },
@@ -566,6 +591,9 @@ export default function WConceptApp() {
   const [activeNav,    setActiveNav]    = useState('home');
   const bannerTrackRef = useRef(null);
 
+  /* ── 콜드스타트 ── */
+  const [isColdStart, setIsColdStart] = useState(true);
+
   /* ── 페이지 네비게이션 ── */
   const [page,          setPage]          = useState('home');
   const [selectedItem,  setSelectedItem]  = useState(null);
@@ -584,6 +612,7 @@ export default function WConceptApp() {
   /* 홈으로 돌아올 때 세 구좌 모두 셔플 + refreshKey 증가 → 카드 stagger 재실행 */
   const handleBack = useCallback(() => {
     setPage('home');
+    setIsColdStart(false);
     setDisplayedRelated(shuffle(RELATED_PRODUCTS));
     setDisplayedCuration(shuffle(CURATION_PRODUCTS));
     setDisplayedBeauty(shuffle(BEAUTY_PRODUCTS));
@@ -780,7 +809,12 @@ export default function WConceptApp() {
           마지막 아이템 뒤 trailing spacer로
           오른쪽 여백을 왼쪽 여백과 동일하게 유지
       ══════════════════════════════════════ */}
-      <section className="pt-3 pb-4">
+      <AnimatePresence>
+      {!isColdStart && (
+      <motion.section className="pt-3 pb-4"
+        initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
+        exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.35, ease: [0.4,0,0.2,1] }}
+      >
         <h3
           className="px-5 text-black"
           style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 10px' }}
@@ -804,113 +838,109 @@ export default function WConceptApp() {
             <BrandAvatar key={brand.id} brand={brand} />
           ))}
         </div>
-      </section>
+      </motion.section>
+      )}
+      </AnimatePresence>
 
       {/* ══════════════════════════════════════
-          연관 추천 상품
+          연관 추천 / 실시간 베스트 (콜드스타트 전환)
       ══════════════════════════════════════ */}
-      <section
-        style={{
-          borderTop: '1px solid #F0F0F0',
-          paddingTop: 28,
-          paddingBottom: 40,
-        }}
-      >
-        {/* 섹션 헤더 — 최근 본 상품 썸네일 + 타이틀 */}
-        <div className="flex items-center gap-[10px] px-5 mb-5">
-          <div
-            className="flex-shrink-0 overflow-hidden"
-            style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}
-          >
-            <img
-              src="/pd00.jpg"
-              alt="최근 본 상품"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
-          </div>
-          <div style={{ minWidth: 0 }}>
-            <h3
-              style={{
-                fontSize: 14, fontWeight: 700, color: '#111',
-                letterSpacing: '-0.02em', lineHeight: 1.3,
-                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                margin: 0,
-              }}
-            >
-              시어서커 오버핏 스트라이프 셔츠 [핑크]
-            </h3>
-            <p
-              style={{
-                fontSize: 11.5, fontWeight: 400, color: '#AAA',
-                letterSpacing: '0.01em', marginTop: 3, lineHeight: 1,
-              }}
-            >
-              이 상품과 비슷한 무드의 아이템
-            </p>
-          </div>
-        </div>
-
-        {/* 상품 카드 — 2행 CSS Grid 가로 스크롤
-            gridAutoColumns = (390 - paddingLeft20) / 3.5 - gap ≈ 98px
-            → 화면에 3.5개 노출, 4번째 카드 살짝 peek
-        */}
-        <div
-          className="overflow-x-auto scrollbar-hide"
-          style={{
-            ...SCROLL_STYLE,
-            display: 'grid',
-            gridTemplateRows: 'auto auto',
-            gridAutoFlow: 'column',
-            gridAutoColumns: 98,
-            columnGap: 10,
-            rowGap: 20,
-            paddingLeft: 20,
-            paddingRight: 20,
-            paddingTop: 2,
-            paddingBottom: 4,
-          }}
+      <AnimatePresence mode="wait">
+      {isColdStart ? (
+        <motion.section key="best"
+          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          {displayedRelated.map((item, i) => (
-            <motion.div
-              key={refreshKey + '-' + item.id}
-              style={{ minWidth: 0 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4, 0, 0.2, 1] }}
-            >
-              <ProductCard item={item} onClick={() => handleProductClick(item)} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+            W Concept 실시간 베스트
+          </h3>
+          <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
+            {REALTIME_BEST.map((item, i) => (
+              <motion.div key={item.id} style={{ minWidth: 0, position: 'relative' }}
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4,0,0.2,1] }}
+              >
+                <span style={{ position: 'absolute', top: 6, left: 6, zIndex: 1, fontSize: 11, fontWeight: 700, color: i < 3 ? '#FF3300' : '#999', lineHeight: 1 }}>{i + 1}</span>
+                <ProductCard item={item} onClick={() => handleProductClick(item)} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      ) : (
+        <motion.section key="related"
+          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
+        >
+          <div className="flex items-center gap-[10px] px-5 mb-5">
+            <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
+              <img src="/pd00.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', margin: 0 }}>
+                시어서커 오버핏 스트라이프 셔츠 [핑크]
+              </h3>
+              <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
+                이 상품과 비슷한 무드의 아이템
+              </p>
+            </div>
+          </div>
+          <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
+            {displayedRelated.map((item, i) => (
+              <motion.div key={refreshKey + '-' + item.id} style={{ minWidth: 0 }}
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.22, delay: Math.floor(i / 2) * 0.055, ease: [0.4,0,0.2,1] }}
+              >
+                <ProductCard item={item} onClick={() => handleProductClick(item)} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      )}
+      </AnimatePresence>
 
       {/* ══════════════════════════════════════
-          스타일 큐레이션 — 2행 그리드 (추천 상품 구좌와 동일)
+          스타일 큐레이션 / 스타일 선택 온보딩
       ══════════════════════════════════════ */}
-      <section
-        style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}
-      >
-        <h3
-          className="px-5"
-          style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}
+      <AnimatePresence mode="wait">
+      {isColdStart ? (
+        <motion.section key="style-onboard"
+          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 36 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          주말에 어울리는 모던 시크 룩
-        </h3>
-
-        {/* 에디토리얼 스타일 카드 — 단일행 가로 스크롤 */}
-        <div
-          className="flex overflow-x-auto scrollbar-hide"
-          style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}
+          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
+            어떤 스타일이 취향인가요?
+          </h3>
+          <p className="px-5" style={{ fontSize: 12.5, color: '#999', margin: '0 0 18px' }}>관심 스타일을 선택하면 맞춤 추천을 드려요</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '0 20px' }}>
+            {STYLE_OPTIONS.map(opt => (
+              <button key={opt.id} onClick={() => setIsColdStart(false)}
+                style={{ padding: '9px 18px', borderRadius: 100, border: '1px solid #D0D0D0', background: '#F7F8F9', fontSize: 13, color: '#333', cursor: 'pointer', letterSpacing: '-0.01em' }}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </motion.section>
+      ) : (
+        <motion.section key="style-cards"
+          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          {STYLE_CARDS.map((card) => (
-            <StyleCard
-              key={card.id}
-              card={card}
-              onClick={() => handleProductClick({ ...card.product, id: card.id, brand: card.product.brand })}
-            />
-          ))}
-        </div>
-      </section>
+          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
+            주말에 어울리는 모던 시크 룩
+          </h3>
+          <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
+            {STYLE_CARDS.map((card) => (
+              <StyleCard key={card.id} card={card} onClick={() => handleProductClick({ ...card.product, id: card.id, brand: card.product.brand })} />
+            ))}
+          </div>
+        </motion.section>
+      )}
+      </AnimatePresence>
 
       {/* ══════════════════════════════════════
           추천 브랜드
@@ -960,9 +990,31 @@ export default function WConceptApp() {
       </section>
 
       {/* ══════════════════════════════════════
-          뷰티 상품 추천 — 2행 그리드 (스타일 추천과 동일)
+          뷰티 추천 / 카테고리 선택 온보딩
       ══════════════════════════════════════ */}
-      <section
+      <AnimatePresence mode="wait">
+      {isColdStart ? (
+        <motion.section key="cat-onboard"
+          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 36 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
+        >
+          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
+            관심 카테고리를 선택해주세요
+          </h3>
+          <p className="px-5" style={{ fontSize: 12.5, color: '#999', margin: '0 0 18px' }}>선택한 카테고리 기반으로 상품을 추천해 드려요</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, padding: '0 20px' }}>
+            {CATEGORY_OPTIONS.map(opt => (
+              <button key={opt.id} onClick={() => setIsColdStart(false)}
+                style={{ padding: '14px 0', borderRadius: 8, border: '1px solid #E0E0E0', background: '#F7F8F9', fontSize: 13, color: '#333', cursor: 'pointer', textAlign: 'center' }}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </motion.section>
+      ) : (
+      <motion.section key="beauty"
         style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 32 }}
       >
         <h3
@@ -1005,7 +1057,9 @@ export default function WConceptApp() {
             뷰티 더보기 <span style={{ fontSize: 15, lineHeight: 1 }}>›</span>
           </button>
         </div>
-      </section>
+      </motion.section>
+      )}
+      </AnimatePresence>
 
       {/* ══════════════════════════════════════
           광고 배너
@@ -1267,7 +1321,7 @@ export default function WConceptApp() {
       </section>
 
       {/* ══ 취향 기반 무한 피드 ══ */}
-      <InfiniteFeed onProductClick={handleProductClick} />
+      <InfiniteFeed onProductClick={handleProductClick} coldStart={isColdStart} />
 
     </div>{/* end 홈 컨텐츠 */}
 
