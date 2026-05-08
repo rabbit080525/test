@@ -912,7 +912,7 @@ export default function WConceptApp() {
           스타일 큐레이션 / 스타일 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {!isStylePicked ? (
+      {!isStylePicked && isColdStart ? (
         <motion.section key="style-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1021,7 +1021,7 @@ export default function WConceptApp() {
           뷰티 추천 / 카테고리 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {!isCategoryPicked ? (
+      {!isCategoryPicked && isColdStart ? (
         <motion.section key="cat-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
