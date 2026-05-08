@@ -1379,6 +1379,39 @@ export default function WConceptApp() {
 
     {/* ── 하단 탭바 ── */}
     <BottomNav active={activeNav} onChange={setActiveNav} />
+
+    {/* ── 데모 토글 버튼 ── */}
+    <button
+      onClick={() => {
+        const next = !isColdStart;
+        setIsColdStart(next);
+        if (next) {
+          setIsStylePicked(false);
+          setSelectedStyle(null);
+          setIsCategoryPicked(false);
+          setSelectedCategory(null);
+        }
+      }}
+      style={{
+        position: 'fixed',
+        bottom: 80,
+        right: 12,
+        zIndex: 9999,
+        padding: '5px 10px',
+        borderRadius: 100,
+        border: 'none',
+        background: isColdStart ? '#3B82F6' : '#10B981',
+        color: '#fff',
+        fontSize: 10,
+        fontWeight: 700,
+        letterSpacing: '0.04em',
+        cursor: 'pointer',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+        lineHeight: 1,
+      }}
+    >
+      USER: {isColdStart ? 'COLD' : 'WARM'}
+    </button>
     </div>
   );
 }
