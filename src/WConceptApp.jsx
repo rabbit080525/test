@@ -776,7 +776,6 @@ export default function WConceptApp() {
   const handleBack = useCallback(() => {
     setPage('home');
     setIsColdStart(false);
-    setIsWarmed(prev => ({ ...prev, clicked: true }));
     setDisplayedRelated(shuffle(RELATED_PRODUCTS));
     setDisplayedCuration(shuffle(CURATION_PRODUCTS));
     setDisplayedBeauty(shuffle(BEAUTY_PRODUCTS));
@@ -1006,23 +1005,11 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
-      {/* ── 섹션 1~4: 상품 클릭 시 노출 ── */}
-      <AnimatePresence>
-      {isWarmed.clicked && (
-      <motion.div
-        key="clicked-sections"
-        initial={{ height: 0, opacity: 0 }}
-        animate={{ height: 'auto', opacity: 1 }}
-        exit={{ height: 0, opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-        style={{ overflow: 'hidden' }}
-      >
-
       {/* ══════════════════════════════════════
-          연관 추천
+          연관 추천 / 실시간 베스트 (콜드스타트 전환)
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {(false) ? ( /* cold best — isWarmed.clicked 시 항상 warm 버전 */
+      {isColdStart ? (
         <motion.section key="best"
           style={{ paddingTop: 28, paddingBottom: 40 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1140,7 +1127,7 @@ export default function WConceptApp() {
       ══════════════════════════════════════ */}
       <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         {/* 섹션 헤더 */}
-        {(false) ? (
+        {isColdStart ? (
           <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
             요즘 사랑받는 브랜드
           </h3>
@@ -1276,13 +1263,9 @@ export default function WConceptApp() {
       )}
       </AnimatePresence>
 
-      </motion.div>
-      )}
-      </AnimatePresence>
-
       {/* ── 섹션 5~8: 장바구니 담기 시 노출 ── */}
       <AnimatePresence>
-      {isWarmed.carted && (
+      {(isWarmed.carted && !isColdStart) && (
       <motion.div
         key="carted-sections"
         initial={{ height: 0, opacity: 0 }}
@@ -1432,7 +1415,7 @@ export default function WConceptApp() {
 
       {/* ── 섹션 9~12: 마이하트 클릭 시 노출 ── */}
       <AnimatePresence>
-      {isWarmed.hearted && (
+      {(isWarmed.hearted && !isColdStart) && (
       <motion.div
         key="hearted-sections"
         initial={{ height: 0, opacity: 0 }}
