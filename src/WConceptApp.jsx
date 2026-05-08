@@ -805,7 +805,7 @@ export default function WConceptApp() {
       </div>
 
       {/* ══════════════════════════════════════
-          인기 브랜드 — horizontal scroll
+          관심 브랜드 새 소식 — horizontal scroll
           마지막 아이템 뒤 trailing spacer로
           오른쪽 여백을 왼쪽 여백과 동일하게 유지
       ══════════════════════════════════════ */}
@@ -819,7 +819,7 @@ export default function WConceptApp() {
           className="px-5 text-black"
           style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 10px' }}
         >
-          인기 브랜드
+          관심 브랜드 새 소식
         </h3>
 
         <div
@@ -963,7 +963,7 @@ export default function WConceptApp() {
               마리떼 프랑소와 저버
             </h3>
             <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
-              이 브랜드와 결이 비슷한 추천 브랜드
+              인기 브랜드
             </p>
           </div>
         </div>
@@ -1166,7 +1166,7 @@ export default function WConceptApp() {
               레이지지
             </h3>
             <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>
-              이 브랜드와 결이 비슷한 추천 브랜드
+              인기 브랜드
             </p>
           </div>
         </div>
@@ -1293,7 +1293,7 @@ export default function WConceptApp() {
           </div>
           <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 15, fontWeight: 700, color: '#111', letterSpacing: '-0.02em', lineHeight: 1.3, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>온앤온</h3>
-            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>이 브랜드와 결이 비슷한 추천 브랜드</p>
+            <p style={{ fontSize: 11.5, fontWeight: 400, color: '#AAA', letterSpacing: '0.01em', marginTop: 3, lineHeight: 1 }}>인기 브랜드</p>
           </div>
         </div>
         <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 20, paddingLeft: 20, paddingRight: 24, paddingTop: 4, paddingBottom: 4 }}>
