@@ -685,11 +685,12 @@ export default function WConceptApp() {
   const [activeNav,    setActiveNav]    = useState('home');
   const bannerTrackRef = useRef(null);
 
-  /* ── 인터랙션 워밍 ── */
-  const [isWarmed, setIsWarmed] = useState({ clicked: false, carted: false, hearted: false });
+  /* ── 유저 단계: 0=COLD, 1=W1(CLICK), 2=W2(CART), 3=W3(FULL) ── */
+  const [userStep, setUserStep] = useState(0);
 
-  /* ── 콜드스타트 ── */
-  const [isColdStart, setIsColdStart] = useState(true);
+  /* derived — 기존 조건 코드 그대로 유지 */
+  const isColdStart = userStep === 0;
+  const isWarmed    = { clicked: userStep >= 1, carted: userStep >= 2, hearted: userStep >= 3 };
   /* ── 스타일 온보딩 ── */
   const [isStylePicked,    setIsStylePicked]    = useState(false);
   const [selectedStyle,    setSelectedStyle]    = useState(null);
@@ -710,21 +711,21 @@ export default function WConceptApp() {
   const handleProductClick = useCallback((item) => {
     setSelectedItem(item);
     setPage('detail');
-    setIsWarmed(prev => prev.clicked ? prev : { ...prev, clicked: true });
+    /* clicked 자체는 handleBack에서 step 0→1 전환 시 반영 */
   }, []);
 
   const handleCartAdd = useCallback(() => {
-    setIsWarmed(prev => prev.carted ? prev : { ...prev, carted: true });
+    setUserStep(prev => Math.max(prev, 2));
   }, []);
 
   const handleHeart = useCallback(() => {
-    setIsWarmed(prev => prev.hearted ? prev : { ...prev, hearted: true });
+    setUserStep(prev => Math.max(prev, 3));
   }, []);
 
   /* 홈으로 돌아올 때 세 구좌 모두 셔플 + refreshKey 증가 → 카드 stagger 재실행 */
   const handleBack = useCallback(() => {
     setPage('home');
-    setIsColdStart(false);
+    setUserStep(prev => prev === 0 ? 1 : prev); /* cold → step1(CLICK) */
     setDisplayedRelated(shuffle(RELATED_PRODUCTS));
     setDisplayedCuration(shuffle(CURATION_PRODUCTS));
     setDisplayedBeauty(shuffle(BEAUTY_PRODUCTS));
@@ -1547,43 +1548,50 @@ export default function WConceptApp() {
 
     <ScrollToTop />
 
-    {/* ── 데모 토글 버튼 ── */}
-    <button
-      onClick={() => {
-        const next = !isColdStart;
-        setIsColdStart(next);
-        if (next) {
-          // COLD 복귀: 모든 상태 리셋
-          setIsWarmed({ clicked: false, carted: false, hearted: false });
-          setIsStylePicked(false);
-          setSelectedStyle(null);
-          setIsCategoryPicked(false);
-          setSelectedCategory(null);
-        } else {
-          // WARM: 모든 구역 즉시 노출
-          setIsWarmed({ clicked: true, carted: true, hearted: true });
-        }
-      }}
-      style={{
-        position: 'fixed',
-        bottom: 80,
-        right: 12,
-        zIndex: 9999,
-        padding: '5px 10px',
-        borderRadius: 100,
-        border: 'none',
-        background: isColdStart ? '#3B82F6' : '#10B981',
-        color: '#fff',
-        fontSize: 10,
-        fontWeight: 700,
-        letterSpacing: '0.04em',
-        cursor: 'pointer',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-        lineHeight: 1,
-      }}
-    >
-      USER: {isColdStart ? 'COLD' : 'WARM'}
-    </button>
+    {/* ── 데모 토글 버튼 (4단계 순환) ── */}
+    {(() => {
+      const STEPS = [
+        { label: 'USER: COLD',      bg: '#3B82F6' }, // 0
+        { label: 'USER: W1(CLICK)', bg: '#F59E0B' }, // 1
+        { label: 'USER: W2(CART)',  bg: '#10B981' }, // 2
+        { label: 'USER: W3(FULL)',  bg: '#8B5CF6' }, // 3
+      ];
+      const next = (userStep + 1) % 4;
+      return (
+        <button
+          onClick={() => {
+            setUserStep(next);
+            if (next === 0) {
+              // COLD 복귀: 온보딩 리셋
+              setIsStylePicked(false);
+              setSelectedStyle(null);
+              setIsCategoryPicked(false);
+              setSelectedCategory(null);
+            }
+          }}
+          style={{
+            position: 'fixed',
+            bottom: 80,
+            right: 12,
+            zIndex: 9999,
+            padding: '5px 10px',
+            borderRadius: 100,
+            border: 'none',
+            background: STEPS[userStep].bg,
+            color: '#fff',
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: '0.04em',
+            cursor: 'pointer',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+            lineHeight: 1,
+            transition: 'background 0.2s',
+          }}
+        >
+          {STEPS[userStep].label}
+        </button>
+      );
+    })()}
     </div>
   );
 }
