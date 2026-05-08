@@ -50,11 +50,12 @@ const BRANDS = [
   { id: 5, name: '마르디',    hasNewArrivals: false, logo: null,                  url: null },
 ];
 
-const STYLE_OPTIONS = [
-  { id: 's1', label: '미니멀' }, { id: 's2', label: '캐주얼' },
-  { id: 's3', label: '페미닌' }, { id: 's4', label: '스트릿' },
-  { id: 's5', label: '오피스룩' }, { id: 's6', label: '빈티지' },
-  { id: 's7', label: '스포티' }, { id: 's8', label: '로맨틱' },
+const STYLE_TABS = [
+  { id: 'st1', label: '#미니멀' },
+  { id: 'st2', label: '#프렌치시크' },
+  { id: 'st3', label: '#고프코어' },
+  { id: 'st4', label: '#모던클래식' },
+  { id: 'st5', label: '#스트리트캐주얼' },
 ];
 
 const CATEGORY_OPTIONS = [
@@ -593,6 +594,9 @@ export default function WConceptApp() {
 
   /* ── 콜드스타트 ── */
   const [isColdStart, setIsColdStart] = useState(true);
+  /* ── 스타일 온보딩 ── */
+  const [isStylePicked,  setIsStylePicked]  = useState(false);
+  const [selectedStyle,  setSelectedStyle]  = useState(null);
 
   /* ── 페이지 네비게이션 ── */
   const [page,          setPage]          = useState('home');
@@ -904,7 +908,7 @@ export default function WConceptApp() {
           스타일 큐레이션 / 스타일 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {isColdStart ? (
+      {!isStylePicked ? (
         <motion.section key="style-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -915,11 +919,23 @@ export default function WConceptApp() {
           </h3>
           <p className="px-5" style={{ fontSize: 12.5, color: '#999', margin: '0 0 18px' }}>관심 스타일을 선택하면 맞춤 추천을 드려요</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '0 20px' }}>
-            {STYLE_OPTIONS.map(opt => (
-              <button key={opt.id} onClick={() => setIsColdStart(false)}
-                style={{ padding: '9px 18px', borderRadius: 100, border: '1px solid #D0D0D0', background: '#F7F8F9', fontSize: 13, color: '#333', cursor: 'pointer', letterSpacing: '-0.01em' }}
+            {STYLE_TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => { setSelectedStyle(tab.label); setIsStylePicked(true); }}
+                style={{
+                  padding: '9px 18px',
+                  borderRadius: 100,
+                  border: '1px solid #D0D0D0',
+                  background: '#F7F8F9',
+                  fontSize: 13,
+                  color: '#333',
+                  cursor: 'pointer',
+                  letterSpacing: '-0.01em',
+                  transition: 'background 0.12s, border-color 0.12s',
+                }}
               >
-                {opt.label}
+                {tab.label}
               </button>
             ))}
           </div>
@@ -930,9 +946,14 @@ export default function WConceptApp() {
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-            주말에 어울리는 모던 시크 룩
-          </h3>
+          <div className="px-5" style={{ marginBottom: 20 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
+              주말에 어울리는 모던 시크 룩
+            </h3>
+            <p style={{ margin: 0, fontSize: 12, color: '#AAA', letterSpacing: '-0.01em' }}>
+              {selectedStyle} 취향 기반 추천
+            </p>
+          </div>
           <div className="flex overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, gap: 12, paddingLeft: 16, paddingRight: 16, paddingBottom: 4 }}>
             {STYLE_CARDS.map((card) => (
               <StyleCard key={card.id} card={card} onClick={() => handleProductClick({ ...card.product, id: card.id, brand: card.product.brand })} />
