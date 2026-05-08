@@ -756,7 +756,7 @@ export default function WConceptApp() {
 
               {/* text overlay */}
               <div className="absolute bottom-0 left-0 right-0 px-5 pb-6 flex flex-col items-start">
-                {banner.badge && (
+                {banner.badge && !isColdStart && (
                   <div
                     className="flex items-center gap-[5px] mb-[12px]"
                     style={{ background: 'rgba(0,0,0,0.72)', borderRadius: 100, padding: '5px 12px 5px 10px' }}
