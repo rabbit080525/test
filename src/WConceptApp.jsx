@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
 import InfiniteFeed from './InfiniteFeed';
+import ScrollToTop from './ScrollToTop';
 
 /* ─── utils ─────────────────────────────────────────── */
 function shuffle(arr) {
@@ -1379,6 +1380,8 @@ export default function WConceptApp() {
 
     {/* ── 하단 탭바 ── */}
     <BottomNav active={activeNav} onChange={setActiveNav} />
+
+    <ScrollToTop />
 
     {/* ── 데모 토글 버튼 ── */}
     <button
