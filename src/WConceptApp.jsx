@@ -14,38 +14,6 @@ function shuffle(arr) {
   return a;
 }
 
-/* ─── Toast ─────────────────────────────────────────── */
-function Toast({ message }) {
-  return (
-    <AnimatePresence>
-      {message && (
-        <motion.div
-          key={message}
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
-          style={{
-            position: 'fixed', top: 62, left: '50%', transform: 'translateX(-50%)',
-            zIndex: 99999,
-            background: 'rgba(20,20,20,0.88)',
-            color: '#fff',
-            fontSize: 13,
-            fontWeight: 500,
-            letterSpacing: '-0.01em',
-            padding: '10px 18px',
-            borderRadius: 100,
-            whiteSpace: 'nowrap',
-            pointerEvents: 'none',
-            backdropFilter: 'blur(6px)',
-          }}
-        >
-          {message}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
 
 /* ─── data ─────────────────────────────────────────── */
 const TABS = [
@@ -719,13 +687,6 @@ export default function WConceptApp() {
 
   /* ── 인터랙션 워밍 ── */
   const [isWarmed, setIsWarmed] = useState({ clicked: false, carted: false, hearted: false });
-  const [toast,    setToast]    = useState(null);
-
-  useEffect(() => {
-    if (!toast) return;
-    const t = setTimeout(() => setToast(null), 2000);
-    return () => clearTimeout(t);
-  }, [toast]);
 
   /* ── 콜드스타트 ── */
   const [isColdStart, setIsColdStart] = useState(true);
@@ -749,27 +710,15 @@ export default function WConceptApp() {
   const handleProductClick = useCallback((item) => {
     setSelectedItem(item);
     setPage('detail');
-    setIsWarmed(prev => {
-      if (prev.clicked) return prev;
-      setToast('관심 상품을 분석 중이에요 ✨');
-      return { ...prev, clicked: true };
-    });
+    setIsWarmed(prev => prev.clicked ? prev : { ...prev, clicked: true });
   }, []);
 
   const handleCartAdd = useCallback(() => {
-    setIsWarmed(prev => {
-      if (prev.carted) return prev;
-      setToast('취향을 장바구니에 담았어요 🛒');
-      return { ...prev, carted: true };
-    });
+    setIsWarmed(prev => prev.carted ? prev : { ...prev, carted: true });
   }, []);
 
   const handleHeart = useCallback(() => {
-    setIsWarmed(prev => {
-      if (prev.hearted) return prev;
-      setToast('찜한 상품 기반으로 취향을 분석해요 💕');
-      return { ...prev, hearted: true };
-    });
+    setIsWarmed(prev => prev.hearted ? prev : { ...prev, hearted: true });
   }, []);
 
   /* 홈으로 돌아올 때 세 구좌 모두 셔플 + refreshKey 증가 → 카드 stagger 재실행 */
@@ -1596,7 +1545,6 @@ export default function WConceptApp() {
     {/* ── 하단 탭바 ── */}
     <BottomNav active={activeNav} onChange={setActiveNav} />
 
-    <Toast message={toast} />
     <ScrollToTop />
 
     {/* ── 데모 토글 버튼 ── */}
