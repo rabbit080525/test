@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Heart, Home, LayoutGrid, User, ChevronLeft } from 'lucide-react';
 import InfiniteFeed from './InfiniteFeed';
@@ -12,6 +12,39 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+/* ─── Toast ─────────────────────────────────────────── */
+function Toast({ message }) {
+  return (
+    <AnimatePresence>
+      {message && (
+        <motion.div
+          key={message}
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+          style={{
+            position: 'fixed', top: 62, left: '50%', transform: 'translateX(-50%)',
+            zIndex: 99999,
+            background: 'rgba(20,20,20,0.88)',
+            color: '#fff',
+            fontSize: 13,
+            fontWeight: 500,
+            letterSpacing: '-0.01em',
+            padding: '10px 18px',
+            borderRadius: 100,
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none',
+            backdropFilter: 'blur(6px)',
+          }}
+        >
+          {message}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }
 
 /* ─── data ─────────────────────────────────────────── */
@@ -344,7 +377,7 @@ function StyleCard({ card, onClick }) {
 }
 
 /* ─── ProductDetailPage ─────────────────────────────── */
-function ProductDetailPage({ item, onBack }) {
+function ProductDetailPage({ item, onBack, onCartAdd }) {
   const image = item.image || `/pd0${item.id}.jpg`;
   const brandName = typeof item.brand === 'string' ? item.brand : (item.brand?.name ?? '');
   return (
@@ -371,7 +404,7 @@ function ProductDetailPage({ item, onBack }) {
         <img src={image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       </div>
 
-      <div style={{ padding: '20px 20px 60px' }}>
+      <div style={{ padding: '20px 20px 0' }}>
         <p style={{ fontSize: 12.5, color: '#888', letterSpacing: '-0.01em', marginBottom: 8, margin: '0 0 8px' }}>{brandName}</p>
         <h1 style={{ fontSize: 16, fontWeight: 500, color: '#111', lineHeight: 1.45, letterSpacing: '-0.02em', margin: '0 0 14px' }}>
           {item.name}
@@ -382,6 +415,19 @@ function ProductDetailPage({ item, onBack }) {
             {item.price.toLocaleString()}원
           </span>
         </div>
+      </div>
+      <div style={{ padding: '20px 20px 60px' }}>
+        <button
+          onClick={onCartAdd}
+          style={{
+            width: '100%', height: 50, borderRadius: 8,
+            background: '#111', border: 'none',
+            color: '#fff', fontSize: 15, fontWeight: 600,
+            letterSpacing: '-0.01em', cursor: 'pointer',
+          }}
+        >
+          장바구니 담기
+        </button>
       </div>
     </>
   );
@@ -671,6 +717,16 @@ export default function WConceptApp() {
   const [activeNav,    setActiveNav]    = useState('home');
   const bannerTrackRef = useRef(null);
 
+  /* ── 인터랙션 워밍 ── */
+  const [isWarmed, setIsWarmed] = useState({ clicked: false, carted: false, hearted: false });
+  const [toast,    setToast]    = useState(null);
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2000);
+    return () => clearTimeout(t);
+  }, [toast]);
+
   /* ── 콜드스타트 ── */
   const [isColdStart, setIsColdStart] = useState(true);
   /* ── 스타일 온보딩 ── */
@@ -693,6 +749,27 @@ export default function WConceptApp() {
   const handleProductClick = useCallback((item) => {
     setSelectedItem(item);
     setPage('detail');
+    setIsWarmed(prev => {
+      if (prev.clicked) return prev;
+      setToast('관심 상품을 분석 중이에요 ✨');
+      return { ...prev, clicked: true };
+    });
+  }, []);
+
+  const handleCartAdd = useCallback(() => {
+    setIsWarmed(prev => {
+      if (prev.carted) return prev;
+      setToast('취향을 장바구니에 담았어요 🛒');
+      return { ...prev, carted: true };
+    });
+  }, []);
+
+  const handleHeart = useCallback(() => {
+    setIsWarmed(prev => {
+      if (prev.hearted) return prev;
+      setToast('찜한 상품 기반으로 취향을 분석해요 💕');
+      return { ...prev, hearted: true };
+    });
   }, []);
 
   /* 홈으로 돌아올 때 세 구좌 모두 셔플 + refreshKey 증가 → 카드 stagger 재실행 */
@@ -1449,7 +1526,7 @@ export default function WConceptApp() {
       </>)}
 
       {/* ══ 취향 기반 무한 피드 ══ */}
-      <InfiniteFeed onProductClick={handleProductClick} coldStart={isColdStart} />
+      <InfiniteFeed onProductClick={handleProductClick} coldStart={isColdStart} onHeart={handleHeart} />
 
     </div>{/* end 홈 컨텐츠 */}
 
@@ -1469,7 +1546,7 @@ export default function WConceptApp() {
             background: '#fff', overflowY: 'auto', zIndex: 30,
           }}
         >
-          <ProductDetailPage item={selectedItem} onBack={handleBack} />
+          <ProductDetailPage item={selectedItem} onBack={handleBack} onCartAdd={handleCartAdd} />
         </motion.div>
       )}
     </AnimatePresence>
@@ -1477,6 +1554,7 @@ export default function WConceptApp() {
     {/* ── 하단 탭바 ── */}
     <BottomNav active={activeNav} onChange={setActiveNav} />
 
+    <Toast message={toast} />
     <ScrollToTop />
 
     {/* ── 데모 토글 버튼 ── */}

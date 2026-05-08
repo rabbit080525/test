@@ -101,7 +101,7 @@ function SkeletonCard() {
 }
 
 /* ── FeedCard ────────────────────────────────────────── */
-function FeedCard({ item, onProductClick }) {
+function FeedCard({ item, onProductClick, onHeart }) {
   const [liked, setLiked] = useState(false);
   return (
     <motion.div
@@ -137,7 +137,7 @@ function FeedCard({ item, onProductClick }) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
           <p style={{ margin: 0, fontSize: 11, color: '#999', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{item.brand}</p>
           <button
-            onClick={e => { e.stopPropagation(); setLiked(v => !v); }}
+            onClick={e => { e.stopPropagation(); if (!liked) onHeart?.(); setLiked(v => !v); }}
             style={{ flexShrink: 0, padding: 2, background: 'none', border: 'none', cursor: 'pointer', lineHeight: 0 }}
           >
             <Heart size={13} strokeWidth={1.5}
@@ -155,7 +155,7 @@ function FeedCard({ item, onProductClick }) {
 }
 
 /* ── InfiniteFeed ────────────────────────────────────── */
-export default function InfiniteFeed({ onProductClick, coldStart = false }) {
+export default function InfiniteFeed({ onProductClick, coldStart = false, onHeart }) {
   const visibleTabs = coldStart
     ? FEED_TABS.filter(t => t.id !== '내 취향')
     : FEED_TABS;
@@ -245,7 +245,7 @@ export default function InfiniteFeed({ onProductClick, coldStart = false }) {
           style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, padding: '0 16px' }}
         >
           {items.map(item => (
-            <FeedCard key={item.id} item={item} onProductClick={onProductClick} />
+            <FeedCard key={item.id} item={item} onProductClick={onProductClick} onHeart={onHeart} />
           ))}
           {isLoading && (
             <>
