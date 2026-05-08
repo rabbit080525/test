@@ -595,8 +595,11 @@ export default function WConceptApp() {
   /* ── 콜드스타트 ── */
   const [isColdStart, setIsColdStart] = useState(true);
   /* ── 스타일 온보딩 ── */
-  const [isStylePicked,  setIsStylePicked]  = useState(false);
-  const [selectedStyle,  setSelectedStyle]  = useState(null);
+  const [isStylePicked,    setIsStylePicked]    = useState(false);
+  const [selectedStyle,    setSelectedStyle]    = useState(null);
+  /* ── 카테고리 온보딩 ── */
+  const [isCategoryPicked, setIsCategoryPicked] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   /* ── 페이지 네비게이션 ── */
   const [page,          setPage]          = useState('home');
@@ -1020,7 +1023,7 @@ export default function WConceptApp() {
           뷰티 추천 / 카테고리 선택 온보딩
       ══════════════════════════════════════ */}
       <AnimatePresence mode="wait">
-      {isColdStart ? (
+      {!isCategoryPicked ? (
         <motion.section key="cat-onboard"
           style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
@@ -1032,7 +1035,7 @@ export default function WConceptApp() {
           <p className="px-5" style={{ fontSize: 12.5, color: '#999', margin: '0 0 18px' }}>선택한 카테고리 기반으로 상품을 추천해 드려요</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, padding: '0 20px' }}>
             {CATEGORY_OPTIONS.map(opt => (
-              <button key={opt.id} onClick={() => setIsColdStart(false)}
+              <button key={opt.id} onClick={() => { setSelectedCategory(opt.label); setIsCategoryPicked(true); }}
                 style={{ padding: '14px 0', borderRadius: 8, border: '1px solid #E0E0E0', background: '#F7F8F9', fontSize: 13, color: '#333', cursor: 'pointer', textAlign: 'center' }}
               >
                 {opt.label}
@@ -1043,13 +1046,17 @@ export default function WConceptApp() {
       ) : (
       <motion.section key="beauty"
         style={{ paddingTop: 28, paddingBottom: 32 }}
+        initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
       >
-        <h3
-          className="px-5"
-          style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}
-        >
-          여름 휴가에서 빛나는 수분 글로우 픽
-        </h3>
+        <div className="px-5" style={{ marginBottom: 20 }}>
+          <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
+            여름 휴가에서 빛나는 수분 글로우 픽
+          </h3>
+          <p style={{ margin: 0, fontSize: 12, color: '#AAA', letterSpacing: '-0.01em' }}>
+            {selectedCategory} 카테고리 기반 추천
+          </p>
+        </div>
 
         <div
           className="overflow-x-auto scrollbar-hide"
