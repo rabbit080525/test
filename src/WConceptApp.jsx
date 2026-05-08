@@ -805,7 +805,7 @@ export default function WConceptApp() {
       </div>
 
       {/* ══════════════════════════════════════
-          관심 브랜드 새 소식 — horizontal scroll
+          인기 브랜드 — horizontal scroll
           마지막 아이템 뒤 trailing spacer로
           오른쪽 여백을 왼쪽 여백과 동일하게 유지
       ══════════════════════════════════════ */}
@@ -819,7 +819,7 @@ export default function WConceptApp() {
           className="px-5 text-black"
           style={{ fontSize: 17, fontWeight: 600, letterSpacing: '-0.025em', margin: '0 0 10px' }}
         >
-          관심 브랜드 새 소식
+          인기 브랜드
         </h3>
 
         <div
@@ -848,7 +848,7 @@ export default function WConceptApp() {
       <AnimatePresence mode="wait">
       {isColdStart ? (
         <motion.section key="best"
-          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}
+          style={{ paddingTop: 28, paddingBottom: 40 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
@@ -869,7 +869,7 @@ export default function WConceptApp() {
         </motion.section>
       ) : (
         <motion.section key="related"
-          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}
+          style={{ paddingTop: 28, paddingBottom: 40 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
@@ -906,7 +906,7 @@ export default function WConceptApp() {
       <AnimatePresence mode="wait">
       {isColdStart ? (
         <motion.section key="style-onboard"
-          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 36 }}
+          style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
@@ -926,7 +926,7 @@ export default function WConceptApp() {
         </motion.section>
       ) : (
         <motion.section key="style-cards"
-          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}
+          style={{ paddingTop: 28, paddingBottom: 44 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
@@ -945,7 +945,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           추천 브랜드
       ══════════════════════════════════════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         {/* 섹션 헤더 */}
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div
@@ -995,7 +995,7 @@ export default function WConceptApp() {
       <AnimatePresence mode="wait">
       {isColdStart ? (
         <motion.section key="cat-onboard"
-          style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 36 }}
+          style={{ paddingTop: 28, paddingBottom: 36 }}
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
@@ -1015,7 +1015,7 @@ export default function WConceptApp() {
         </motion.section>
       ) : (
       <motion.section key="beauty"
-        style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 32 }}
+        style={{ paddingTop: 28, paddingBottom: 32 }}
       >
         <h3
           className="px-5"
@@ -1112,7 +1112,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           광고 배너 하단 — 연관 추천 상품
       ══════════════════════════════════════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 40 }}>
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
             <img src="/pd03.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -1138,7 +1138,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           광고 배너 하단 — 에디토리얼
       ══════════════════════════════════════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
           오피스룩으로 입기 좋은 베이직 룩
         </h3>
@@ -1156,7 +1156,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           광고 배너 하단 — 브랜드 추천
       ══════════════════════════════════════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
             <img src="/lazy_logo.jpg" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -1180,7 +1180,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           광고 배너 하단 — 뷰티 추천
       ══════════════════════════════════════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
           주말 아침을 깨우는 감성 테이블웨어
         </h3>
@@ -1201,7 +1201,7 @@ export default function WConceptApp() {
       {/* ══════════════════════════════════════
           브랜드 광고
       ══════════════════════════════════════ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 20, paddingBottom: 32 }}>
+      <section style={{ paddingTop: 20, paddingBottom: 32 }}>
         {/* 헤더: 브랜드 정보 + 광고 태그 */}
         <div className="flex items-center gap-[12px] px-5 mb-4">
           <div style={{ flexShrink: 0, width: 52, height: 52, borderRadius: 8, background: '#EBEBEB', overflow: 'hidden' }}>
@@ -1250,7 +1250,7 @@ export default function WConceptApp() {
       </section>
 
       {/* ══ 추가 — 연관 추천 상품 ══ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 40 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 40 }}>
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
             <img src="/pd05.jpg" alt="최근 본 상품" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -1274,7 +1274,7 @@ export default function WConceptApp() {
       </section>
 
       {/* ══ 추가 — 에디토리얼 ══ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
           트렌드를 입다, 이번 주 픽
         </h3>
@@ -1286,7 +1286,7 @@ export default function WConceptApp() {
       </section>
 
       {/* ══ 추가 — 브랜드 추천 ══ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         <div className="flex items-center gap-[10px] px-5 mb-5">
           <div className="flex-shrink-0 overflow-hidden" style={{ width: 44, height: 44, borderRadius: 6, background: '#EBEBEB' }}>
             <img src="/oui_logo.jpg" alt="브랜드 추천" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -1304,7 +1304,7 @@ export default function WConceptApp() {
       </section>
 
       {/* ══ 추가 — 액티브 추천 ══ */}
-      <section style={{ borderTop: '1px solid #F0F0F0', paddingTop: 28, paddingBottom: 44 }}>
+      <section style={{ paddingTop: 28, paddingBottom: 44 }}>
         <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
           활동적인 하루를 위한 액티브웨어
         </h3>
