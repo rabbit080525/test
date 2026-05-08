@@ -52,11 +52,11 @@ const BRANDS = [
 ];
 
 const STYLE_TABS = [
-  { id: 'st1', label: '#미니멀' },
-  { id: 'st2', label: '#프렌치시크' },
-  { id: 'st3', label: '#고프코어' },
-  { id: 'st4', label: '#모던클래식' },
-  { id: 'st5', label: '#스트리트캐주얼' },
+  { id: 'st1', label: '#미니멀',        image: '/apd04.jpg' },
+  { id: 'st2', label: '#프렌치시크',    image: '/pd00.jpg'  },
+  { id: 'st3', label: '#고프코어',      image: '/apd08.jpg' },
+  { id: 'st4', label: '#모던클래식',    image: '/pd03.jpg'  },
+  { id: 'st5', label: '#스트리트캐주얼', image: '/apd02.jpg' },
 ];
 
 const CATEGORY_OPTIONS = [
@@ -214,6 +214,44 @@ const SCROLL_STYLE = {
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
 };
+
+/* ─── StyleCard ─────────────────────────────────────── */
+/* ─── StyleOnboardCard ──────────────────────────────── */
+function StyleOnboardCard({ tab, onClick }) {
+  return (
+    <div
+      onClick={onClick}
+      style={{ flexShrink: 0, width: 118, cursor: 'pointer' }}
+    >
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        aspectRatio: '3/4',
+        borderRadius: 10,
+        overflow: 'hidden',
+        background: '#EBEBEB',
+      }}>
+        <img
+          src={tab.image}
+          alt={tab.label}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          loading="lazy"
+        />
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%)',
+        }} />
+        <span style={{
+          position: 'absolute', bottom: 11, left: 11,
+          fontSize: 12.5, fontWeight: 700, color: '#fff',
+          letterSpacing: '-0.01em', lineHeight: 1,
+        }}>
+          {tab.label}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 /* ─── StyleCard ─────────────────────────────────────── */
 function StyleCard({ card, onClick }) {
@@ -918,29 +956,24 @@ export default function WConceptApp() {
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
-          <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
-            어떤 스타일이 취향인가요?
-          </h3>
-          <p className="px-5" style={{ fontSize: 12.5, color: '#999', margin: '0 0 18px' }}>관심 스타일을 선택하면 맞춤 추천을 드려요</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '0 20px' }}>
+          <div className="px-5" style={{ marginBottom: 20 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 5px' }}>
+              어떤 스타일이 취향인가요?
+            </h3>
+            <p style={{ margin: 0, fontSize: 12.5, color: '#999', letterSpacing: '-0.01em' }}>
+              관심 스타일을 선택하시면 맞춤 추천을 드려요
+            </p>
+          </div>
+          <div
+            className="flex overflow-x-auto scrollbar-hide"
+            style={{ ...SCROLL_STYLE, gap: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 4 }}
+          >
             {STYLE_TABS.map(tab => (
-              <button
+              <StyleOnboardCard
                 key={tab.id}
+                tab={tab}
                 onClick={() => { setSelectedStyle(tab.label); setIsStylePicked(true); }}
-                style={{
-                  padding: '9px 18px',
-                  borderRadius: 100,
-                  border: '1px solid #D0D0D0',
-                  background: '#F7F8F9',
-                  fontSize: 13,
-                  color: '#333',
-                  cursor: 'pointer',
-                  letterSpacing: '-0.01em',
-                  transition: 'background 0.12s, border-color 0.12s',
-                }}
-              >
-                {tab.label}
-              </button>
+              />
             ))}
           </div>
         </motion.section>
