@@ -860,7 +860,7 @@ export default function WConceptApp() {
           transition={{ duration: 0.32, ease: [0.4,0,0.2,1] }}
         >
           <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-            W Concept 실시간 베스트
+            지금 W컨셉에서 주목받는 상품
           </h3>
           <div className="overflow-x-auto scrollbar-hide" style={{ ...SCROLL_STYLE, display: 'grid', gridTemplateRows: 'auto auto', gridAutoFlow: 'column', gridAutoColumns: 98, columnGap: 10, rowGap: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 2, paddingBottom: 4 }}>
             {REALTIME_BEST.map((item, i) => (
@@ -970,7 +970,7 @@ export default function WConceptApp() {
         {/* 섹션 헤더 */}
         {isColdStart ? (
           <h3 className="px-5" style={{ fontSize: 17, fontWeight: 600, color: '#111', letterSpacing: '-0.025em', margin: '0 0 20px' }}>
-            인기 브랜드
+            요즘 사랑받는 브랜드
           </h3>
         ) : (
           <div className="flex items-center gap-[10px] px-5 mb-5">
