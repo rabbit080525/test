@@ -3,9 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
 
 const FEED_TABS = [
-  { id: '내 취향',   label: '내 취향',   emoji: '✨' },
-  { id: '5월 하객룩', label: '5월 하객룩', emoji: '🌸' },
-  { id: '주말 캠핑',  label: '주말 캠핑',  emoji: '🏕️' },
+  { id: '내 취향',       label: '내 취향',       emoji: '✨' },
+  { id: '5월 하객룩',   label: '5월 하객룩',   emoji: '🌸' },
+  { id: '주말 캠핑',    label: '주말 캠핑',    emoji: '🏕️' },
+  { id: '원피스',       label: '원피스',       emoji: '👗' },
+  { id: '리퍼브',       label: '리퍼브',       emoji: '🏷️' },
+  { id: '화이트스커트', label: '화이트스커트', emoji: '🤍' },
+  { id: '나이키운동화', label: '나이키운동화', emoji: '👟' },
 ];
 
 const ALL_IMAGES = [
