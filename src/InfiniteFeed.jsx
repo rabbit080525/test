@@ -5,7 +5,7 @@ import { Heart } from 'lucide-react';
 const FEED_TABS = [
   { id: '내 취향',         label: '내 취향',              emoji: '✨' },
   { id: '20대여성인기',    label: '20대 여성 인기',       emoji: '🧡' },
-  { id: '20대여성인기',     label: '20대여성인기',            emoji: '🌸' },
+  { id: '5월 하객룩',     label: '5월 하객룩',            emoji: '🌸' },
   { id: '주말 캠핑',      label: '주말 캠핑',             emoji: '🏕️' },
   { id: '원피스',         label: '여름 바캉스 원피스',    emoji: '🌊' },
   { id: '리퍼브',         label: '슬기로운 리퍼브 픽',   emoji: '🏷️' },
