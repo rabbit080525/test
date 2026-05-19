@@ -161,9 +161,10 @@ function FeedCard({ item, onProductClick, onHeart }) {
 
 /* ── InfiniteFeed ────────────────────────────────────── */
 export default function InfiniteFeed({ onProductClick, coldStart = false, onHeart }) {
-  const visibleTabs = coldStart
-    ? FEED_TABS.filter(t => t.id !== '내 취향')
-    : FEED_TABS;
+  const visibleTabs = (coldStart ? FEED_TABS.filter(t => t.id !== '내 취향') : FEED_TABS)
+    .map(t => t.id === '20대여성인기'
+      ? { ...t, label: coldStart ? '20대 여성 인기' : '30대 여성 인기' }
+      : t);
   const defaultTab = coldStart ? '5월 하객룩' : '내 취향';
 
   const tabRef      = useRef(defaultTab);
