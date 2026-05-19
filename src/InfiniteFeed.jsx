@@ -3,13 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
 
 const FEED_TABS = [
-  { id: '내 취향',       label: '내 취향',              emoji: '✨' },
-  { id: '5월 하객룩',   label: '5월 하객룩',            emoji: '🌸' },
-  { id: '주말 캠핑',    label: '주말 캠핑',             emoji: '🏕️' },
-  { id: '원피스',       label: '여름 바캉스 원피스',    emoji: '🌊' },
-  { id: '리퍼브',       label: '슬기로운 리퍼브 픽',   emoji: '🏷️' },
-  { id: '화이트스커트', label: '봄 오피스 화이트스커트', emoji: '🤍' },
-  { id: '나이키운동화', label: '러닝 데이 나이키',      emoji: '👟' },
+  { id: '내 취향',         label: '내 취향',              emoji: '✨' },
+  { id: '20대여성인기',    label: '20대 여성 인기',       emoji: '🧡' },
+  { id: '30대직장인Pick',  label: '30대 직장인 Pick',     emoji: '💼' },
+  { id: '남성BEST',        label: '남성 BEST',            emoji: '👔' },
+  { id: '5월 하객룩',     label: '5월 하객룩',            emoji: '🌸' },
+  { id: '주말 캠핑',      label: '주말 캠핑',             emoji: '🏕️' },
+  { id: '원피스',         label: '여름 바캉스 원피스',    emoji: '🌊' },
+  { id: '리퍼브',         label: '슬기로운 리퍼브 픽',   emoji: '🏷️' },
+  { id: '화이트스커트',   label: '봄 오피스 화이트스커트', emoji: '🤍' },
+  { id: '나이키운동화',   label: '러닝 데이 나이키',      emoji: '👟' },
 ];
 
 const ALL_IMAGES = [
