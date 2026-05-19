@@ -5,7 +5,7 @@ import { Heart } from 'lucide-react';
 const FEED_TABS = [
   { id: '내 취향',         label: '내 취향',              emoji: '✨' },
   { id: '20대여성인기',    label: '20대 여성 인기',       emoji: '🧡' },
-  { id: '5월 하객룩',     label: '5월 하객룩',            emoji: '🌸' },
+  { id: '20대여성인기',     label: '20대여성인기',            emoji: '🌸' },
   { id: '주말 캠핑',      label: '주말 캠핑',             emoji: '🏕️' },
   { id: '원피스',         label: '여름 바캉스 원피스',    emoji: '🌊' },
   { id: '리퍼브',         label: '슬기로운 리퍼브 픽',   emoji: '🏷️' },
@@ -165,7 +165,7 @@ export default function InfiniteFeed({ onProductClick, coldStart = false, onHear
     .map(t => t.id === '20대여성인기'
       ? { ...t, label: coldStart ? '20대 여성 인기' : '30대 여성 인기' }
       : t);
-  const defaultTab = coldStart ? '5월 하객룩' : '내 취향';
+  const defaultTab = coldStart ? '20대여성인기' : '내 취향';
 
   const tabRef      = useRef(defaultTab);
   const pageRef     = useRef(1);
@@ -179,7 +179,7 @@ export default function InfiniteFeed({ onProductClick, coldStart = false, onHear
 
   // coldStart 변화 시 탭 동기화
   useEffect(() => {
-    const target = coldStart ? '5월 하객룩' : '내 취향';
+    const target = coldStart ? '20대여성인기' : '내 취향';
     if (tabRef.current === target) return;
     tabRef.current     = target;
     pageRef.current    = 1;
